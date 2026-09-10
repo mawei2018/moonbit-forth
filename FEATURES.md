@@ -97,6 +97,15 @@ RECURSE 绑定当前定义自身，配合 IF/EXIT 和返回栈可实现递归，
 
 支持 CREATE 位于辅助词、重复替换行为和多个 DOES> 分阶段替换。已捕获的词引用与执行令牌共享被创建词的行为更新；不同 CREATE 即使数据地址相同也拥有独立身份。新增定义若不是 CREATE，会使其不能成为 DOES> 修改对象。
 
-顶层 DOES>、缺失 CREATE、未平衡返回栈/循环和控制结构内 DOES> 会报错；DOES> 后 RECURSE 属于未支持场景，编译时明确拒绝。尚无 >BODY、IMMEDIATE、POSTPONE、原始输入缓冲区或完整 ANS 符合性证明。
+顶层 DOES>、缺失 CREATE、未平衡返回栈/循环和控制结构内 DOES> 会报错；DOES> 后 RECURSE 属于未支持场景，编译时明确拒绝。尚无 IMMEDIATE、POSTPONE、原始输入缓冲区或完整 ANS 符合性证明。
 
 语义参考 [Forth DOES>](https://forth-standard.org/standard/core/DOES)。本轮只运行新增 `does*` 的 5 组 JS 测试，覆盖独立数据、数组与条件行为、辅助创建/重复替换、执行令牌身份、自替换及错误恢复；未重复全套、未运行 Gforth 实机对照或重新打包。
+
+
+## 0.12.0 开发更新：匿名定义与数据地址
+
+新增 :NONAME 和 >BODY。匿名定义在分号处留下执行令牌，可保存在常量或变量、作为回调传递，支持 RECURSE、EXIT 和 CREATE…DOES>。示例 `:noname dup * ; constant square 7 square execute` 得到 49。
+
+>BODY 接收 CREATE 词的执行令牌并返回数据区地址，DOES> 替换行为或后续同名重定义不改变旧令牌对应的地址。例如 `: con create , does> @ ; 4 con a 7 ' a >body ! a` 得到 7。普通冒号定义、内建词及 CONSTANT 的令牌不被当作 CREATE 数据地址，无效令牌报错。数据区尚未分配时可取得 HERE 对应地址，但读写仍须先分配空间。
+
+参考 [Forth :NONAME](https://forth-standard.org/standard/core/ColonNONAME) 与 [>BODY](https://forth-standard.org/standard/core/toBODY)。本轮仅运行新增 `anonymous*` 的 5 组 JS 测试，覆盖回调存取、递归、匿名定义词、地址稳定性及非法输入；未重复全套、未作 Gforth 实机对照或打包。完整编译状态、IMMEDIATE/POSTPONE 和源码输入词仍待实现。

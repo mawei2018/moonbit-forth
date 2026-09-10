@@ -23,3 +23,17 @@ fn Machine::capture_xt(self : Machine, name : String) -> Int raise ForthError {
   self.execution_tokens.push(body)
   self.execution_tokens.length()
 }
+
+///|
+fn Machine::body_address(self : Machine, xt : Int) -> Int raise ForthError {
+  if xt < 1 || xt > self.execution_tokens.length() {
+    raise Invalid("invalid execution token")
+  }
+  let body = self.execution_tokens[xt - 1]
+  if body.length() >= 2 {
+    if self.data_addresses.get(body[1]) is Some(address) {
+      return address
+    }
+  }
+  raise Invalid(">BODY requires a CREATE word")
+}

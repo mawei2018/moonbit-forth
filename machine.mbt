@@ -7,6 +7,7 @@ pub suberror ForthError {
 pub struct Machine {
   priv stack : Array[Int]
   priv words : Map[String, Array[String]]
+  priv data_addresses : Map[String, Int]
   priv mut latest_created : Array[String]?
   priv mut input : Array[String]
   priv mut input_pc : Int
@@ -31,6 +32,7 @@ pub fn Machine::new() -> Machine {
     words: {},
     binding_id: 0,
     execution_tokens: [],
+    data_addresses: {},
     latest_created: None,
     input: [],
     input_pc: 0,
@@ -178,6 +180,7 @@ fn Machine::execute(
       if word == "create" {
         let identity = self.binding_key()
         self.words[identity] = []
+        self.data_addresses[identity] = value
         data_body.push(identity)
         self.latest_created = Some(data_body)
       } else {
@@ -187,18 +190,24 @@ fn Machine::execute(
     } else if word == "does>" {
       self.attach_does(code[pc:].to_owned())
       return
-    } else if word == ":" {
-      if pc >= code.length() {
-        raise Invalid("missing definition name")
+    } else if word == ":" || word == ":noname" {
+      let anonymous = word == ":noname"
+      let name = if anonymous {
+        self.binding_key()
+      } else {
+        if pc >= code.length() {
+          raise Invalid("missing definition name")
+        }
+        let name = code[pc]
+        pc += 1
+        name
       }
-      let name = code[pc]
-      pc += 1
       if number(name) is Some(_) || name == ";" || name == ":" {
         raise Invalid("invalid definition name")
       }
       let body = []
       while pc < code.length() && code[pc] != ";" {
-        if code[pc] == ":" {
+        if code[pc] == ":" || code[pc] == ":noname" {
           raise Invalid("nested definition")
         }
         body.push(code[pc])
@@ -209,6 +218,9 @@ fn Machine::execute(
       }
       pc += 1
       self.compile_word(name, body)
+      if anonymous {
+        self.stack.push(self.capture_xt(name))
+      }
     } else if word == "do" || word == "?do" {
       let (body, plus, next) = counted_body(code, pc)
       pc = next
@@ -467,6 +479,10 @@ fn Machine::execute(
           return
         }
         ">r" | "r>" | "r@" | "2>r" | "2r>" | "2r@" => self.return_word(word)
+        ">body" => {
+          let xt = self.pop()
+          self.stack.push(self.body_address(xt))
+        }
         "execute" => {
           let xt = self.pop()
           if xt < 1 || xt > self.execution_tokens.length() {
