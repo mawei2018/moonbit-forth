@@ -311,29 +311,30 @@ function _M0TPB9ArrayViewGUsiEE(param0, param1, param2) {
   this.start = param1;
   this.end = param2;
 }
-function _M0TP211localreview5forth7Machine(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15, param16, param17, param18, param19, param20, param21) {
+function _M0TP211localreview5forth7Machine(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15, param16, param17, param18, param19, param20, param21, param22) {
   this.stack = param0;
   this.words = param1;
   this.immediate_words = param2;
   this.latest_name = param3;
   this.compile_output = param4;
-  this.compile_eval = param5;
-  this.data_addresses = param6;
-  this.latest_created = param7;
-  this.input = param8;
-  this.input_pc = param9;
-  this.execution_tokens = param10;
-  this.binding_id = param11;
-  this.output = param12;
-  this.memory = param13;
-  this.returns = param14;
-  this.return_base = param15;
-  this.loop_indices = param16;
-  this.exiting = param17;
-  this.loop_base = param18;
-  this.in_word = param19;
-  this.leaving = param20;
-  this.fuel = param21;
+  this.compilation_state = param5;
+  this.compile_eval = param6;
+  this.data_addresses = param7;
+  this.latest_created = param8;
+  this.input = param9;
+  this.input_pc = param10;
+  this.execution_tokens = param11;
+  this.binding_id = param12;
+  this.output = param13;
+  this.memory = param14;
+  this.returns = param15;
+  this.return_base = param16;
+  this.loop_indices = param17;
+  this.exiting = param18;
+  this.loop_base = param19;
+  this.in_word = param20;
+  this.leaving = param21;
+  this.fuel = param22;
 }
 function _M0TPB8MutLocalGsE(param0) {
   this.val = param0;
@@ -4251,15 +4252,15 @@ function _M0IPC16string6StringPC15debug5Debug8to__repr(self) {
 function _M0IPC15array5ArrayPC15debug5Debug8to__reprGiE(self) {
   return _M0MPC15debug4Repr5array(_M0MPC15array5Array3mapGiRPC15debug4ReprE(self, (x) => _M0MPC15debug4Repr4ReprGiE(x)));
 }
-function _M0IP211localreview5forth10ForthErrorPC15debug5Debug8to__repr(_x_237) {
-  let _arg_238;
+function _M0IP211localreview5forth10ForthErrorPC15debug5Debug8to__repr(_x_240) {
+  let _arg_241;
   _L: {
-    const _Invalid = _x_237;
-    const _$42$arg_238 = _Invalid._0;
-    _arg_238 = _$42$arg_238;
+    const _Invalid = _x_240;
+    const _$42$arg_241 = _Invalid._0;
+    _arg_241 = _$42$arg_241;
     break _L;
   }
-  return _M0MPC15debug4Repr4ctor("Invalid", [{ _0: undefined, _1: _M0IPC16string6StringPC15debug5Debug8to__repr(_arg_238) }]);
+  return _M0MPC15debug4Repr4ctor("Invalid", [{ _0: undefined, _1: _M0IPC16string6StringPC15debug5Debug8to__repr(_arg_241) }]);
 }
 function _M0FP211localreview5forth14bracket__chunk(body, start) {
   const chunk = [];
@@ -4614,7 +4615,7 @@ function _M0MP211localreview5forth7Machine13body__address(self, xt) {
   return new _M0DTPC16result6ResultGiRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid(">BODY requires a CREATE word"));
 }
 function _M0FP211localreview5forth15primitive__word(word) {
-  return _M0MPC15array5Array8containsGsE(["dup", "drop", "swap", "over", "rot", "nip", "tuck", "2dup", "2drop", "2swap", "here", "allot", "align", "aligned", "cells", "cell+", "@", "c@", "!", "c!", "+!", ",", "c,", "fill", "erase", "move", "0=", "0<", "0>", "1+", "1-", "i", "j", "exit", "unloop", "leave", ">r", "r>", "r@", "2>r", "2r>", "2r@", "depth", ".", "negate", "+", "-", "*", "/", "mod", "=", "<", ">", "and", "or", "execute", "variable", "constant", "create", "'", ">body", "immediate", "compile,"], word);
+  return _M0MPC15array5Array8containsGsE(["dup", "drop", "swap", "over", "rot", "nip", "tuck", "2dup", "2drop", "2swap", "here", "allot", "align", "aligned", "cells", "cell+", "@", "c@", "!", "c!", "+!", ",", "c,", "fill", "erase", "move", "0=", "0<", "0>", "1+", "1-", "i", "j", "exit", "unloop", "leave", ">r", "r>", "r@", "2>r", "2r>", "2r@", "depth", ".", "negate", "+", "-", "*", "/", "mod", "=", "<", ">", "and", "or", "execute", "variable", "constant", "create", "'", ">body", "immediate", "compile,", "state"], word);
 }
 function _M0MP211localreview5forth7Machine11capture__xt(self, name) {
   let body;
@@ -4682,7 +4683,7 @@ function _M0MP211localreview5forth7Machine14postpone__into(self, name, output) {
     _M0MPC15array5Array4pushGsE(output, _M0MPC13int3Int18to__string_2einner(xt, 10));
     return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(_M0MPC15array5Array4pushGsE(output, _M0IPC16option6OptionPB2Eq5equalGbE(_M0MPB3Map3getGsbE(self.immediate_words, name), true) ? "\u0001execute" : "\u0001compile,"));
   } else {
-    if (_M0FP211localreview5forth13control__word(name) || (_M0FP211localreview5forth15primitive__word(name) || (name === "literal" || name === "does>"))) {
+    if (_M0FP211localreview5forth13control__word(name) || (_M0FP211localreview5forth15primitive__word(name) || (name === "literal" || (name === "does>" || name === "[']")))) {
       return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(_M0MPC15array5Array4pushGsE(output, `\u0002${name}`));
     } else {
       return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid(`unsupported POSTPONE target: ${name}`));
@@ -4702,8 +4703,13 @@ function _M0MP211localreview5forth7Machine15emit__postponed(self, name) {
   if (output.length >= 65536) {
     return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("compiled definition limit"));
   }
-  if (name === "literal") {
-    const _bind$2 = _M0MP211localreview5forth7Machine3pop(self);
+  if (name === "[']") {
+    if (self.input_pc >= self.input.length) {
+      return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("missing postponed execution token name"));
+    }
+    const target = _M0MPC15array5Array2atGsE(self.input, self.input_pc);
+    self.input_pc = self.input_pc + 1 | 0;
+    const _bind$2 = _M0MP211localreview5forth7Machine11capture__xt(self, target);
     let _tmp;
     if (_bind$2.$tag === 1) {
       const _ok = _bind$2;
@@ -4713,10 +4719,22 @@ function _M0MP211localreview5forth7Machine15emit__postponed(self, name) {
     }
     _M0MPC15array5Array4pushGsE(output, _M0MPC13int3Int18to__string_2einner(_tmp, 10));
   } else {
-    if (_M0FP211localreview5forth13control__word(name)) {
-      _M0MPC15array5Array4pushGsE(output, name);
+    if (name === "literal") {
+      const _bind$2 = _M0MP211localreview5forth7Machine3pop(self);
+      let _tmp;
+      if (_bind$2.$tag === 1) {
+        const _ok = _bind$2;
+        _tmp = _ok._0;
+      } else {
+        return _bind$2;
+      }
+      _M0MPC15array5Array4pushGsE(output, _M0MPC13int3Int18to__string_2einner(_tmp, 10));
     } else {
-      _M0MPC15array5Array4pushGsE(output, `\u0001${name}`);
+      if (_M0FP211localreview5forth13control__word(name)) {
+        _M0MPC15array5Array4pushGsE(output, name);
+      } else {
+        _M0MPC15array5Array4pushGsE(output, `\u0001${name}`);
+      }
     }
   }
   return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
@@ -4729,6 +4747,12 @@ function _M0MP211localreview5forth7Machine13memory__range(self, address, count) 
   }
 }
 function _M0MP211localreview5forth7Machine4load(self, address, cell) {
+  if (address === -4 && cell) {
+    return new _M0DTPC16result6ResultGiRP211localreview5forth10ForthErrorE2Ok(self.compilation_state ? -1 : 0);
+  }
+  if (!cell && (address >= -4 && address < 0)) {
+    return new _M0DTPC16result6ResultGiRP211localreview5forth10ForthErrorE2Ok(self.compilation_state ? 255 : 0);
+  }
   const _bind = _M0MP211localreview5forth7Machine13memory__range(self, address, cell ? 4 : 1);
   if (_bind.$tag === 1) {
     const _ok = _bind;
@@ -5839,6 +5863,10 @@ function _M0MP211localreview5forth7Machine7execute(self, code, depth) {
                                                                   case "2r@": {
                                                                     break _L$8;
                                                                   }
+                                                                  case "state": {
+                                                                    _M0MPC15array5Array4pushGiE(self.stack, -4);
+                                                                    break;
+                                                                  }
                                                                   case "immediate": {
                                                                     if (self.compile_eval) {
                                                                       return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("IMMEDIATE during active compilation is unsupported"));
@@ -6321,10 +6349,13 @@ function _M0MP211localreview5forth7Machine13compile__word(self, name, body) {
       break _L;
     }
     const compiled = [];
+    const previous_state = self.compilation_state;
+    self.compilation_state = true;
     const previous_output = self.compile_output;
     self.compile_output = new _M0DTPC16option6OptionGRPB5ArrayGsEE4Some(compiled);
     const _defer = () => {
       self.compile_output = previous_output;
+      self.compilation_state = previous_state;
     };
     let _err$2;
     _L$2: {
@@ -6569,6 +6600,8 @@ function _M0MP211localreview5forth7Machine13compile__word(self, name, body) {
   return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(_err);
 }
 function _M0MP211localreview5forth7Machine25interpret__compile__chunk(self, chunk) {
+  const saved_state = self.compilation_state;
+  self.compilation_state = false;
   const saved_input = self.input;
   const saved_pc = self.input_pc;
   const saved_mode = self.compile_eval;
@@ -6576,6 +6609,7 @@ function _M0MP211localreview5forth7Machine25interpret__compile__chunk(self, chun
   self.input_pc = 0;
   self.compile_eval = true;
   const _defer = () => {
+    self.compilation_state = saved_state;
     self.input = saved_input;
     self.input_pc = saved_pc;
     self.compile_eval = saved_mode;
@@ -6728,22 +6762,23 @@ function _M0MP211localreview5forth7Machine3new() {
   const _bind$8 = undefined;
   const _bind$9 = _M0DTPC16option6OptionGRPB5ArrayGsEE4None__;
   const _bind$10 = false;
-  const _bind$11 = [];
-  const _bind$12 = _M0MPB3Map3MapGsiE(new _M0TPB9ArrayViewGUsiEE(_bind$11, 0, 0), undefined);
-  const _bind$13 = _M0DTPC16option6OptionGRPB5ArrayGsEE4None__;
-  const _bind$14 = [];
-  const _bind$15 = 0;
-  const _bind$16 = [];
+  const _bind$11 = false;
+  const _bind$12 = [];
+  const _bind$13 = _M0MPB3Map3MapGsiE(new _M0TPB9ArrayViewGUsiEE(_bind$12, 0, 0), undefined);
+  const _bind$14 = _M0DTPC16option6OptionGRPB5ArrayGsEE4None__;
+  const _bind$15 = [];
+  const _bind$16 = 0;
   const _bind$17 = [];
   const _bind$18 = [];
-  const _bind$19 = 0;
-  const _bind$20 = [];
-  const _bind$21 = false;
-  const _bind$22 = 0;
-  const _bind$23 = false;
+  const _bind$19 = [];
+  const _bind$20 = 0;
+  const _bind$21 = [];
+  const _bind$22 = false;
+  const _bind$23 = 0;
   const _bind$24 = false;
-  const _bind$25 = 0;
-  return new _M0TP211localreview5forth7Machine(_bind, _bind$3, _bind$7, _bind$8, _bind$9, _bind$10, _bind$12, _bind$13, _bind$14, _bind$15, _bind$5, _bind$4, _bind$16, _bind$17, _bind$18, _bind$19, _bind$20, _bind$21, _bind$22, _bind$23, _bind$24, _bind$25);
+  const _bind$25 = false;
+  const _bind$26 = 0;
+  return new _M0TP211localreview5forth7Machine(_bind, _bind$3, _bind$7, _bind$8, _bind$9, _bind$10, _bind$11, _bind$13, _bind$14, _bind$15, _bind$16, _bind$5, _bind$4, _bind$17, _bind$18, _bind$19, _bind$20, _bind$21, _bind$22, _bind$23, _bind$24, _bind$25, _bind$26);
 }
 function _M0MP211localreview5forth7Machine6values(self) {
   return _M0MPC15array5Array4copyGiE(self.stack);

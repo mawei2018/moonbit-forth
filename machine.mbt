@@ -10,6 +10,7 @@ pub struct Machine {
   priv immediate_words : Map[String, Bool]
   priv mut latest_name : String?
   priv mut compile_output : Array[String]?
+  priv mut compilation_state : Bool
   priv mut compile_eval : Bool
   priv data_addresses : Map[String, Int]
   priv mut latest_created : Array[String]?
@@ -39,6 +40,7 @@ pub fn Machine::new() -> Machine {
     immediate_words: {},
     latest_name: None,
     compile_output: None,
+    compilation_state: false,
     compile_eval: false,
     data_addresses: {},
     latest_created: None,
@@ -497,6 +499,7 @@ fn Machine::execute(
           return
         }
         ">r" | "r>" | "r@" | "2>r" | "2r>" | "2r@" => self.return_word(word)
+        "state" => self.stack.push(-4)
         "immediate" => {
           if self.compile_eval {
             raise Invalid("IMMEDIATE during active compilation is unsupported")

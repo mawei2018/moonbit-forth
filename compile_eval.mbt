@@ -24,6 +24,8 @@ fn Machine::interpret_compile_chunk(
   self : Machine,
   chunk : Array[String],
 ) -> Unit raise ForthError {
+  let saved_state = self.compilation_state
+  self.compilation_state = false
   let saved_input = self.input
   let saved_pc = self.input_pc
   let saved_mode = self.compile_eval
@@ -31,6 +33,7 @@ fn Machine::interpret_compile_chunk(
   self.input_pc = 0
   self.compile_eval = true
   defer {
+    self.compilation_state = saved_state
     self.input = saved_input
     self.input_pc = saved_pc
     self.compile_eval = saved_mode

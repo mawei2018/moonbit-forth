@@ -25,10 +25,13 @@ fn Machine::compile_word(
   let pending : Map[String, Array[String]] = Map([])
   let own = self.binding_key()
   let compiled = []
+  let previous_state = self.compilation_state
+  self.compilation_state = true
   let previous_output = self.compile_output
   self.compile_output = Some(compiled)
   defer {
     self.compile_output = previous_output
+    self.compilation_state = previous_state
   }
   let captures : Map[String, String] = Map([])
   let controls = [
@@ -111,6 +114,6 @@ fn primitive_word(word : String) -> Bool {
     "+!", ",", "c,", "fill", "erase", "move", "0=", "0<", "0>", "1+", "1-", "i",
     "j", "exit", "unloop", "leave", ">r", "r>", "r@", "2>r", "2r>", "2r@", "depth",
     ".", "negate", "+", "-", "*", "/", "mod", "=", "<", ">", "and", "or", "execute",
-    "variable", "constant", "create", "'", ">body", "immediate", "compile,",
+    "variable", "constant", "create", "'", ">body", "immediate", "compile,", "state",
   ].contains(word)
 }

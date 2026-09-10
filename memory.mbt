@@ -34,6 +34,12 @@ fn Machine::load(
   address : Int,
   cell : Bool,
 ) -> Int raise ForthError {
+  if address == -4 && cell {
+    return if self.compilation_state { -1 } else { 0 }
+  }
+  if !cell && address >= -4 && address < 0 {
+    return if self.compilation_state { 255 } else { 0 }
+  }
   self.memory_range(address, if cell { 4 } else { 1 })
   if cell {
     if address % 4 != 0 {

@@ -25,7 +25,8 @@ fn Machine::postpone_into(
   } else if control_word(name) ||
     primitive_word(name) ||
     name == "literal" ||
-    name == "does>" {
+    name == "does>" ||
+    name == "[']" {
     output.push("\u0002" + name)
   } else {
     raise Invalid("unsupported POSTPONE target: " + name)
@@ -44,7 +45,14 @@ fn Machine::emit_postponed(
   if output.length() >= 65536 {
     raise Invalid("compiled definition limit")
   }
-  if name == "literal" {
+  if name == "[']" {
+    if self.input_pc >= self.input.length() {
+      raise Invalid("missing postponed execution token name")
+    }
+    let target = self.input[self.input_pc]
+    self.input_pc += 1
+    output.push(self.capture_xt(target).to_string())
+  } else if name == "literal" {
     output.push(self.pop().to_string())
   } else if control_word(name) {
     output.push(name)

@@ -151,3 +151,14 @@ POSTPONE 保存目标词的编译行为：普通词延后生成调用，用户�
 POSTPONE 暂不支持方括号状态切换、[']、RECURSE、POSTPONE 自身等解析/状态编译词；STATE、跨 eval 编译和标准控制流栈任意编排仍待补齐。
 
 参考 [Forth POSTPONE](https://forth-standard.org/standard/core/POSTPONE)。本轮新增 `postpone*` 5 组 JS 测试通过，另对受改动影响的 `compile structure*` 4 组作定向回归，均通过。未重复其他套件、未作 Gforth 实机对照或打包。
+
+
+## 0.17.0 开发更新：STATE 与延后解析
+
+STATE 压入只读状态 cell 地址，`STATE @` 在编译状态为 -1，在解释状态为 0。编译中执行用户立即词保持编译状态，`[ … ]` 中执行切换为解释状态；成功或失败后恢复外层状态。状态 cell 使用独立虚拟地址 -4，不占用数据空间；支持 @ 和 C@ 读取，写入拒绝。
+
+可编写区分状态的立即词：`: smart 7 state @ if postpone literal then ; immediate`，解释时留下 7，编译时写入字面量 7。POSTPONE 也支持 `[']`，在延期动作执行时读取当时的名称，例如 `: quote postpone ['] ; immediate : callback quote dup ;`。
+
+本轮 `compiler state*` 的 4 组新增 JS 测试通过，覆盖解释/编译/方括号状态、状态相关宏、延期名称读取、失败恢复和只读状态保护。未重复全套、未运行 Gforth 实机对照或打包。跨 eval 编译、独立状态切换词和完整原始输入仍待实现。
+
+语义参考 [Forth STATE](https://forth-standard.org/standard/core/STATE)。

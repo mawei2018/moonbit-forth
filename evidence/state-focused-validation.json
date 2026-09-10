@@ -1,0 +1,10 @@
+{
+  "timestamp": "2026-09-10T13:31:17.016064+00:00",
+  "target": "js",
+  "filter": "compiler state*",
+  "passed": 4,
+  "failed": 0,
+  "full_suite_run": false,
+  "gforth_oracle_run": false,
+  "archives_rebuilt": false
+}
