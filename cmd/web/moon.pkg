@@ -1,0 +1,11 @@
+import {
+  "localreview/forth" @lib,
+}
+
+supported_targets = "js"
+
+pkgtype(kind: "executable")
+
+options(
+  link: { "js": { "exports": [ "run" ], "format": "esm" } },
+)

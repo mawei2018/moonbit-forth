@@ -1,0 +1,1 @@
+export default {"slug": "forth", "title": "Forth 栈式解释器", "description": "可嵌入、具执行预算的 Forth 子集", "source": "https://gforth.org/", "scope": "词定义、整数栈运算、条件分支、执行预算", "limitations": "浮点、内存词、完整 ANS Forth、REPL IO", "version": "0.1.0", "example": ": square dup * ;\n12 square .\n5 3 > if 99 else 0 then ."};

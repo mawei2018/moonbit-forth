@@ -1,0 +1,49 @@
+{
+  "project": "forth",
+  "checks": [
+    {
+      "command": "moon fmt",
+      "exit_code": 0,
+      "output": "Finished. moon: ran 8 tasks, now up to date\n",
+      "utc": "2026-09-09T18:52:46.979479+00:00"
+    },
+    {
+      "command": "moon info",
+      "exit_code": 0,
+      "output": "Finished. moon: ran 2 tasks, now up to date\n",
+      "utc": "2026-09-09T18:52:47.161823+00:00"
+    },
+    {
+      "command": "moon check --deny-warn",
+      "exit_code": 0,
+      "output": "Finished. moon: ran 2 tasks, now up to date\n",
+      "utc": "2026-09-09T18:52:47.516986+00:00"
+    },
+    {
+      "command": "moon test --deny-warn",
+      "exit_code": 0,
+      "output": "Total tests: 6, passed: 6, failed: 0.\n",
+      "utc": "2026-09-09T18:52:47.849635+00:00"
+    },
+    {
+      "command": "moon test --target js --deny-warn",
+      "exit_code": 0,
+      "output": "Total tests: 6, passed: 6, failed: 0.\n",
+      "utc": "2026-09-09T18:52:48.036734+00:00"
+    },
+    {
+      "command": "moon build --target js --deny-warn",
+      "exit_code": 0,
+      "output": "Finished. moon: no work to do\n",
+      "utc": "2026-09-09T18:52:48.352933+00:00"
+    },
+    {
+      "command": "moon run cmd/main",
+      "exit_code": 0,
+      "output": "144 99\n",
+      "utc": "2026-09-09T18:52:48.501063+00:00"
+    }
+  ],
+  "demo": "144 99",
+  "source_lines": 277
+}

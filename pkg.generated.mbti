@@ -1,0 +1,26 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "localreview/forth"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+
+// Errors
+pub suberror ForthError {
+  Invalid(String)
+} derive(@debug.Debug)
+
+// Types and methods
+pub struct Machine {
+  // private fields
+} derive(@debug.Debug)
+pub fn Machine::eval(Self, String, budget? : Int) -> Unit raise ForthError
+pub fn Machine::new() -> Self
+pub fn Machine::printed(Self) -> String
+pub fn Machine::values(Self) -> Array[Int]
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,5 @@
+import {
+  "localreview/forth" @lib,
+}
+
+pkgtype(kind: "executable")
