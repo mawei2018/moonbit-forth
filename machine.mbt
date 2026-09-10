@@ -9,12 +9,22 @@ pub struct Machine {
   priv words : Map[String, Array[String]]
   priv output : Array[String]
   priv memory : Array[Byte]
+  priv loop_indices : Array[Int]
+  priv mut leaving : Bool
   priv mut fuel : Int
 } derive(Debug)
 
 ///|
 pub fn Machine::new() -> Machine {
-  { stack: [], words: {}, output: [], memory: [], fuel: 0, }
+  {
+    stack: [],
+    words: {},
+    output: [],
+    memory: [],
+    loop_indices: [],
+    leaving: false,
+    fuel: 0,
+  }
 }
 
 ///|
@@ -158,6 +168,14 @@ fn Machine::execute(
       }
       pc += 1
       self.words[name] = body
+    } else if word == "do" || word == "?do" {
+      let (body, plus, next) = counted_body(code, pc)
+      pc = next
+      let start = self.pop()
+      let limit = self.pop()
+      if word == "do" || start != limit {
+        self.counted_loop(body, start, limit, plus, depth + 1)
+      }
     } else if word == "begin" {
       let (body, tail, ending, next) = begin_body(code, pc)
       pc = next
@@ -167,6 +185,9 @@ fn Machine::execute(
           raise Invalid("execution budget exhausted")
         }
         self.execute(body, depth + 1)
+        if self.leaving {
+          return
+        }
         if ending == "until" {
           if self.pop() != 0 {
             break
@@ -176,6 +197,9 @@ fn Machine::execute(
             break
           }
           self.execute(tail, depth + 1)
+          if self.leaving {
+            return
+          }
         }
       }
     } else if word == "if" {
@@ -211,9 +235,9 @@ fn Machine::execute(
         raise Invalid("missing then")
       }
       self.execute(if condition != 0 { yes } else { no }, depth + 1)
-    } else if [";", "else", "then", "while", "repeat", "until", "again"].contains(
-        word,
-      ) {
+    } else if [
+        ";", "else", "then", "while", "repeat", "until", "again", "loop", "+loop",
+      ].contains(word) {
       raise Invalid("unexpected control word: " + word)
     } else if self.words.get(word) is Some(body) {
       self.execute(body, depth + 1)
@@ -359,6 +383,20 @@ fn Machine::execute(
             },
           )
         }
+        "i" | "j" => {
+          let back = if word == "i" { 1 } else { 2 }
+          if self.loop_indices.length() < back {
+            raise Invalid("loop index unavailable")
+          }
+          self.stack.push(self.loop_indices[self.loop_indices.length() - back])
+        }
+        "leave" => {
+          if self.loop_indices.is_empty() {
+            raise Invalid("LEAVE outside counted loop")
+          }
+          self.leaving = true
+          return
+        }
         "depth" => self.stack.push(self.stack.length())
         "." => self.output.push(self.pop().to_string())
         "negate" => {
@@ -389,6 +427,9 @@ fn Machine::execute(
         }
         _ => raise Invalid("unknown word: " + word)
       }
+    }
+    if self.leaving {
+      return
     }
     if self.stack.length() > 4096 {
       raise Invalid("stack limit exceeded")

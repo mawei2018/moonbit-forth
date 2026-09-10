@@ -1,6 +1,6 @@
 # Forth 栈式解释器
 
-可嵌入、具执行预算的 Forth 子集。本地候选版 0.2.0，供比较和代码审查；尚未作为完整竞赛作品提交。
+可嵌入、具执行预算的 Forth 子集。本地开发版 0.5.0，供比较和代码审查；尚未作为完整竞赛作品提交。
 
 ## 运行
 
@@ -18,7 +18,7 @@ moon run cmd/main
 
 实现目标：词定义、整数栈运算、条件分支、执行预算。
 
-未承诺：浮点、内存词、完整 ANS Forth、REPL IO。
+未承诺：浮点、完整 ANS Forth、REPL IO。
 
 ## 来源与实现方式
 
@@ -32,7 +32,7 @@ moon run cmd/main
 
 ## 下一阶段与明确限制
 
-增加编译期词绑定、DO/LOOP、返回栈、REPL 和 ANS 子集符合性测试；当前词字典为运行时查找，32 位整数按 MoonBit 溢出语义回绕，错误发生前的栈/字典修改会保留。
+增加编译期词绑定、返回栈、REPL 和 ANS 子集符合性测试；当前词字典为运行时查找，32 位整数按 MoonBit 溢出语义回绕，错误发生前的栈/字典修改会保留。
 
 本分装包自带 `web/index.html`（用 `start-review.ps1` 启动）。`cmd/web/main.mbt` 为薄适配层，网页调用编译后的真实 MoonBit 模块。
 
@@ -85,6 +85,15 @@ node tools/cli.mjs --file sample.txt --json
 
 新增 BEGIN…UNTIL、BEGIN…AGAIN、BEGIN…WHILE…REPEAT，可嵌套并在自定义词/IF 内使用。UNTIL 消费栈顶标志，非零退出；WHILE 标志为零时跳过后半段并退出。每次循环检查共享执行预算，空 AGAIN 循环也不会无限占用。补充 0=、0<、0>、1+、1-。
 
-示例：`0 begin 1+ dup 4 = until` 留下 4；`3 begin dup 0> while 1- repeat` 留下 0。当前每个 BEGIN 只支持一个 WHILE，不支持标准控制流栈允许的多 WHILE 编排。DO/?DO/LOOP/+LOOP、LEAVE、EXIT 和返回栈仍未实现，不能视为完整 Forth 控制流。
+示例：`0 begin 1+ dup 4 = until` 留下 4；`3 begin dup 0> while 1- repeat` 留下 0。当前每个 BEGIN 只支持一个 WHILE，不支持标准控制流栈允许的多 WHILE 编排。EXIT 和返回栈仍未实现，不能视为完整 Forth 控制流。
 
 仅运行新增 `begin loops*` 的 4 组 JS 测试：UNTIL、零次 WHILE、嵌套/变量/IF、错误结构和无限循环预算。未重复旧套件或打包，未作 Gforth 实机对照。
+
+
+## 0.5.0 开发更新：计数循环
+
+新增 DO/?DO…LOOP/+LOOP、I/J 嵌套索引和 LEAVE。参数顺序为 limit start；`5 0 do i 2 +loop` 留下 0、2、4，`0 3 do i -1 +loop` 留下 3、2、1、0。?DO 在起点等于终点时跳过；DO 保留绕回语义。正负步长按 32 位 cell 回绕及边界跨越处理，零步长受执行预算约束。
+
+LEAVE 可从 IF 或 BEGIN 中退出最近的计数循环；循环异常会清理索引状态。最多嵌套 64 层。当前是运行期解释模型，LEAVE 使用动态循环上下文；没有完整标准编译期控制流约束，也尚无 EXIT、返回栈或 DOES>。
+
+语义参考 [Forth +LOOP](https://forth-standard.org/standard/core/PlusLOOP) 与 [LEAVE](https://forth-standard.org/standard/core/LEAVE)。本轮仅运行新增 `counted loops*` 的 4 组 JS 测试，覆盖跳过、嵌套、正负步长、回绕、提前退出和错误后恢复；没有运行 Gforth 对照、全套回归或重新打包。最新源码及浏览器引擎为开发版，旧压缩包仍是历史快照。
