@@ -1,0 +1,23 @@
+{
+  "source": "Ubuntu 26.04 resolute apt archive",
+  "gforth_version": "0.7.3+dfsg-9build4.1",
+  "installation": "packages extracted only to work/gforth-reference/root; no system package installation",
+  "packages": [
+    {
+      "file": "gforth-common_0.7.3+dfsg-9build4.1_all.deb",
+      "sha256": "efe52d2bad0eb431ce0e4663e6fd5244747f54c22223aace68cf1c7dbf2c5aa8"
+    },
+    {
+      "file": "gforth-lib_0.7.3+dfsg-9build4.1_amd64.deb",
+      "sha256": "bceffd9e225cc62acfc7ac32d3e20adfc08494c229b4ae04daa9c9ebc55467cd"
+    },
+    {
+      "file": "gforth_0.7.3+dfsg-9build4.1_amd64.deb",
+      "sha256": "3cf30523adaf1adc98bfb98ffc7b90a6b0ec80ceec2e0636a7e8f1cbbb5cd7ee"
+    },
+    {
+      "file": "libltdl7_2.5.4-9_amd64.deb",
+      "sha256": "c0279172b218093c674151044326457f6cb3e2ce0b1241380e3897e65677283e"
+    }
+  ]
+}

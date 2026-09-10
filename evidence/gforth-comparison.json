@@ -1,0 +1,344 @@
+{
+  "timestamp": "2026-09-10T13:35:19.227Z",
+  "reference": "gforth 0.7.3",
+  "referenceExit": 0,
+  "engine": "web/engine.mjs",
+  "scope": "shared portable integer programs; no address or cell-width equivalence claim",
+  "fullSuiteRun": false,
+  "results": [
+    {
+      "name": "arithmetic",
+      "passed": true,
+      "expected": [
+        15
+      ],
+      "actual": [
+        15
+      ]
+    },
+    {
+      "name": "stack",
+      "passed": true,
+      "expected": [
+        2,
+        3,
+        1,
+        4
+      ],
+      "actual": [
+        2,
+        3,
+        1,
+        4
+      ]
+    },
+    {
+      "name": "binding",
+      "passed": true,
+      "expected": [
+        3,
+        9
+      ],
+      "actual": [
+        3,
+        9
+      ]
+    },
+    {
+      "name": "same name",
+      "passed": true,
+      "expected": [
+        2
+      ],
+      "actual": [
+        2
+      ]
+    },
+    {
+      "name": "primitive binding",
+      "passed": true,
+      "expected": [
+        2,
+        2,
+        99
+      ],
+      "actual": [
+        2,
+        2,
+        99
+      ]
+    },
+    {
+      "name": "begin",
+      "passed": true,
+      "expected": [
+        4
+      ],
+      "actual": [
+        4
+      ]
+    },
+    {
+      "name": "while",
+      "passed": true,
+      "expected": [
+        0
+      ],
+      "actual": [
+        0
+      ]
+    },
+    {
+      "name": "do",
+      "passed": true,
+      "expected": [
+        0,
+        1,
+        2
+      ],
+      "actual": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "nested do",
+      "passed": true,
+      "expected": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "actual": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "plusloop",
+      "passed": true,
+      "expected": [
+        0,
+        2,
+        4
+      ],
+      "actual": [
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "name": "negative loop",
+      "passed": true,
+      "expected": [
+        3,
+        2,
+        1,
+        0
+      ],
+      "actual": [
+        3,
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "name": "leave",
+      "passed": true,
+      "expected": [
+        0,
+        1,
+        2
+      ],
+      "actual": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "return stack",
+      "passed": true,
+      "expected": [
+        8,
+        3,
+        3
+      ],
+      "actual": [
+        8,
+        3,
+        3
+      ]
+    },
+    {
+      "name": "pair return",
+      "passed": true,
+      "expected": [
+        3,
+        4,
+        3,
+        4
+      ],
+      "actual": [
+        3,
+        4,
+        3,
+        4
+      ]
+    },
+    {
+      "name": "exit",
+      "passed": true,
+      "expected": [
+        7,
+        5
+      ],
+      "actual": [
+        7,
+        5
+      ]
+    },
+    {
+      "name": "unloop",
+      "passed": true,
+      "expected": [
+        0,
+        1,
+        2
+      ],
+      "actual": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "recurse",
+      "passed": true,
+      "expected": [
+        120
+      ],
+      "actual": [
+        120
+      ]
+    },
+    {
+      "name": "xt",
+      "passed": true,
+      "expected": [
+        4,
+        8
+      ],
+      "actual": [
+        4,
+        8
+      ]
+    },
+    {
+      "name": "anonymous",
+      "passed": true,
+      "expected": [
+        49
+      ],
+      "actual": [
+        49
+      ]
+    },
+    {
+      "name": "does",
+      "passed": true,
+      "expected": [
+        7,
+        9
+      ],
+      "actual": [
+        7,
+        9
+      ]
+    },
+    {
+      "name": "body",
+      "passed": true,
+      "expected": [
+        7
+      ],
+      "actual": [
+        7
+      ]
+    },
+    {
+      "name": "literal",
+      "passed": true,
+      "expected": [
+        51
+      ],
+      "actual": [
+        51
+      ]
+    },
+    {
+      "name": "immediate",
+      "passed": true,
+      "expected": [
+        7
+      ],
+      "actual": [
+        7
+      ]
+    },
+    {
+      "name": "compile comma",
+      "passed": true,
+      "expected": [
+        12
+      ],
+      "actual": [
+        12
+      ]
+    },
+    {
+      "name": "postpone",
+      "passed": true,
+      "expected": [
+        7,
+        8
+      ],
+      "actual": [
+        7,
+        8
+      ]
+    },
+    {
+      "name": "state",
+      "passed": true,
+      "expected": [
+        -1,
+        0,
+        0
+      ],
+      "actual": [
+        -1,
+        0,
+        0
+      ]
+    }
+  ],
+  "passed": 26,
+  "failed": 0,
+  "engineSha256": "92b767f2f534f6b045cac0decc32fdc4bccdbb70ab3c01434c6f63443ee3ecf5",
+  "casesSha256": "6218297fd5480be956ce76aa526d7562d2cf73bae17cb104188a6d8be20b20dc"
+}

@@ -1,0 +1,106 @@
+[
+  {
+    "name": "arithmetic",
+    "source": "7 3 + 2 * 5 -"
+  },
+  {
+    "name": "stack",
+    "source": "1 2 3 rot 2dup +"
+  },
+  {
+    "name": "binding",
+    "source": ": a 3 ; : b a ; : a 9 ; b a"
+  },
+  {
+    "name": "same name",
+    "source": ": a 1 ; : a a 1+ ; a"
+  },
+  {
+    "name": "primitive binding",
+    "source": ": saved dup ; : dup 99 ; 2 saved dup"
+  },
+  {
+    "name": "begin",
+    "source": ": count 0 begin 1+ dup 4 = until ; count"
+  },
+  {
+    "name": "while",
+    "source": ": count 3 begin dup 0> while 1- repeat ; count"
+  },
+  {
+    "name": "do",
+    "source": ": indices 3 0 do i loop ; indices"
+  },
+  {
+    "name": "nested do",
+    "source": ": indices 2 0 do 2 0 do j i loop loop ; indices"
+  },
+  {
+    "name": "plusloop",
+    "source": ": indices 5 0 do i 2 +loop ; indices"
+  },
+  {
+    "name": "negative loop",
+    "source": ": indices 0 3 do i -1 +loop ; indices"
+  },
+  {
+    "name": "leave",
+    "source": ": indices 9 0 do i dup 2 = if leave then loop ; indices"
+  },
+  {
+    "name": "return stack",
+    "source": ": f 3 >r 8 r@ r> ; f"
+  },
+  {
+    "name": "pair return",
+    "source": ": f 3 4 2>r 2r@ 2r> ; f"
+  },
+  {
+    "name": "exit",
+    "source": ": f dup 0= if drop 7 exit then 1+ ; 0 f 4 f"
+  },
+  {
+    "name": "unloop",
+    "source": ": f 5 0 do i dup 2 = if unloop exit then loop ; f"
+  },
+  {
+    "name": "recurse",
+    "source": ": f dup 2 < if drop 1 exit then dup 1- recurse * ; 5 f"
+  },
+  {
+    "name": "xt",
+    "source": ": f 4 ; ' f constant old : f 8 ; old execute f"
+  },
+  {
+    "name": "anonymous",
+    "source": ":noname dup * ; constant square 7 square execute"
+  },
+  {
+    "name": "does",
+    "source": ": con create , does> @ ; 7 con a 9 con b a b"
+  },
+  {
+    "name": "body",
+    "source": ": con create , does> @ ; 4 con a 7 ' a >body ! a"
+  },
+  {
+    "name": "literal",
+    "source": ": value [ 7 7 * 2 + ] literal ; value"
+  },
+  {
+    "name": "immediate",
+    "source": ": seven 7 ; immediate : value seven literal ; value"
+  },
+  {
+    "name": "compile comma",
+    "source": ": emitdup ['] dup compile, ; immediate : double emitdup + ; 6 double"
+  },
+  {
+    "name": "postpone",
+    "source": ": endif postpone then ; immediate : choice if 7 else 8 endif ; 1 choice 0 choice"
+  },
+  {
+    "name": "state",
+    "source": ": mode state @ ; immediate : compiled mode literal ; : interpreted [ mode ] literal ; compiled interpreted mode"
+  }
+]
