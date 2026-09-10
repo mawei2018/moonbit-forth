@@ -9,6 +9,8 @@ pub struct Machine {
   priv words : Map[String, Array[String]]
   priv output : Array[String]
   priv memory : Array[Byte]
+  priv returns : Array[Int]
+  priv mut return_base : Int
   priv loop_indices : Array[Int]
   priv mut leaving : Bool
   priv mut fuel : Int
@@ -21,6 +23,8 @@ pub fn Machine::new() -> Machine {
     words: {},
     output: [],
     memory: [],
+    returns: [],
+    return_base: 0,
     loop_indices: [],
     leaving: false,
     fuel: 0,
@@ -240,7 +244,7 @@ fn Machine::execute(
       ].contains(word) {
       raise Invalid("unexpected control word: " + word)
     } else if self.words.get(word) is Some(body) {
-      self.execute(body, depth + 1)
+      self.execute_frame(body, depth + 1)
     } else if number(word) is Some(n) {
       self.stack.push(n)
     } else {
@@ -397,6 +401,7 @@ fn Machine::execute(
           self.leaving = true
           return
         }
+        ">r" | "r>" | "r@" | "2>r" | "2r>" | "2r@" => self.return_word(word)
         "depth" => self.stack.push(self.stack.length())
         "." => self.output.push(self.pop().to_string())
         "negate" => {
@@ -448,5 +453,5 @@ pub fn Machine::eval(
     raise Invalid("invalid input limit")
   }
   self.fuel = budget
-  self.execute(tokens(source), 0)
+  self.execute_frame(tokens(source), 0)
 }
