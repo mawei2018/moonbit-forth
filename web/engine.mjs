@@ -56,6 +56,15 @@ function _M0TPB3MapGsRPB5ArrayGsEE(param0, param1, param2, param3, param4, param
   this.head = param5;
   this.tail = param6;
 }
+function _M0TPB3MapGsbE(param0, param1, param2, param3, param4, param5, param6) {
+  this.entries = param0;
+  this.size = param1;
+  this.capacity = param2;
+  this.capacity_mask = param3;
+  this.grow_at = param4;
+  this.head = param5;
+  this.tail = param6;
+}
 function _M0TPB3MapGsiE(param0, param1, param2, param3, param4, param5, param6) {
   this.entries = param0;
   this.size = param1;
@@ -75,6 +84,14 @@ function _M0TPB3MapGssE(param0, param1, param2, param3, param4, param5, param6) 
   this.tail = param6;
 }
 function _M0TPB5EntryGsRPB5ArrayGsEE(param0, param1, param2, param3, param4, param5) {
+  this.prev = param0;
+  this.next = param1;
+  this.psl = param2;
+  this.hash = param3;
+  this.key = param4;
+  this.value = param5;
+}
+function _M0TPB5EntryGsbE(param0, param1, param2, param3, param4, param5) {
   this.prev = param0;
   this.next = param1;
   this.psl = param2;
@@ -284,31 +301,39 @@ function _M0TPB9ArrayViewGUssEE(param0, param1, param2) {
   this.start = param1;
   this.end = param2;
 }
+function _M0TPB9ArrayViewGUsbEE(param0, param1, param2) {
+  this.buf = param0;
+  this.start = param1;
+  this.end = param2;
+}
 function _M0TPB9ArrayViewGUsiEE(param0, param1, param2) {
   this.buf = param0;
   this.start = param1;
   this.end = param2;
 }
-function _M0TP211localreview5forth7Machine(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15, param16, param17, param18) {
+function _M0TP211localreview5forth7Machine(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15, param16, param17, param18, param19, param20, param21) {
   this.stack = param0;
   this.words = param1;
-  this.compile_eval = param2;
-  this.data_addresses = param3;
-  this.latest_created = param4;
-  this.input = param5;
-  this.input_pc = param6;
-  this.execution_tokens = param7;
-  this.binding_id = param8;
-  this.output = param9;
-  this.memory = param10;
-  this.returns = param11;
-  this.return_base = param12;
-  this.loop_indices = param13;
-  this.exiting = param14;
-  this.loop_base = param15;
-  this.in_word = param16;
-  this.leaving = param17;
-  this.fuel = param18;
+  this.immediate_words = param2;
+  this.latest_name = param3;
+  this.compile_output = param4;
+  this.compile_eval = param5;
+  this.data_addresses = param6;
+  this.latest_created = param7;
+  this.input = param8;
+  this.input_pc = param9;
+  this.execution_tokens = param10;
+  this.binding_id = param11;
+  this.output = param12;
+  this.memory = param13;
+  this.returns = param14;
+  this.return_base = param15;
+  this.loop_indices = param16;
+  this.exiting = param17;
+  this.loop_base = param18;
+  this.in_word = param19;
+  this.leaving = param20;
+  this.fuel = param21;
 }
 function _M0TPB8MutLocalGsE(param0) {
   this.val = param0;
@@ -1588,6 +1613,21 @@ function _M0MPC15array9ArrayView4joinGRPC16string10StringViewE(self, separator) 
     return _M0MPB13StringBuilder10to__string(buf);
   }
 }
+function _M0IPC16option6OptionPB2Eq5equalGbE(self, other) {
+  if (self === -1) {
+    return other === -1;
+  } else {
+    const _Some = self;
+    const _x = _Some;
+    if (other === -1) {
+      return false;
+    } else {
+      const _Some$2 = other;
+      const _y = _Some$2;
+      return _x === _y;
+    }
+  }
+}
 function _M0IPC16option6OptionPB2Eq5equalGsE(self, other) {
   if (self === undefined) {
     return other === undefined;
@@ -1665,6 +1705,14 @@ function _M0FPB8new__mapGsRPB5ArrayGsEE(capacity) {
   const _bind$4 = undefined;
   return new _M0TPB3MapGsRPB5ArrayGsEE(_bind$3, 0, capacity$2, _bind, _bind$2, _bind$4, -1);
 }
+function _M0FPB8new__mapGsbE(capacity) {
+  const capacity$2 = _M0MPC13int3Int20next__power__of__two(capacity);
+  const _bind = capacity$2 - 1 | 0;
+  const _bind$2 = _M0FPB21calc__grow__threshold(capacity$2);
+  const _bind$3 = $make_array_len_and_init(capacity$2, undefined);
+  const _bind$4 = undefined;
+  return new _M0TPB3MapGsbE(_bind$3, 0, capacity$2, _bind, _bind$2, _bind$4, -1);
+}
 function _M0FPB8new__mapGsiE(capacity) {
   const capacity$2 = _M0MPC13int3Int20next__power__of__two(capacity);
   const _bind = capacity$2 - 1 | 0;
@@ -1703,6 +1751,18 @@ function _M0MPB3Map20add__entry__to__tailGsRPB5ArrayGsEE(self, idx, entry) {
   self.entries[idx] = entry;
   self.size = self.size + 1 | 0;
 }
+function _M0MPB3Map20add__entry__to__tailGsbE(self, idx, entry) {
+  const _bind = self.tail;
+  if (_bind === -1) {
+    self.head = entry;
+  } else {
+    const _tmp = self.entries;
+    _M0MPC16option6Option6unwrapGRPB5EntryGsRPB5ArrayGsEEE(_bind >>> 0 < _tmp.length ? _tmp[_bind] : $oob()).next = entry;
+  }
+  self.tail = idx;
+  self.entries[idx] = entry;
+  self.size = self.size + 1 | 0;
+}
 function _M0MPB3Map20add__entry__to__tailGsiE(self, idx, entry) {
   const _bind = self.tail;
   if (_bind === -1) {
@@ -1728,6 +1788,17 @@ function _M0MPB3Map20add__entry__to__tailGssE(self, idx, entry) {
   self.size = self.size + 1 | 0;
 }
 function _M0MPB3Map10set__entryGsRPB5ArrayGsEE(self, entry, new_idx) {
+  const _bind = entry.next;
+  if (_bind === undefined) {
+    self.tail = new_idx;
+  } else {
+    const _Some = _bind;
+    const _next = _Some;
+    _next.prev = new_idx;
+  }
+  self.entries[new_idx] = entry;
+}
+function _M0MPB3Map10set__entryGsbE(self, entry, new_idx) {
   const _bind = entry.next;
   if (_bind === undefined) {
     self.tail = new_idx;
@@ -1779,6 +1850,37 @@ function _M0MPB3Map10push__awayGsRPB5ArrayGsEE(self, idx, entry) {
       if (psl > _curr_entry.psl) {
         entry$2.psl = psl;
         _M0MPB3Map10set__entryGsRPB5ArrayGsEE(self, entry$2, idx$2);
+        _tmp = _curr_entry.psl + 1 | 0;
+        _tmp$2 = (idx$2 + 1 | 0) & self.capacity_mask;
+        _tmp$3 = _curr_entry;
+        continue;
+      } else {
+        _tmp = psl + 1 | 0;
+        _tmp$2 = (idx$2 + 1 | 0) & self.capacity_mask;
+        continue;
+      }
+    }
+  }
+}
+function _M0MPB3Map10push__awayGsbE(self, idx, entry) {
+  let _tmp = entry.psl + 1 | 0;
+  let _tmp$2 = (idx + 1 | 0) & self.capacity_mask;
+  let _tmp$3 = entry;
+  while (true) {
+    const psl = _tmp;
+    const idx$2 = _tmp$2;
+    const entry$2 = _tmp$3;
+    const _bind = self.entries[idx$2];
+    if (_bind === undefined) {
+      entry$2.psl = psl;
+      _M0MPB3Map10set__entryGsbE(self, entry$2, idx$2);
+      return;
+    } else {
+      const _Some = _bind;
+      const _curr_entry = _Some;
+      if (psl > _curr_entry.psl) {
+        entry$2.psl = psl;
+        _M0MPB3Map10set__entryGsbE(self, entry$2, idx$2);
         _tmp = _curr_entry.psl + 1 | 0;
         _tmp$2 = (idx$2 + 1 | 0) & self.capacity_mask;
         _tmp$3 = _curr_entry;
@@ -1883,6 +1985,36 @@ function _M0MPB3Map20rehash__place__entryGsRPB5ArrayGsEE(self, outer) {
     }
   }
 }
+function _M0MPB3Map20rehash__place__entryGsbE(self, outer) {
+  const hash = outer.hash;
+  let _tmp = 0;
+  let _tmp$2 = hash & self.capacity_mask;
+  while (true) {
+    const psl = _tmp;
+    const idx = _tmp$2;
+    const _bind = self.entries[idx];
+    if (_bind === undefined) {
+      outer.psl = psl;
+      outer.prev = self.tail;
+      _M0MPB3Map20add__entry__to__tailGsbE(self, idx, outer);
+      return undefined;
+    } else {
+      const _Some = _bind;
+      const _curr = _Some;
+      if (psl > _curr.psl) {
+        _M0MPB3Map10push__awayGsbE(self, idx, _curr);
+        outer.psl = psl;
+        outer.prev = self.tail;
+        _M0MPB3Map20add__entry__to__tailGsbE(self, idx, outer);
+        return undefined;
+      } else {
+        _tmp = psl + 1 | 0;
+        _tmp$2 = (idx + 1 | 0) & self.capacity_mask;
+        continue;
+      }
+    }
+  }
+}
 function _M0MPB3Map20rehash__place__entryGsiE(self, outer) {
   const hash = outer.hash;
   let _tmp = 0;
@@ -1964,6 +2096,32 @@ function _M0MPB3Map4growGsRPB5ArrayGsEE(self) {
       const next_in_chain = _e.next;
       _e.next = undefined;
       _M0MPB3Map20rehash__place__entryGsRPB5ArrayGsEE(self, _e);
+      _tmp = next_in_chain;
+      continue;
+    }
+  }
+}
+function _M0MPB3Map4growGsbE(self) {
+  const old_head = self.head;
+  const new_capacity = self.capacity << 1;
+  self.entries = $make_array_len_and_init(new_capacity, undefined);
+  self.capacity = new_capacity;
+  self.capacity_mask = new_capacity - 1 | 0;
+  self.grow_at = _M0FPB21calc__grow__threshold(self.capacity);
+  self.size = 0;
+  self.head = undefined;
+  self.tail = -1;
+  let _tmp = old_head;
+  while (true) {
+    const x = _tmp;
+    if (x === undefined) {
+      return;
+    } else {
+      const _Some = x;
+      const _e = _Some;
+      const next_in_chain = _e.next;
+      _e.next = undefined;
+      _M0MPB3Map20rehash__place__entryGsbE(self, _e);
       _tmp = next_in_chain;
       continue;
     }
@@ -2067,6 +2225,52 @@ function _M0MPB3Map15set__with__hashGsRPB5ArrayGsEE(self, key, value, hash) {
     }
   }
 }
+function _M0MPB3Map15set__with__hashGsbE(self, key, value, hash) {
+  let _tmp = 0;
+  let _tmp$2 = hash & self.capacity_mask;
+  while (true) {
+    const psl = _tmp;
+    const idx = _tmp$2;
+    const _bind = self.entries[idx];
+    if (_bind === undefined) {
+      if (self.size >= self.grow_at) {
+        _M0MPB3Map4growGsbE(self);
+        _tmp = 0;
+        _tmp$2 = hash & self.capacity_mask;
+        continue;
+      }
+      const _bind$2 = self.tail;
+      const _bind$3 = undefined;
+      const entry = new _M0TPB5EntryGsbE(_bind$2, _bind$3, psl, hash, key, value);
+      _M0MPB3Map20add__entry__to__tailGsbE(self, idx, entry);
+      return undefined;
+    } else {
+      const _Some = _bind;
+      const _curr_entry = _Some;
+      if (_curr_entry.hash === hash && _curr_entry.key === key) {
+        _curr_entry.value = value;
+        return undefined;
+      }
+      if (psl > _curr_entry.psl) {
+        if (self.size >= self.grow_at) {
+          _M0MPB3Map4growGsbE(self);
+          _tmp = 0;
+          _tmp$2 = hash & self.capacity_mask;
+          continue;
+        }
+        _M0MPB3Map10push__awayGsbE(self, idx, _curr_entry);
+        const _bind$2 = self.tail;
+        const _bind$3 = undefined;
+        const entry = new _M0TPB5EntryGsbE(_bind$2, _bind$3, psl, hash, key, value);
+        _M0MPB3Map20add__entry__to__tailGsbE(self, idx, entry);
+        return undefined;
+      }
+      _tmp = psl + 1 | 0;
+      _tmp$2 = (idx + 1 | 0) & self.capacity_mask;
+      continue;
+    }
+  }
+}
 function _M0MPB3Map15set__with__hashGsiE(self, key, value, hash) {
   let _tmp = 0;
   let _tmp$2 = hash & self.capacity_mask;
@@ -2162,6 +2366,9 @@ function _M0MPB3Map15set__with__hashGssE(self, key, value, hash) {
 function _M0MPB3Map3setGsRPB5ArrayGsEE(self, key, value) {
   _M0MPB3Map15set__with__hashGsRPB5ArrayGsEE(self, key, value, _M0IPC16string6StringPB4Hash4hash(key));
 }
+function _M0MPB3Map3setGsbE(self, key, value) {
+  _M0MPB3Map15set__with__hashGsbE(self, key, value, _M0IPC16string6StringPB4Hash4hash(key));
+}
 function _M0MPB3Map3setGsiE(self, key, value) {
   _M0MPB3Map15set__with__hashGsiE(self, key, value, _M0IPC16string6StringPB4Hash4hash(key));
 }
@@ -2186,6 +2393,32 @@ function _M0MPB3Map3MapGsRPB5ArrayGsEE(arr, capacity) {
     if (_ < _bind) {
       const e = arr.buf[arr.start + _ | 0];
       _M0MPB3Map3setGsRPB5ArrayGsEE(m, e._0, e._1);
+      _tmp = _ + 1 | 0;
+      continue;
+    } else {
+      break;
+    }
+  }
+  return m;
+}
+function _M0MPB3Map3MapGsbE(arr, capacity) {
+  const length = arr.end - arr.start | 0;
+  let capacity$2;
+  if (capacity === undefined) {
+    capacity$2 = length === 0 ? 8 : _M0FPB21capacity__for__length(length);
+  } else {
+    const _Some = capacity;
+    const _capacity = _Some;
+    capacity$2 = _M0MPC13int3Int3max(_capacity, _M0FPB21capacity__for__length(length));
+  }
+  const m = _M0FPB8new__mapGsbE(capacity$2);
+  const _bind = arr.end - arr.start | 0;
+  let _tmp = 0;
+  while (true) {
+    const _ = _tmp;
+    if (_ < _bind) {
+      const e = arr.buf[arr.start + _ | 0];
+      _M0MPB3Map3setGsbE(m, e._0, e._1);
       _tmp = _ + 1 | 0;
       continue;
     } else {
@@ -2264,6 +2497,31 @@ function _M0MPB3Map3getGsRPB5ArrayGsEE(self, key) {
       }
       if (i > _entry.psl) {
         return _M0DTPC16option6OptionGRPB5ArrayGsEE4None__;
+      }
+      _tmp = i + 1 | 0;
+      _tmp$2 = (idx + 1 | 0) & self.capacity_mask;
+      continue;
+    }
+  }
+}
+function _M0MPB3Map3getGsbE(self, key) {
+  const hash = _M0IPC16string6StringPB4Hash4hash(key);
+  let _tmp = 0;
+  let _tmp$2 = hash & self.capacity_mask;
+  while (true) {
+    const i = _tmp;
+    const idx = _tmp$2;
+    const _bind = self.entries[idx];
+    if (_bind === undefined) {
+      return -1;
+    } else {
+      const _Some = _bind;
+      const _entry = _Some;
+      if (_entry.hash === hash && _entry.key === key) {
+        return _entry.value;
+      }
+      if (i > _entry.psl) {
+        return -1;
       }
       _tmp = i + 1 | 0;
       _tmp$2 = (idx + 1 | 0) & self.capacity_mask;
@@ -3993,15 +4251,15 @@ function _M0IPC16string6StringPC15debug5Debug8to__repr(self) {
 function _M0IPC15array5ArrayPC15debug5Debug8to__reprGiE(self) {
   return _M0MPC15debug4Repr5array(_M0MPC15array5Array3mapGiRPC15debug4ReprE(self, (x) => _M0MPC15debug4Repr4ReprGiE(x)));
 }
-function _M0IP211localreview5forth10ForthErrorPC15debug5Debug8to__repr(_x_215) {
-  let _arg_216;
+function _M0IP211localreview5forth10ForthErrorPC15debug5Debug8to__repr(_x_227) {
+  let _arg_228;
   _L: {
-    const _Invalid = _x_215;
-    const _$42$arg_216 = _Invalid._0;
-    _arg_216 = _$42$arg_216;
+    const _Invalid = _x_227;
+    const _$42$arg_228 = _Invalid._0;
+    _arg_228 = _$42$arg_228;
     break _L;
   }
-  return _M0MPC15debug4Repr4ctor("Invalid", [{ _0: undefined, _1: _M0IPC16string6StringPC15debug5Debug8to__repr(_arg_216) }]);
+  return _M0MPC15debug4Repr4ctor("Invalid", [{ _0: undefined, _1: _M0IPC16string6StringPC15debug5Debug8to__repr(_arg_228) }]);
 }
 function _M0FP211localreview5forth14bracket__chunk(body, start) {
   const chunk = [];
@@ -4356,7 +4614,7 @@ function _M0MP211localreview5forth7Machine13body__address(self, xt) {
   return new _M0DTPC16result6ResultGiRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid(">BODY requires a CREATE word"));
 }
 function _M0FP211localreview5forth15primitive__word(word) {
-  return _M0MPC15array5Array8containsGsE(["dup", "drop", "swap", "over", "rot", "nip", "tuck", "2dup", "2drop", "2swap", "here", "allot", "align", "aligned", "cells", "cell+", "@", "c@", "!", "c!", "+!", ",", "c,", "fill", "erase", "move", "0=", "0<", "0>", "1+", "1-", "i", "j", "exit", "unloop", "leave", ">r", "r>", "r@", "2>r", "2r>", "2r@", "depth", ".", "negate", "+", "-", "*", "/", "mod", "=", "<", ">", "and", "or", "execute", "variable", "constant", "create", "'", ">body"], word);
+  return _M0MPC15array5Array8containsGsE(["dup", "drop", "swap", "over", "rot", "nip", "tuck", "2dup", "2drop", "2swap", "here", "allot", "align", "aligned", "cells", "cell+", "@", "c@", "!", "c!", "+!", ",", "c,", "fill", "erase", "move", "0=", "0<", "0>", "1+", "1-", "i", "j", "exit", "unloop", "leave", ">r", "r>", "r@", "2>r", "2r>", "2r@", "depth", ".", "negate", "+", "-", "*", "/", "mod", "=", "<", ">", "and", "or", "execute", "variable", "constant", "create", "'", ">body", "immediate", "compile,"], word);
 }
 function _M0MP211localreview5forth7Machine11capture__xt(self, name) {
   let body;
@@ -4745,6 +5003,8 @@ function _M0MP211localreview5forth7Machine7execute(self, code, depth) {
             self.latest_created = _M0DTPC16option6OptionGRPB5ArrayGsEE4None__;
           }
           _M0MPB3Map3setGsRPB5ArrayGsEE(self.words, name, data_body);
+          self.latest_name = name;
+          _M0MPB3Map3setGsbE(self.immediate_words, name, false);
         } else {
           if (word === "does>") {
             const _bind$2 = _M0MP211localreview5forth7Machine12attach__does(self, _M0MPC15array9ArrayView9to__ownedGsE(_M0MPC15array5Array12view_2einnerGsE(code, pc.val, undefined)));
@@ -5513,28 +5773,54 @@ function _M0MP211localreview5forth7Machine7execute(self, code, depth) {
                                                                 case "2r@": {
                                                                   break _L$8;
                                                                 }
-                                                                case ">body": {
-                                                                  const _bind$36 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                  let xt;
-                                                                  if (_bind$36.$tag === 1) {
-                                                                    const _ok = _bind$36;
-                                                                    xt = _ok._0;
-                                                                  } else {
-                                                                    return _bind$36;
+                                                                case "immediate": {
+                                                                  if (self.compile_eval) {
+                                                                    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("IMMEDIATE during active compilation is unsupported"));
                                                                   }
-                                                                  const _tmp$2 = self.stack;
-                                                                  const _bind$37 = _M0MP211localreview5forth7Machine13body__address(self, xt);
-                                                                  let _tmp$3;
+                                                                  let name;
+                                                                  _L$21: {
+                                                                    const _bind$36 = self.latest_name;
+                                                                    if (_bind$36 === undefined) {
+                                                                      return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("IMMEDIATE requires a named definition"));
+                                                                    } else {
+                                                                      const _Some = _bind$36;
+                                                                      const _name = _Some;
+                                                                      name = _name;
+                                                                      break _L$21;
+                                                                    }
+                                                                  }
+                                                                  _M0MPB3Map3setGsbE(self.immediate_words, name, true);
+                                                                  break;
+                                                                }
+                                                                case "compile,": {
+                                                                  let output;
+                                                                  const _bind$36 = self.compile_output;
+                                                                  if (_bind$36.$tag === 1) {
+                                                                    const _Some = _bind$36;
+                                                                    const _output = _Some._0;
+                                                                    output = _output;
+                                                                  } else {
+                                                                    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("COMPILE, outside compilation"));
+                                                                  }
+                                                                  const _bind$37 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                  let xt;
                                                                   if (_bind$37.$tag === 1) {
                                                                     const _ok = _bind$37;
-                                                                    _tmp$3 = _ok._0;
+                                                                    xt = _ok._0;
                                                                   } else {
                                                                     return _bind$37;
                                                                   }
-                                                                  _M0MPC15array5Array4pushGiE(_tmp$2, _tmp$3);
+                                                                  if (xt < 1 || xt > self.execution_tokens.length) {
+                                                                    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("invalid execution token"));
+                                                                  }
+                                                                  if (output.length >= 65534) {
+                                                                    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("compiled definition limit"));
+                                                                  }
+                                                                  _M0MPC15array5Array4pushGsE(output, _M0MPC13int3Int18to__string_2einner(xt, 10));
+                                                                  _M0MPC15array5Array4pushGsE(output, "\u0001execute");
                                                                   break;
                                                                 }
-                                                                case "execute": {
+                                                                case ">body": {
                                                                   const _bind$38 = _M0MP211localreview5forth7Machine3pop(self);
                                                                   let xt$2;
                                                                   if (_bind$38.$tag === 1) {
@@ -5543,15 +5829,36 @@ function _M0MP211localreview5forth7Machine7execute(self, code, depth) {
                                                                   } else {
                                                                     return _bind$38;
                                                                   }
-                                                                  if (xt$2 < 1 || xt$2 > self.execution_tokens.length) {
-                                                                    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("invalid execution token"));
-                                                                  }
-                                                                  const _bind$39 = _M0MP211localreview5forth7Machine14execute__frame(self, _M0MPC15array5Array2atGRPB5ArrayGsEE(self.execution_tokens, xt$2 - 1 | 0), depth + 1 | 0, true);
+                                                                  const _tmp$2 = self.stack;
+                                                                  const _bind$39 = _M0MP211localreview5forth7Machine13body__address(self, xt$2);
+                                                                  let _tmp$3;
                                                                   if (_bind$39.$tag === 1) {
                                                                     const _ok = _bind$39;
-                                                                    _ok._0;
+                                                                    _tmp$3 = _ok._0;
                                                                   } else {
                                                                     return _bind$39;
+                                                                  }
+                                                                  _M0MPC15array5Array4pushGiE(_tmp$2, _tmp$3);
+                                                                  break;
+                                                                }
+                                                                case "execute": {
+                                                                  const _bind$40 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                  let xt$3;
+                                                                  if (_bind$40.$tag === 1) {
+                                                                    const _ok = _bind$40;
+                                                                    xt$3 = _ok._0;
+                                                                  } else {
+                                                                    return _bind$40;
+                                                                  }
+                                                                  if (xt$3 < 1 || xt$3 > self.execution_tokens.length) {
+                                                                    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("invalid execution token"));
+                                                                  }
+                                                                  const _bind$41 = _M0MP211localreview5forth7Machine14execute__frame(self, _M0MPC15array5Array2atGRPB5ArrayGsEE(self.execution_tokens, xt$3 - 1 | 0), depth + 1 | 0, true);
+                                                                  if (_bind$41.$tag === 1) {
+                                                                    const _ok = _bind$41;
+                                                                    _ok._0;
+                                                                  } else {
+                                                                    return _bind$41;
                                                                   }
                                                                   break;
                                                                 }
@@ -5561,25 +5868,25 @@ function _M0MP211localreview5forth7Machine7execute(self, code, depth) {
                                                                 }
                                                                 case ".": {
                                                                   const _tmp$4 = self.output;
-                                                                  const _bind$40 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                  const _bind$42 = _M0MP211localreview5forth7Machine3pop(self);
                                                                   let _tmp$5;
-                                                                  if (_bind$40.$tag === 1) {
-                                                                    const _ok = _bind$40;
+                                                                  if (_bind$42.$tag === 1) {
+                                                                    const _ok = _bind$42;
                                                                     _tmp$5 = _ok._0;
                                                                   } else {
-                                                                    return _bind$40;
+                                                                    return _bind$42;
                                                                   }
                                                                   _M0MPC15array5Array4pushGsE(_tmp$4, _M0MPC13int3Int18to__string_2einner(_tmp$5, 10));
                                                                   break;
                                                                 }
                                                                 case "negate": {
-                                                                  const _bind$41 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                  const _bind$43 = _M0MP211localreview5forth7Machine3pop(self);
                                                                   let a$8;
-                                                                  if (_bind$41.$tag === 1) {
-                                                                    const _ok = _bind$41;
+                                                                  if (_bind$43.$tag === 1) {
+                                                                    const _ok = _bind$43;
                                                                     a$8 = _ok._0;
                                                                   } else {
-                                                                    return _bind$41;
+                                                                    return _bind$43;
                                                                   }
                                                                   _M0MPC15array5Array4pushGiE(self.stack, -a$8 | 0);
                                                                   break;
@@ -5954,180 +6261,215 @@ function _M0MP211localreview5forth7Machine13compile__word(self, name, body) {
       break _L;
     }
     const compiled = [];
-    const _bind$4 = [];
-    const captures = _M0MPB3Map3MapGssE(new _M0TPB9ArrayViewGUssEE(_bind$4, 0, 0), undefined);
-    const controls = ["if", "else", "then", "begin", "while", "repeat", "until", "again", "do", "?do", "loop", "+loop"];
-    const after_does = new _M0TPB8MutLocalGbE(false);
-    const pc = new _M0TPB8MutLocalGiE(0);
-    while (true) {
-      if (pc.val < body.length) {
-        const word = _M0MPC15array5Array2atGsE(body, pc.val);
-        pc.val = pc.val + 1 | 0;
-        if (word === "[") {
-          let chunk;
-          let next;
-          _L$2: {
-            const _bind$5 = _M0FP211localreview5forth14bracket__chunk(body, pc.val);
-            let _bind$6;
-            if (_bind$5.$tag === 1) {
-              const _ok = _bind$5;
-              _bind$6 = _ok._0;
-            } else {
-              const _err$2 = _bind$5;
-              _err = _err$2._0;
-              break _L;
-            }
-            const _chunk = _bind$6._0;
-            const _next = _bind$6._1;
-            chunk = _chunk;
-            next = _next;
-            break _L$2;
-          }
-          pc.val = next;
-          const _bind$5 = _M0MP211localreview5forth7Machine25interpret__compile__chunk(self, chunk);
-          if (_bind$5.$tag === 1) {
-            const _ok = _bind$5;
-            _ok._0;
-          } else {
-            const _err$2 = _bind$5;
-            _err = _err$2._0;
-            break _L;
-          }
-        } else {
-          if (word === "literal") {
-            const _bind$5 = _M0MP211localreview5forth7Machine3pop(self);
-            let _tmp;
-            if (_bind$5.$tag === 1) {
-              const _ok = _bind$5;
-              _tmp = _ok._0;
-            } else {
-              const _err$2 = _bind$5;
-              _err = _err$2._0;
-              break _L;
-            }
-            _M0MPC15array5Array4pushGsE(compiled, _M0MPC13int3Int18to__string_2einner(_tmp, 10));
-          } else {
-            if (word === "does>") {
-              after_does.val = true;
-              _M0MPC15array5Array4pushGsE(compiled, "\u0001does>");
-            } else {
-              if (word === "[']") {
-                if (pc.val >= body.length) {
-                  _err = new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("missing execution token name");
-                  break _L;
-                }
-                const _bind$5 = _M0MP211localreview5forth7Machine11capture__xt(self, _M0MPC15array5Array2atGsE(body, pc.val));
-                let _tmp;
-                if (_bind$5.$tag === 1) {
-                  const _ok = _bind$5;
-                  _tmp = _ok._0;
-                } else {
-                  const _err$2 = _bind$5;
-                  _err = _err$2._0;
-                  break _L;
-                }
-                _M0MPC15array5Array4pushGsE(compiled, _M0MPC13int3Int18to__string_2einner(_tmp, 10));
-                pc.val = pc.val + 1 | 0;
+    const previous_output = self.compile_output;
+    self.compile_output = new _M0DTPC16option6OptionGRPB5ArrayGsEE4Some(compiled);
+    const _defer = () => {
+      self.compile_output = previous_output;
+    };
+    let _err$2;
+    _L$2: {
+      const _bind$4 = [];
+      const captures = _M0MPB3Map3MapGssE(new _M0TPB9ArrayViewGUssEE(_bind$4, 0, 0), undefined);
+      const controls = ["if", "else", "then", "begin", "while", "repeat", "until", "again", "do", "?do", "loop", "+loop"];
+      const after_does = new _M0TPB8MutLocalGbE(false);
+      const pc = new _M0TPB8MutLocalGiE(0);
+      while (true) {
+        if (pc.val < body.length) {
+          const word = _M0MPC15array5Array2atGsE(body, pc.val);
+          pc.val = pc.val + 1 | 0;
+          if (word === "[") {
+            let chunk;
+            let next;
+            _L$3: {
+              const _bind$5 = _M0FP211localreview5forth14bracket__chunk(body, pc.val);
+              let _bind$6;
+              if (_bind$5.$tag === 1) {
+                const _ok = _bind$5;
+                _bind$6 = _ok._0;
               } else {
-                if (word === "recurse") {
-                  if (after_does.val) {
-                    _err = new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("RECURSE after DOES> is unsupported");
-                    break _L;
+                const _err$3 = _bind$5;
+                _err$2 = _err$3._0;
+                break _L$2;
+              }
+              const _chunk = _bind$6._0;
+              const _next = _bind$6._1;
+              chunk = _chunk;
+              next = _next;
+              break _L$3;
+            }
+            pc.val = next;
+            const _bind$5 = _M0MP211localreview5forth7Machine25interpret__compile__chunk(self, chunk);
+            if (_bind$5.$tag === 1) {
+              const _ok = _bind$5;
+              _ok._0;
+            } else {
+              const _err$3 = _bind$5;
+              _err$2 = _err$3._0;
+              break _L$2;
+            }
+          } else {
+            if (word === "literal") {
+              const _bind$5 = _M0MP211localreview5forth7Machine3pop(self);
+              let _tmp;
+              if (_bind$5.$tag === 1) {
+                const _ok = _bind$5;
+                _tmp = _ok._0;
+              } else {
+                const _err$3 = _bind$5;
+                _err$2 = _err$3._0;
+                break _L$2;
+              }
+              _M0MPC15array5Array4pushGsE(compiled, _M0MPC13int3Int18to__string_2einner(_tmp, 10));
+            } else {
+              if (word === "does>") {
+                after_does.val = true;
+                _M0MPC15array5Array4pushGsE(compiled, "\u0001does>");
+              } else {
+                if (word === "[']") {
+                  if (pc.val >= body.length) {
+                    _err$2 = new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("missing execution token name");
+                    break _L$2;
                   }
-                  _M0MPC15array5Array4pushGsE(compiled, own);
+                  const _bind$5 = _M0MP211localreview5forth7Machine11capture__xt(self, _M0MPC15array5Array2atGsE(body, pc.val));
+                  let _tmp;
+                  if (_bind$5.$tag === 1) {
+                    const _ok = _bind$5;
+                    _tmp = _ok._0;
+                  } else {
+                    const _err$3 = _bind$5;
+                    _err$2 = _err$3._0;
+                    break _L$2;
+                  }
+                  _M0MPC15array5Array4pushGsE(compiled, _M0MPC13int3Int18to__string_2einner(_tmp, 10));
+                  pc.val = pc.val + 1 | 0;
                 } else {
-                  _L$2: {
-                    _L$3: {
-                      if (_M0MPC15array5Array8containsGsE(controls, word)) {
-                        break _L$3;
-                      } else {
-                        const _bind$5 = _M0FP211localreview5forth6number(word);
-                        if (_bind$5 === undefined) {
-                          let target;
-                          _L$4: {
-                            _L$5: {
-                              const _bind$6 = _M0MPB3Map3getGsRPB5ArrayGsEE(self.words, word);
-                              if (_bind$6.$tag === 1) {
-                                const _Some = _bind$6;
-                                const _target = _Some._0;
-                                target = _target;
-                                break _L$5;
-                              } else {
-                                if (_M0FP211localreview5forth15primitive__word(word)) {
-                                  _M0MPC15array5Array4pushGsE(compiled, `\u0001${word}`);
-                                } else {
-                                  _err = new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid(`unknown or unsupported compile-time word: ${word}`);
-                                  break _L;
-                                }
-                              }
-                              break _L$4;
-                            }
-                            let key;
-                            const _bind$6 = _M0MPB3Map3getGssE(captures, word);
-                            if (_bind$6 === undefined) {
-                              const _bind$7 = _M0MP211localreview5forth7Machine12binding__key(self);
-                              let key$2;
-                              if (_bind$7.$tag === 1) {
-                                const _ok = _bind$7;
-                                key$2 = _ok._0;
-                              } else {
-                                const _err$2 = _bind$7;
-                                _err = _err$2._0;
-                                break _L;
-                              }
-                              _M0MPB3Map3setGsRPB5ArrayGsEE(pending, key$2, target);
-                              _M0MPB3Map3setGssE(captures, word, key$2);
-                              key = key$2;
-                            } else {
-                              const _Some = _bind$6;
-                              const _key = _Some;
-                              key = _key;
-                            }
-                            _M0MPC15array5Array4pushGsE(compiled, key);
-                          }
-                        } else {
-                          break _L$3;
-                        }
-                      }
+                  if (word === "recurse") {
+                    if (after_does.val) {
+                      _err$2 = new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("RECURSE after DOES> is unsupported");
                       break _L$2;
                     }
-                    _M0MPC15array5Array4pushGsE(compiled, word);
+                    _M0MPC15array5Array4pushGsE(compiled, own);
+                  } else {
+                    _L$3: {
+                      _L$4: {
+                        if (_M0MPC15array5Array8containsGsE(controls, word)) {
+                          break _L$4;
+                        } else {
+                          const _bind$5 = _M0FP211localreview5forth6number(word);
+                          if (_bind$5 === undefined) {
+                            let target;
+                            _L$5: {
+                              _L$6: {
+                                const _bind$6 = _M0MPB3Map3getGsRPB5ArrayGsEE(self.words, word);
+                                if (_bind$6.$tag === 1) {
+                                  const _Some = _bind$6;
+                                  const _target = _Some._0;
+                                  target = _target;
+                                  break _L$6;
+                                } else {
+                                  if (_M0FP211localreview5forth15primitive__word(word)) {
+                                    _M0MPC15array5Array4pushGsE(compiled, `\u0001${word}`);
+                                  } else {
+                                    _err$2 = new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid(`unknown or unsupported compile-time word: ${word}`);
+                                    break _L$2;
+                                  }
+                                }
+                                break _L$5;
+                              }
+                              if (_M0IPC16option6OptionPB2Eq5equalGbE(_M0MPB3Map3getGsbE(self.immediate_words, word), true)) {
+                                const _bind$6 = _M0MP211localreview5forth7Machine14run__immediate(self, target, body, pc.val);
+                                let _tmp;
+                                if (_bind$6.$tag === 1) {
+                                  const _ok = _bind$6;
+                                  _tmp = _ok._0;
+                                } else {
+                                  const _err$3 = _bind$6;
+                                  _err$2 = _err$3._0;
+                                  break _L$2;
+                                }
+                                pc.val = _tmp;
+                                continue;
+                              }
+                              let key;
+                              const _bind$6 = _M0MPB3Map3getGssE(captures, word);
+                              if (_bind$6 === undefined) {
+                                const _bind$7 = _M0MP211localreview5forth7Machine12binding__key(self);
+                                let key$2;
+                                if (_bind$7.$tag === 1) {
+                                  const _ok = _bind$7;
+                                  key$2 = _ok._0;
+                                } else {
+                                  const _err$3 = _bind$7;
+                                  _err$2 = _err$3._0;
+                                  break _L$2;
+                                }
+                                _M0MPB3Map3setGsRPB5ArrayGsEE(pending, key$2, target);
+                                _M0MPB3Map3setGssE(captures, word, key$2);
+                                key = key$2;
+                              } else {
+                                const _Some = _bind$6;
+                                const _key = _Some;
+                                key = _key;
+                              }
+                              _M0MPC15array5Array4pushGsE(compiled, key);
+                            }
+                          } else {
+                            break _L$4;
+                          }
+                        }
+                        break _L$3;
+                      }
+                      _M0MPC15array5Array4pushGsE(compiled, word);
+                    }
                   }
                 }
               }
             }
           }
-        }
-        continue;
-      } else {
-        break;
-      }
-    }
-    const _it = _M0MPB3Map5iter2GsRPB5ArrayGsEE(pending);
-    while (true) {
-      let key;
-      let target;
-      _L$2: {
-        const _bind$5 = _M0MPB5Iter24nextGsRPB5ArrayGsEE(_it);
-        if (_bind$5 === undefined) {
-          break;
+          continue;
         } else {
-          const _Some = _bind$5;
-          const _x = _Some;
-          const _key = _x._0;
-          const _target = _x._1;
-          key = _key;
-          target = _target;
-          break _L$2;
+          break;
         }
       }
-      _M0MPB3Map3setGsRPB5ArrayGsEE(self.words, key, target);
-      continue;
+      const _it = _M0MPB3Map5iter2GsRPB5ArrayGsEE(pending);
+      while (true) {
+        let key;
+        let target;
+        _L$3: {
+          const _bind$5 = _M0MPB5Iter24nextGsRPB5ArrayGsEE(_it);
+          if (_bind$5 === undefined) {
+            break;
+          } else {
+            const _Some = _bind$5;
+            const _x = _Some;
+            const _key = _x._0;
+            const _target = _x._1;
+            key = _key;
+            target = _target;
+            break _L$3;
+          }
+        }
+        _M0MPB3Map3setGsRPB5ArrayGsEE(self.words, key, target);
+        continue;
+      }
+      _M0MPB3Map3setGsRPB5ArrayGsEE(self.words, own, compiled);
+      _M0MPB3Map3setGsRPB5ArrayGsEE(self.words, name, compiled);
+      self.latest_created = _M0DTPC16option6OptionGRPB5ArrayGsEE4None__;
+      let _tmp;
+      const _bind$5 = "\u0000";
+      if (_M0MPC16string6String11has__prefix(name, new _M0TPC16string10StringView(_bind$5, 0, _bind$5.length))) {
+        _tmp = undefined;
+      } else {
+        _tmp = name;
+      }
+      self.latest_name = _tmp;
+      const _defer_result = _M0MPB3Map3setGsbE(self.immediate_words, name, false);
+      _defer();
+      return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(_defer_result);
     }
-    _M0MPB3Map3setGsRPB5ArrayGsEE(self.words, own, compiled);
-    _M0MPB3Map3setGsRPB5ArrayGsEE(self.words, name, compiled);
-    self.latest_created = _M0DTPC16option6OptionGRPB5ArrayGsEE4None__;
-    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
+    _defer();
+    _err = _err$2;
+    break _L;
   }
   self.binding_id = old_binding_id;
   while (true) {
@@ -6169,6 +6511,36 @@ function _M0MP211localreview5forth7Machine25interpret__compile__chunk(self, chun
   }
   _defer();
   return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(_err);
+}
+function _M0MP211localreview5forth7Machine14run__immediate(self, target, source, pc) {
+  const saved_input = self.input;
+  const saved_pc = self.input_pc;
+  const saved_mode = self.compile_eval;
+  self.input = source;
+  self.input_pc = pc;
+  self.compile_eval = true;
+  const _defer = () => {
+    self.input = saved_input;
+    self.input_pc = saved_pc;
+    self.compile_eval = saved_mode;
+  };
+  let _err;
+  _L: {
+    const _bind = _M0MP211localreview5forth7Machine14execute__frame(self, target, 1, true);
+    if (_bind.$tag === 1) {
+      const _ok = _bind;
+      _ok._0;
+    } else {
+      const _err$2 = _bind;
+      _err = _err$2._0;
+      break _L;
+    }
+    const _defer_result = self.input_pc;
+    _defer();
+    return new _M0DTPC16result6ResultGiRP211localreview5forth10ForthErrorE2Ok(_defer_result);
+  }
+  _defer();
+  return new _M0DTPC16result6ResultGiRP211localreview5forth10ForthErrorE3Err(_err);
 }
 function _M0MP211localreview5forth7Machine13counted__loop(self, body, start, limit, plus, depth) {
   if (self.loop_indices.length >= 64) {
@@ -6265,23 +6637,27 @@ function _M0MP211localreview5forth7Machine3new() {
   const _bind$3 = _M0MPB3Map3MapGsRPB5ArrayGsEE(new _M0TPB9ArrayViewGUsRPB5ArrayGsEEE(_bind$2, 0, 0), undefined);
   const _bind$4 = 0;
   const _bind$5 = [];
-  const _bind$6 = false;
-  const _bind$7 = [];
-  const _bind$8 = _M0MPB3Map3MapGsiE(new _M0TPB9ArrayViewGUsiEE(_bind$7, 0, 0), undefined);
+  const _bind$6 = [];
+  const _bind$7 = _M0MPB3Map3MapGsbE(new _M0TPB9ArrayViewGUsbEE(_bind$6, 0, 0), undefined);
+  const _bind$8 = undefined;
   const _bind$9 = _M0DTPC16option6OptionGRPB5ArrayGsEE4None__;
-  const _bind$10 = [];
-  const _bind$11 = 0;
-  const _bind$12 = [];
-  const _bind$13 = [];
+  const _bind$10 = false;
+  const _bind$11 = [];
+  const _bind$12 = _M0MPB3Map3MapGsiE(new _M0TPB9ArrayViewGUsiEE(_bind$11, 0, 0), undefined);
+  const _bind$13 = _M0DTPC16option6OptionGRPB5ArrayGsEE4None__;
   const _bind$14 = [];
   const _bind$15 = 0;
   const _bind$16 = [];
-  const _bind$17 = false;
-  const _bind$18 = 0;
-  const _bind$19 = false;
-  const _bind$20 = false;
-  const _bind$21 = 0;
-  return new _M0TP211localreview5forth7Machine(_bind, _bind$3, _bind$6, _bind$8, _bind$9, _bind$10, _bind$11, _bind$5, _bind$4, _bind$12, _bind$13, _bind$14, _bind$15, _bind$16, _bind$17, _bind$18, _bind$19, _bind$20, _bind$21);
+  const _bind$17 = [];
+  const _bind$18 = [];
+  const _bind$19 = 0;
+  const _bind$20 = [];
+  const _bind$21 = false;
+  const _bind$22 = 0;
+  const _bind$23 = false;
+  const _bind$24 = false;
+  const _bind$25 = 0;
+  return new _M0TP211localreview5forth7Machine(_bind, _bind$3, _bind$7, _bind$8, _bind$9, _bind$10, _bind$12, _bind$13, _bind$14, _bind$15, _bind$5, _bind$4, _bind$16, _bind$17, _bind$18, _bind$19, _bind$20, _bind$21, _bind$22, _bind$23, _bind$24, _bind$25);
 }
 function _M0MP211localreview5forth7Machine6values(self) {
   return _M0MPC15array5Array4copyGiE(self.stack);

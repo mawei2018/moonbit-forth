@@ -37,3 +37,25 @@ fn Machine::interpret_compile_chunk(
   }
   self.execute_frame(chunk, 0, false)
 }
+
+///|
+fn Machine::run_immediate(
+  self : Machine,
+  target : Array[String],
+  source : Array[String],
+  pc : Int,
+) -> Int raise ForthError {
+  let saved_input = self.input
+  let saved_pc = self.input_pc
+  let saved_mode = self.compile_eval
+  self.input = source
+  self.input_pc = pc
+  self.compile_eval = true
+  defer {
+    self.input = saved_input
+    self.input_pc = saved_pc
+    self.compile_eval = saved_mode
+  }
+  self.execute_frame(target, 1, true)
+  self.input_pc
+}

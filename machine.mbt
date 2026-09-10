@@ -7,6 +7,9 @@ pub suberror ForthError {
 pub struct Machine {
   priv stack : Array[Int]
   priv words : Map[String, Array[String]]
+  priv immediate_words : Map[String, Bool]
+  priv mut latest_name : String?
+  priv mut compile_output : Array[String]?
   priv mut compile_eval : Bool
   priv data_addresses : Map[String, Int]
   priv mut latest_created : Array[String]?
@@ -33,6 +36,9 @@ pub fn Machine::new() -> Machine {
     words: {},
     binding_id: 0,
     execution_tokens: [],
+    immediate_words: {},
+    latest_name: None,
+    compile_output: None,
     compile_eval: false,
     data_addresses: {},
     latest_created: None,
@@ -192,6 +198,8 @@ fn Machine::execute(
         self.latest_created = None
       }
       self.words[name] = data_body
+      self.latest_name = Some(name)
+      self.immediate_words[name] = false
     } else if word == "does>" {
       self.attach_does(code[pc:].to_owned())
       return
@@ -487,6 +495,30 @@ fn Machine::execute(
           return
         }
         ">r" | "r>" | "r@" | "2>r" | "2r>" | "2r@" => self.return_word(word)
+        "immediate" => {
+          if self.compile_eval {
+            raise Invalid("IMMEDIATE during active compilation is unsupported")
+          }
+          match self.latest_name {
+            Some(name) => self.immediate_words[name] = true
+            None => raise Invalid("IMMEDIATE requires a named definition")
+          }
+        }
+        "compile," => {
+          let output = match self.compile_output {
+            Some(output) => output
+            None => raise Invalid("COMPILE, outside compilation")
+          }
+          let xt = self.pop()
+          if xt < 1 || xt > self.execution_tokens.length() {
+            raise Invalid("invalid execution token")
+          }
+          if output.length() >= 65534 {
+            raise Invalid("compiled definition limit")
+          }
+          output.push(xt.to_string())
+          output.push("\u0001execute")
+        }
         ">body" => {
           let xt = self.pop()
           self.stack.push(self.body_address(xt))

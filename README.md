@@ -1,6 +1,6 @@
 # Forth 栈式解释器
 
-可嵌入、具执行预算的 Forth 子集。本地开发版 0.14.0，供比较和代码审查；尚未作为完整竞赛作品提交。
+可嵌入、具执行预算的 Forth 子集。本地开发版 0.15.0，供比较和代码审查；尚未作为完整竞赛作品提交。
 
 ## 运行
 
@@ -186,3 +186,14 @@ RECURSE 绑定当前定义自身，配合 IF/EXIT 和返回栈可实现递归，
 当前支持定义内成对的 `[ … ]` 和 LITERAL，不支持跨 eval 编译、STATE、IMMEDIATE、POSTPONE、任意控制流栈操作或在编译期间运行定义词；嵌套方括号明确拒绝。这些限制仍需继续补齐。
 
 参考 [Forth LITERAL](https://forth-standard.org/standard/core/LITERAL) 与 [left bracket](https://forth-standard.org/standard/core/Bracket)。本轮只运行 `compile evaluation*` 的 5 组新增 JS 测试，覆盖计算、一次性副作用、令牌/匿名定义、分支/DOES>、错误恢复及预算。未重复全套、未作 Gforth 实机对照或打包。
+
+
+## 0.15.0 开发更新：IMMEDIATE 与 COMPILE,
+
+IMMEDIATE 标记最近完成的命名定义，使其在后续编译中立即执行；解释模式仍正常调用。适用于自定义词、常量和变量，重定义会重置标记。`: seven 7 ; immediate : value seven literal ; value` 得到 7。
+
+COMPILE, 将执行令牌对应的调用写入当前定义，保留当时引用。`: emitdup ['] dup compile, ; immediate : double emitdup + ; 6 double` 得到 12。立即词也可读取编译输入的后续词名：`: emit ' compile, ; immediate : value 5 emit 1+ ; value` 得到 6。编译动作共享预算，失败恢复输出缓冲区和输入上下文。
+
+本实现拒绝在活跃编译期间再次执行 IMMEDIATE；匿名定义后不能标记 IMMEDIATE。COMPILE, 仅用于已有支持的执行令牌，不提供控制流词令牌。尚缺 POSTPONE、STATE、跨 eval 编译和任意控制流栈编排。
+
+参考 [Forth IMMEDIATE](https://forth-standard.org/standard/core/IMMEDIATE) 与 [COMPILE,](https://forth-standard.org/standard/core/COMPILEComma)。本轮只运行 `immediate*` 的 5 组新增 JS 测试，覆盖立即执行/解释、常量、调用生成及绑定、名称解析、一次性副作用和错误恢复。未重复全套、未作 Gforth 实机对照或打包。

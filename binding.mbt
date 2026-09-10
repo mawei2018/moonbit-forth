@@ -26,6 +26,11 @@ fn Machine::compile_word(
   let pending : Map[String, Array[String]] = Map([])
   let own = self.binding_key()
   let compiled = []
+  let previous_output = self.compile_output
+  self.compile_output = Some(compiled)
+  defer {
+    self.compile_output = previous_output
+  }
   let captures : Map[String, String] = Map([])
   let controls = [
     "if", "else", "then", "begin", "while", "repeat", "until", "again", "do", "?do",
@@ -60,6 +65,10 @@ fn Machine::compile_word(
     } else if controls.contains(word) || number(word) is Some(_) {
       compiled.push(word)
     } else if self.words.get(word) is Some(target) {
+      if self.immediate_words.get(word) == Some(true) {
+        pc = self.run_immediate(target, body, pc)
+        continue
+      }
       let key = match captures.get(word) {
         Some(key) => key
         None => {
@@ -82,6 +91,8 @@ fn Machine::compile_word(
   self.words[own] = compiled
   self.words[name] = compiled
   self.latest_created = None
+  self.latest_name = if name.has_prefix("\u0000") { None } else { Some(name) }
+  self.immediate_words[name] = false
 }
 
 ///|
@@ -92,6 +103,6 @@ fn primitive_word(word : String) -> Bool {
     "+!", ",", "c,", "fill", "erase", "move", "0=", "0<", "0>", "1+", "1-", "i",
     "j", "exit", "unloop", "leave", ">r", "r>", "r@", "2>r", "2r>", "2r@", "depth",
     ".", "negate", "+", "-", "*", "/", "mod", "=", "<", ">", "and", "or", "execute",
-    "variable", "constant", "create", "'", ">body",
+    "variable", "constant", "create", "'", ">body", "immediate", "compile,",
   ].contains(word)
 }
