@@ -14,6 +14,16 @@ fn Machine::compile_word(
   name : String,
   body : Array[String],
 ) -> Unit raise ForthError {
+  validate_structure(body)
+  let old_binding_id = self.binding_id
+  let old_tokens = self.execution_tokens.length()
+  errdefer {
+    self.binding_id = old_binding_id
+    while self.execution_tokens.length() > old_tokens {
+      ignore(self.execution_tokens.pop())
+    }
+  }
+  let pending : Map[String, Array[String]] = Map([])
   let own = self.binding_key()
   let compiled = []
   let captures : Map[String, String] = Map([])
@@ -23,21 +33,11 @@ fn Machine::compile_word(
   ]
 
   let mut after_does = false
-  let mut nesting = 0
   let mut pc = 0
   while pc < body.length() {
     let word = body[pc]
     pc += 1
-    if ["if", "begin", "do", "?do"].contains(word) {
-      nesting += 1
-    }
-    if ["then", "until", "again", "repeat", "loop", "+loop"].contains(word) {
-      nesting -= 1
-    }
     if word == "does>" {
-      if nesting != 0 {
-        raise Invalid("DOES> inside control structure")
-      }
       after_does = true
       compiled.push("\u0001does>")
     } else if word == "[']" {
@@ -58,7 +58,7 @@ fn Machine::compile_word(
         Some(key) => key
         None => {
           let key = self.binding_key()
-          self.words[key] = target
+          pending[key] = target
           captures[word] = key
           key
         }
@@ -69,6 +69,9 @@ fn Machine::compile_word(
     } else {
       raise Invalid("unknown or unsupported compile-time word: " + word)
     }
+  }
+  for key, target in pending {
+    self.words[key] = target
   }
   self.words[own] = compiled
   self.words[name] = compiled

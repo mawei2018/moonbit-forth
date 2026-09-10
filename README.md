@@ -1,6 +1,6 @@
 # Forth 栈式解释器
 
-可嵌入、具执行预算的 Forth 子集。本地开发版 0.12.0，供比较和代码审查；尚未作为完整竞赛作品提交。
+可嵌入、具执行预算的 Forth 子集。本地开发版 0.13.0，供比较和代码审查；尚未作为完整竞赛作品提交。
 
 ## 运行
 
@@ -166,3 +166,12 @@ RECURSE 绑定当前定义自身，配合 IF/EXIT 和返回栈可实现递归，
 >BODY 接收 CREATE 词的执行令牌并返回数据区地址，DOES> 替换行为或后续同名重定义不改变旧令牌对应的地址。例如 `: con create , does> @ ; 4 con a 7 ' a >body ! a` 得到 7。普通冒号定义、内建词及 CONSTANT 的令牌不被当作 CREATE 数据地址，无效令牌报错。数据区尚未分配时可取得 HERE 对应地址，但读写仍须先分配空间。
 
 参考 [Forth :NONAME](https://forth-standard.org/standard/core/ColonNONAME) 与 [>BODY](https://forth-standard.org/standard/core/toBODY)。本轮仅运行新增 `anonymous*` 的 5 组 JS 测试，覆盖回调存取、递归、匿名定义词、地址稳定性及非法输入；未重复全套、未作 Gforth 实机对照或打包。完整编译状态、IMMEDIATE/POSTPONE 和源码输入词仍待实现。
+
+
+## 0.13.0 开发更新：编译结构检查与失败回滚
+
+冒号和匿名定义在发布前验证结构化控制流：IF/ELSE/THEN、BEGIN/WHILE/REPEAT、BEGIN/UNTIL/AGAIN、DO/?DO/LOOP/+LOOP 必须正确嵌套与闭合，最大 64 层；DOES> 必须处于已闭合的边界。即使错误代码不会被执行，也在定义时拒绝，保留同名旧定义。
+
+编译过程暂存内部词引用，成功后才加入字典；失败时恢复绑定编号并撤销本次新建令牌，避免反复失败消耗内部资源。已存在令牌和字典保持有效。
+
+本轮仅运行 `compile structure*` 的 4 组新增 JS 测试：22 种错配/未闭合结构、合法混合嵌套和 DOES>、匿名递归与错误、100 次失败编译后的令牌使用。未重复全套、未作 Gforth 实机对照或打包。该检查覆盖当前结构化子集，不支持标准控制流栈的任意重排及多 WHILE 编排；IMMEDIATE/POSTPONE 和完整编译状态仍待补齐。
