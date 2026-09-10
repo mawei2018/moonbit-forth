@@ -7,6 +7,8 @@ pub suberror ForthError {
 pub struct Machine {
   priv stack : Array[Int]
   priv words : Map[String, Array[String]]
+  priv mut input : Array[String]
+  priv mut input_pc : Int
   priv execution_tokens : Array[Array[String]]
   priv mut binding_id : Int
   priv output : Array[String]
@@ -28,6 +30,8 @@ pub fn Machine::new() -> Machine {
     words: {},
     binding_id: 0,
     execution_tokens: [],
+    input: [],
+    input_pc: 0,
     output: [],
     memory: [],
     returns: [],
@@ -144,18 +148,16 @@ fn Machine::execute(
     let builtin = raw.has_prefix("\u0001")
     let word = if builtin { raw[1:].to_owned() } else { raw }
     pc += 1
+    if depth == 0 {
+      self.input_pc = pc
+    }
     if word == "'" {
-      if pc >= code.length() {
-        raise Invalid("missing execution token name")
-      }
-      self.stack.push(self.capture_xt(code[pc]))
-      pc += 1
+      let (name, next) = self.runtime_name(code, pc, depth)
+      pc = next
+      self.stack.push(self.capture_xt(name))
     } else if word == "variable" || word == "constant" || word == "create" {
-      if pc >= code.length() {
-        raise Invalid("missing data word name")
-      }
-      let name = code[pc]
-      pc += 1
+      let (name, next) = self.runtime_name(code, pc, depth)
+      pc = next
       if number(name) is Some(_) ||
         [":", ";", "if", "else", "then"].contains(name) {
         raise Invalid("invalid data word name")
@@ -196,6 +198,9 @@ fn Machine::execute(
     } else if word == "do" || word == "?do" {
       let (body, plus, next) = counted_body(code, pc)
       pc = next
+      if depth == 0 {
+        self.input_pc = pc
+      }
       let start = self.pop()
       let limit = self.pop()
       if word == "do" || start != limit {
@@ -204,6 +209,9 @@ fn Machine::execute(
     } else if word == "begin" {
       let (body, tail, ending, next) = begin_body(code, pc)
       pc = next
+      if depth == 0 {
+        self.input_pc = pc
+      }
       while true {
         self.fuel -= 1
         if self.fuel < 0 {
@@ -258,6 +266,9 @@ fn Machine::execute(
       }
       if nesting != 0 {
         raise Invalid("missing then")
+      }
+      if depth == 0 {
+        self.input_pc = pc
       }
       self.execute(if condition != 0 { yes } else { no }, depth + 1)
     } else if [
@@ -483,6 +494,9 @@ fn Machine::execute(
     if self.leaving || self.exiting {
       return
     }
+    if depth == 0 {
+      pc = if pc > self.input_pc { pc } else { self.input_pc }
+    }
     if self.stack.length() > 4096 {
       raise Invalid("stack limit exceeded")
     }
@@ -500,5 +514,12 @@ pub fn Machine::eval(
     raise Invalid("invalid input limit")
   }
   self.fuel = budget
-  self.execute_frame(tokens(source), 0, false)
+  let input = tokens(source)
+  self.input = input
+  self.input_pc = 0
+  defer {
+    self.input = []
+    self.input_pc = 0
+  }
+  self.execute_frame(input, 0, false)
 }

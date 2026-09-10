@@ -1,6 +1,6 @@
 # Forth 栈式解释器
 
-可嵌入、具执行预算的 Forth 子集。本地开发版 0.9.0，供比较和代码审查；尚未作为完整竞赛作品提交。
+可嵌入、具执行预算的 Forth 子集。本地开发版 0.10.0，供比较和代码审查；尚未作为完整竞赛作品提交。
 
 ## 运行
 
@@ -123,7 +123,7 @@ UNLOOP 只移除当前词的循环参数，不允许破坏调用者循环；移�
 
 RECURSE 绑定当前定义自身，配合 IF/EXIT 和返回栈可实现递归，即使之后重定义同名词也不改变旧递归。未知词在定义时拒绝，失败不替换同名旧定义。内部绑定标识不允许从输入注入，绑定数量上限为 65536。
 
-这是已有词集的绑定编译器；尚无 IMMEDIATE、POSTPONE、编译模式切换或 DOES>。控制结构仍由原有结构化执行器处理，不能重定义这些保留控制词。VARIABLE/CONSTANT/CREATE 目前用于顶层定义，不支持在冒号定义内解析新的输入名称；定义词机制仍待补齐。
+这是已有词集的绑定编译器；尚无 IMMEDIATE、POSTPONE、编译模式切换或 DOES>。控制结构仍由原有结构化执行器处理，不能重定义这些保留控制词。VARIABLE/CONSTANT/CREATE 的运行期名称解析已在 0.10.0 补充；DOES> 定义词机制仍待补齐。
 
 参考 [Forth colon definition](https://forth-standard.org/standard/core/Colon) 与 [RECURSE](https://forth-standard.org/standard/core/RECURSE)。本轮 `binding*` 的 5 组新增 JS 测试通过，覆盖用户词/内建词/数据词重定义、同名旧引用、递归身份、返回栈递归和失败恢复；未重复全套回归、未作 Gforth 实机对照或重新打包。
 
@@ -134,6 +134,15 @@ RECURSE 绑定当前定义自身，配合 IF/EXIT 和返回栈可实现递归，
 
 令牌属于当前 Machine，采用 1 起始的不透明索引，上限 65536；相同已有实现复用令牌。EXECUTE 保留调用边界、预算和深度保护。无效索引、未知名称和无受支持解释语义的控制词会报错。
 
-当前 `'` 只支持顶层解析，定义内用 `[']`；完整运行期输入游标尚待实现。控制词和返回栈原语不提供令牌，自定义词可以使用这些能力后通过令牌调用。它不是原生地址或跨 Machine 可序列化标识；仍缺 DOES>、IMMEDIATE、POSTPONE 等。
+0.10.0 已补定义内单引号的运行期名称解析；完整原始文本输入游标仍待实现。控制词和返回栈原语不提供令牌，自定义词可以使用这些能力后通过令牌调用。它不是原生地址或跨 Machine 可序列化标识；仍缺 DOES>、IMMEDIATE、POSTPONE 等。
 
 参考 [Forth tick](https://forth-standard.org/standard/core/Tick) 与 [EXECUTE](https://forth-standard.org/standard/core/EXECUTE)。本轮仅运行 `execution tokens*` 的 5 组 JS 测试，覆盖回调、令牌复用、保存和重定义、编译时引用、递归/EXIT 与拒绝场景。未重复全套或重新打包，未作 Gforth 实机对照。
+
+
+## 0.10.0 开发更新：运行期名称解析
+
+自定义词现在可通过 VARIABLE、CONSTANT、CREATE 和单引号从当前 eval 输入读取后续名称，支持嵌套调用、条件分支、循环和通过 EXECUTE 调用解析原语。示例 `: table create 10 , 20 , ; table data data cell+ @` 得到 20；`: call ' execute ; 3 call dup +` 得到 6。
+
+定义中的单引号在调用时读取名称；`[']` 仍在编译时捕获名称。名称消费推进共享输入游标，已消费名称不再当作普通词执行。缺失或非法名称会报错，eval 结束或失败后清理输入游标，字典/数据空间按已有规则保留。
+
+本轮只运行 `runtime names*` 的 5 组新增 JS 测试，覆盖变量/常量/CREATE、多个名称、嵌套解析、条件/循环、执行令牌及错误后恢复。未重复全套、未作 Gforth 实机对照或打包。当前仍使用预分词输入，不提供原始 SOURCE/>IN、EVALUATE 或完整编译状态；CREATE…DOES> 仍待补齐。
