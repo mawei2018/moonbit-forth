@@ -66,6 +66,17 @@ UNLOOP 只移除当前词的循环参数，不允许破坏调用者循环；移�
 
 RECURSE 绑定当前定义自身，配合 IF/EXIT 和返回栈可实现递归，即使之后重定义同名词也不改变旧递归。未知词在定义时拒绝，失败不替换同名旧定义。内部绑定标识不允许从输入注入，绑定数量上限为 65536。
 
-这是已有词集的绑定编译器；尚无 IMMEDIATE、POSTPONE、编译模式切换、执行令牌或 DOES>。控制结构仍由原有结构化执行器处理，不能重定义这些保留控制词。VARIABLE/CONSTANT/CREATE 目前用于顶层定义，不支持在冒号定义内解析新的输入名称；定义词机制仍待补齐。
+这是已有词集的绑定编译器；尚无 IMMEDIATE、POSTPONE、编译模式切换或 DOES>。控制结构仍由原有结构化执行器处理，不能重定义这些保留控制词。VARIABLE/CONSTANT/CREATE 目前用于顶层定义，不支持在冒号定义内解析新的输入名称；定义词机制仍待补齐。
 
 参考 [Forth colon definition](https://forth-standard.org/standard/core/Colon) 与 [RECURSE](https://forth-standard.org/standard/core/RECURSE)。本轮 `binding*` 的 5 组新增 JS 测试通过，覆盖用户词/内建词/数据词重定义、同名旧引用、递归身份、返回栈递归和失败恢复；未重复全套回归、未作 Gforth 实机对照或重新打包。
+
+
+## 0.9.0 开发更新：执行令牌
+
+新增顶层 `' name`、定义内 `['] name` 和 EXECUTE。令牌可作为整数 cell 放入常量/变量、传给其他词或跨 eval 使用，引用的行为不随同名词重定义改变。示例 `: square dup * ; : apply execute ; 6 ' square apply` 得到 36；`: callback ['] square ; 7 callback execute` 得到 49。
+
+令牌属于当前 Machine，采用 1 起始的不透明索引，上限 65536；相同已有实现复用令牌。EXECUTE 保留调用边界、预算和深度保护。无效索引、未知名称和无受支持解释语义的控制词会报错。
+
+当前 `'` 只支持顶层解析，定义内用 `[']`；完整运行期输入游标尚待实现。控制词和返回栈原语不提供令牌，自定义词可以使用这些能力后通过令牌调用。它不是原生地址或跨 Machine 可序列化标识；仍缺 DOES>、IMMEDIATE、POSTPONE 等。
+
+参考 [Forth tick](https://forth-standard.org/standard/core/Tick) 与 [EXECUTE](https://forth-standard.org/standard/core/EXECUTE)。本轮仅运行 `execution tokens*` 的 5 组 JS 测试，覆盖回调、令牌复用、保存和重定义、编译时引用、递归/EXIT 与拒绝场景。未重复全套或重新打包，未作 Gforth 实机对照。

@@ -7,6 +7,7 @@ pub suberror ForthError {
 pub struct Machine {
   priv stack : Array[Int]
   priv words : Map[String, Array[String]]
+  priv execution_tokens : Array[Array[String]]
   priv mut binding_id : Int
   priv output : Array[String]
   priv memory : Array[Byte]
@@ -26,6 +27,7 @@ pub fn Machine::new() -> Machine {
     stack: [],
     words: {},
     binding_id: 0,
+    execution_tokens: [],
     output: [],
     memory: [],
     returns: [],
@@ -142,7 +144,13 @@ fn Machine::execute(
     let builtin = raw.has_prefix("\u0001")
     let word = if builtin { raw[1:].to_owned() } else { raw }
     pc += 1
-    if word == "variable" || word == "constant" || word == "create" {
+    if word == "'" {
+      if pc >= code.length() {
+        raise Invalid("missing execution token name")
+      }
+      self.stack.push(self.capture_xt(code[pc]))
+      pc += 1
+    } else if word == "variable" || word == "constant" || word == "create" {
       if pc >= code.length() {
         raise Invalid("missing data word name")
       }
@@ -434,6 +442,13 @@ fn Machine::execute(
           return
         }
         ">r" | "r>" | "r@" | "2>r" | "2r>" | "2r@" => self.return_word(word)
+        "execute" => {
+          let xt = self.pop()
+          if xt < 1 || xt > self.execution_tokens.length() {
+            raise Invalid("invalid execution token")
+          }
+          self.execute_frame(self.execution_tokens[xt - 1], depth + 1, true)
+        }
         "depth" => self.stack.push(self.stack.length())
         "." => self.output.push(self.pop().to_string())
         "negate" => {
