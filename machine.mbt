@@ -12,6 +12,9 @@ pub struct Machine {
   priv returns : Array[Int]
   priv mut return_base : Int
   priv loop_indices : Array[Int]
+  priv mut exiting : Bool
+  priv mut loop_base : Int
+  priv mut in_word : Bool
   priv mut leaving : Bool
   priv mut fuel : Int
 } derive(Debug)
@@ -26,6 +29,9 @@ pub fn Machine::new() -> Machine {
     returns: [],
     return_base: 0,
     loop_indices: [],
+    exiting: false,
+    loop_base: 0,
+    in_word: false,
     leaving: false,
     fuel: 0,
   }
@@ -189,7 +195,7 @@ fn Machine::execute(
           raise Invalid("execution budget exhausted")
         }
         self.execute(body, depth + 1)
-        if self.leaving {
+        if self.leaving || self.exiting {
           return
         }
         if ending == "until" {
@@ -201,7 +207,7 @@ fn Machine::execute(
             break
           }
           self.execute(tail, depth + 1)
-          if self.leaving {
+          if self.leaving || self.exiting {
             return
           }
         }
@@ -244,7 +250,7 @@ fn Machine::execute(
       ].contains(word) {
       raise Invalid("unexpected control word: " + word)
     } else if self.words.get(word) is Some(body) {
-      self.execute_frame(body, depth + 1)
+      self.execute_frame(body, depth + 1, true)
     } else if number(word) is Some(n) {
       self.stack.push(n)
     } else {
@@ -394,6 +400,25 @@ fn Machine::execute(
           }
           self.stack.push(self.loop_indices[self.loop_indices.length() - back])
         }
+        "exit" => {
+          if !self.in_word {
+            raise Invalid("EXIT outside definition")
+          }
+          if self.loop_indices.length() != self.loop_base {
+            raise Invalid("EXIT requires UNLOOP for active loops")
+          }
+          if self.returns.length() != self.return_base {
+            raise Invalid("EXIT requires balanced return stack")
+          }
+          self.exiting = true
+          return
+        }
+        "unloop" => {
+          if !self.in_word || self.loop_indices.length() <= self.loop_base {
+            raise Invalid("UNLOOP outside current word loop")
+          }
+          ignore(self.loop_indices.pop())
+        }
         "leave" => {
           if self.loop_indices.is_empty() {
             raise Invalid("LEAVE outside counted loop")
@@ -433,7 +458,7 @@ fn Machine::execute(
         _ => raise Invalid("unknown word: " + word)
       }
     }
-    if self.leaving {
+    if self.leaving || self.exiting {
       return
     }
     if self.stack.length() > 4096 {
@@ -453,5 +478,5 @@ pub fn Machine::eval(
     raise Invalid("invalid input limit")
   }
   self.fuel = budget
-  self.execute_frame(tokens(source), 0)
+  self.execute_frame(tokens(source), 0, false)
 }

@@ -35,9 +35,12 @@ fn Machine::counted_loop(
   if self.loop_indices.length() >= 64 {
     raise Invalid("loop nesting limit")
   }
+  let base = self.loop_indices.length()
   self.loop_indices.push(start)
   errdefer {
-    ignore(self.loop_indices.pop())
+    while self.loop_indices.length() > base {
+      ignore(self.loop_indices.pop())
+    }
     self.leaving = false
   }
   while true {
@@ -46,6 +49,12 @@ fn Machine::counted_loop(
       raise Invalid("execution budget exhausted")
     }
     self.execute(body, depth)
+    if self.exiting {
+      break
+    }
+    if self.loop_indices.length() != base + 1 {
+      raise Invalid("UNLOOP must be followed by EXIT before loop continuation")
+    }
     if self.leaving {
       self.leaving = false
       break
@@ -67,5 +76,7 @@ fn Machine::counted_loop(
     }
     self.loop_indices[at] = current + step
   }
-  ignore(self.loop_indices.pop())
+  while self.loop_indices.length() > base {
+    ignore(self.loop_indices.pop())
+  }
 }

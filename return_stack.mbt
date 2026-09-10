@@ -3,7 +3,12 @@ fn Machine::execute_frame(
   self : Machine,
   code : Array[String],
   depth : Int,
+  is_word : Bool,
 ) -> Unit raise ForthError {
+  let previous_loop = self.loop_base
+  let previous_word = self.in_word
+  self.loop_base = self.loop_indices.length()
+  self.in_word = is_word
   let previous = self.return_base
   let base = self.returns.length()
   self.return_base = base
@@ -12,12 +17,18 @@ fn Machine::execute_frame(
       ignore(self.returns.pop())
     }
     self.return_base = previous
+    self.loop_base = previous_loop
+    self.in_word = previous_word
+    self.exiting = false
   }
   self.execute(code, depth)
   if self.returns.length() != base {
     raise Invalid("unbalanced return stack at word boundary")
   }
   self.return_base = previous
+  self.loop_base = previous_loop
+  self.in_word = previous_word
+  self.exiting = false
 }
 
 ///|

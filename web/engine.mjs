@@ -213,7 +213,7 @@ function _M0DTPC16result6ResultGiRP211localreview5forth10ForthErrorE2Ok(param0) 
   this._0 = param0;
 }
 _M0DTPC16result6ResultGiRP211localreview5forth10ForthErrorE2Ok.prototype.$tag = 1;
-function _M0TP211localreview5forth7Machine(param0, param1, param2, param3, param4, param5, param6, param7, param8) {
+function _M0TP211localreview5forth7Machine(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11) {
   this.stack = param0;
   this.words = param1;
   this.output = param2;
@@ -221,8 +221,11 @@ function _M0TP211localreview5forth7Machine(param0, param1, param2, param3, param
   this.returns = param4;
   this.return_base = param5;
   this.loop_indices = param6;
-  this.leaving = param7;
-  this.fuel = param8;
+  this.exiting = param7;
+  this.loop_base = param8;
+  this.in_word = param9;
+  this.leaving = param10;
+  this.fuel = param11;
 }
 function _M0TPB9ArrayViewGUsRPB5ArrayGsEEE(param0, param1, param2) {
   this.buf = param0;
@@ -3349,15 +3352,15 @@ function _M0IPC16string6StringPC15debug5Debug8to__repr(self) {
 function _M0IPC15array5ArrayPC15debug5Debug8to__reprGiE(self) {
   return _M0MPC15debug4Repr5array(_M0MPC15array5Array3mapGiRPC15debug4ReprE(self, (x) => _M0MPC15debug4Repr4ReprGiE(x)));
 }
-function _M0IP211localreview5forth10ForthErrorPC15debug5Debug8to__repr(_x_140) {
-  let _arg_141;
+function _M0IP211localreview5forth10ForthErrorPC15debug5Debug8to__repr(_x_144) {
+  let _arg_145;
   _L: {
-    const _Invalid = _x_140;
-    const _$42$arg_141 = _Invalid._0;
-    _arg_141 = _$42$arg_141;
+    const _Invalid = _x_144;
+    const _$42$arg_145 = _Invalid._0;
+    _arg_145 = _$42$arg_145;
     break _L;
   }
-  return _M0MPC15debug4Repr4ctor("Invalid", [{ _0: undefined, _1: _M0IPC16string6StringPC15debug5Debug8to__repr(_arg_141) }]);
+  return _M0MPC15debug4Repr4ctor("Invalid", [{ _0: undefined, _1: _M0IPC16string6StringPC15debug5Debug8to__repr(_arg_145) }]);
 }
 function _M0FP211localreview5forth11begin__body(code, start) {
   const body = [];
@@ -3642,7 +3645,11 @@ function _M0MP211localreview5forth7Machine4save(self, address, value, cell) {
   }
   return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
 }
-function _M0MP211localreview5forth7Machine14execute__frame(self, code, depth) {
+function _M0MP211localreview5forth7Machine14execute__frame(self, code, depth, is_word) {
+  const previous_loop = self.loop_base;
+  const previous_word = self.in_word;
+  self.loop_base = self.loop_indices.length;
+  self.in_word = is_word;
   const previous = self.return_base;
   const base = self.returns.length;
   self.return_base = base;
@@ -3662,6 +3669,9 @@ function _M0MP211localreview5forth7Machine14execute__frame(self, code, depth) {
       break _L;
     }
     self.return_base = previous;
+    self.loop_base = previous_loop;
+    self.in_word = previous_word;
+    self.exiting = false;
     return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
   }
   while (true) {
@@ -3673,6 +3683,9 @@ function _M0MP211localreview5forth7Machine14execute__frame(self, code, depth) {
     }
   }
   self.return_base = previous;
+  self.loop_base = previous_loop;
+  self.in_word = previous_word;
+  self.exiting = false;
   return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(_err);
 }
 function _M0MP211localreview5forth7Machine7execute(self, code, depth) {
@@ -3873,7 +3886,7 @@ function _M0MP211localreview5forth7Machine7execute(self, code, depth) {
                 } else {
                   return _bind;
                 }
-                if (self.leaving) {
+                if (self.leaving || self.exiting) {
                   return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
                 }
                 if (ending === "until") {
@@ -3908,7 +3921,7 @@ function _M0MP211localreview5forth7Machine7execute(self, code, depth) {
                     } else {
                       return _bind$3;
                     }
-                    if (self.leaving) {
+                    if (self.leaving || self.exiting) {
                       return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
                     }
                   }
@@ -4397,6 +4410,26 @@ function _M0MP211localreview5forth7Machine7execute(self, code, depth) {
                                                                 case "j": {
                                                                   break _L$10;
                                                                 }
+                                                                case "exit": {
+                                                                  if (!self.in_word) {
+                                                                    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("EXIT outside definition"));
+                                                                  }
+                                                                  if (self.loop_indices.length !== self.loop_base) {
+                                                                    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("EXIT requires UNLOOP for active loops"));
+                                                                  }
+                                                                  if (self.returns.length !== self.return_base) {
+                                                                    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("EXIT requires balanced return stack"));
+                                                                  }
+                                                                  self.exiting = true;
+                                                                  return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
+                                                                }
+                                                                case "unloop": {
+                                                                  if (!self.in_word || self.loop_indices.length <= self.loop_base) {
+                                                                    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("UNLOOP outside current word loop"));
+                                                                  }
+                                                                  _M0MPC15array5Array3popGiE(self.loop_indices);
+                                                                  break;
+                                                                }
                                                                 case "leave": {
                                                                   if (_M0MPC15array5Array9is__emptyGiE(self.loop_indices)) {
                                                                     return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("LEAVE outside counted loop"));
@@ -4774,7 +4807,7 @@ function _M0MP211localreview5forth7Machine7execute(self, code, depth) {
                       }
                       break _L;
                     }
-                    const _bind = _M0MP211localreview5forth7Machine14execute__frame(self, body, depth + 1 | 0);
+                    const _bind = _M0MP211localreview5forth7Machine14execute__frame(self, body, depth + 1 | 0, true);
                     if (_bind.$tag === 1) {
                       const _ok = _bind;
                       _ok._0;
@@ -4788,7 +4821,7 @@ function _M0MP211localreview5forth7Machine7execute(self, code, depth) {
           }
         }
       }
-      if (self.leaving) {
+      if (self.leaving || self.exiting) {
         return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
       }
       if (self.stack.length > 4096) {
@@ -4805,6 +4838,7 @@ function _M0MP211localreview5forth7Machine13counted__loop(self, body, start, lim
   if (self.loop_indices.length >= 64) {
     return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("loop nesting limit"));
   }
+  const base = self.loop_indices.length;
   _M0MPC15array5Array4pushGiE(self.loop_indices, start);
   let _err;
   _L: {
@@ -4821,6 +4855,13 @@ function _M0MP211localreview5forth7Machine13counted__loop(self, body, start, lim
       } else {
         const _err$2 = _bind;
         _err = _err$2._0;
+        break _L;
+      }
+      if (self.exiting) {
+        break;
+      }
+      if (self.loop_indices.length !== (base + 1 | 0)) {
+        _err = new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("UNLOOP must be followed by EXIT before loop continuation");
         break _L;
       }
       if (self.leaving) {
@@ -4861,17 +4902,31 @@ function _M0MP211localreview5forth7Machine13counted__loop(self, body, start, lim
       _M0MPC15array5Array3setGiE(self.loop_indices, at, current + step | 0);
       continue;
     }
-    _M0MPC15array5Array3popGiE(self.loop_indices);
+    while (true) {
+      if (self.loop_indices.length > base) {
+        _M0MPC15array5Array3popGiE(self.loop_indices);
+        continue;
+      } else {
+        break;
+      }
+    }
     return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
   }
-  _M0MPC15array5Array3popGiE(self.loop_indices);
+  while (true) {
+    if (self.loop_indices.length > base) {
+      _M0MPC15array5Array3popGiE(self.loop_indices);
+      continue;
+    } else {
+      break;
+    }
+  }
   self.leaving = false;
   return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(_err);
 }
 function _M0MP211localreview5forth7Machine3new() {
   const _tmp = [];
   const _bind = [];
-  return new _M0TP211localreview5forth7Machine(_tmp, _M0MPB3Map3MapGsRPB5ArrayGsEE(new _M0TPB9ArrayViewGUsRPB5ArrayGsEEE(_bind, 0, 0), undefined), [], [], [], 0, [], false, 0);
+  return new _M0TP211localreview5forth7Machine(_tmp, _M0MPB3Map3MapGsRPB5ArrayGsEE(new _M0TPB9ArrayViewGUsRPB5ArrayGsEEE(_bind, 0, 0), undefined), [], [], [], 0, [], false, 0, false, false, 0);
 }
 function _M0MP211localreview5forth7Machine6values(self) {
   return _M0MPC15array5Array4copyGiE(self.stack);
@@ -4949,7 +5004,7 @@ function _M0MP211localreview5forth7Machine12eval_2einner(self, source, budget) {
   } else {
     return _bind;
   }
-  return _M0MP211localreview5forth7Machine14execute__frame(self, _tmp, 0);
+  return _M0MP211localreview5forth7Machine14execute__frame(self, _tmp, 0, false);
 }
 function _M0FP411localreview5forth3cmd3web3run(input) {
   let _try_err;

@@ -1,6 +1,6 @@
 # Forth 栈式解释器
 
-可嵌入、具执行预算的 Forth 子集。本地开发版 0.6.0，供比较和代码审查；尚未作为完整竞赛作品提交。
+可嵌入、具执行预算的 Forth 子集。本地开发版 0.7.0，供比较和代码审查；尚未作为完整竞赛作品提交。
 
 ## 运行
 
@@ -32,7 +32,7 @@ moon run cmd/main
 
 ## 下一阶段与明确限制
 
-增加编译期词绑定、EXIT、REPL 和 ANS 子集符合性测试；当前词字典为运行时查找，32 位整数按 MoonBit 溢出语义回绕，错误发生前的栈/字典修改会保留。
+增加编译期词绑定、REPL 和 ANS 子集符合性测试；当前词字典为运行时查找，32 位整数按 MoonBit 溢出语义回绕，错误发生前的栈/字典修改会保留。
 
 本分装包自带 `web/index.html`（用 `start-review.ps1` 启动）。`cmd/web/main.mbt` 为薄适配层，网页调用编译后的真实 MoonBit 模块。
 
@@ -85,7 +85,7 @@ node tools/cli.mjs --file sample.txt --json
 
 新增 BEGIN…UNTIL、BEGIN…AGAIN、BEGIN…WHILE…REPEAT，可嵌套并在自定义词/IF 内使用。UNTIL 消费栈顶标志，非零退出；WHILE 标志为零时跳过后半段并退出。每次循环检查共享执行预算，空 AGAIN 循环也不会无限占用。补充 0=、0<、0>、1+、1-。
 
-示例：`0 begin 1+ dup 4 = until` 留下 4；`3 begin dup 0> while 1- repeat` 留下 0。当前每个 BEGIN 只支持一个 WHILE，不支持标准控制流栈允许的多 WHILE 编排。EXIT 仍未实现，不能视为完整 Forth 控制流。
+示例：`0 begin 1+ dup 4 = until` 留下 4；`3 begin dup 0> while 1- repeat` 留下 0。当前每个 BEGIN 只支持一个 WHILE，不支持标准控制流栈允许的多 WHILE 编排。仍不能视为完整 Forth 控制流。
 
 仅运行新增 `begin loops*` 的 4 组 JS 测试：UNTIL、零次 WHILE、嵌套/变量/IF、错误结构和无限循环预算。未重复旧套件或打包，未作 Gforth 实机对照。
 
@@ -94,7 +94,7 @@ node tools/cli.mjs --file sample.txt --json
 
 新增 DO/?DO…LOOP/+LOOP、I/J 嵌套索引和 LEAVE。参数顺序为 limit start；`5 0 do i 2 +loop` 留下 0、2、4，`0 3 do i -1 +loop` 留下 3、2、1、0。?DO 在起点等于终点时跳过；DO 保留绕回语义。正负步长按 32 位 cell 回绕及边界跨越处理，零步长受执行预算约束。
 
-LEAVE 可从 IF 或 BEGIN 中退出最近的计数循环；循环异常会清理索引状态。最多嵌套 64 层。当前是运行期解释模型，LEAVE 使用动态循环上下文；没有完整标准编译期控制流约束，也尚无 EXIT 或 DOES>。
+LEAVE 可从 IF 或 BEGIN 中退出最近的计数循环；循环异常会清理索引状态。最多嵌套 64 层。当前是运行期解释模型，LEAVE 使用动态循环上下文；没有完整标准编译期控制流约束，也尚无 DOES>。
 
 语义参考 [Forth +LOOP](https://forth-standard.org/standard/core/PlusLOOP) 与 [LEAVE](https://forth-standard.org/standard/core/LEAVE)。本轮仅运行新增 `counted loops*` 的 4 组 JS 测试，覆盖跳过、嵌套、正负步长、回绕、提前退出和错误后恢复；没有运行 Gforth 对照、全套回归或重新打包。最新源码及浏览器引擎为开发版，旧压缩包仍是历史快照。
 
@@ -103,6 +103,15 @@ LEAVE 可从 IF 或 BEGIN 中退出最近的计数循环；循环异常会清理
 
 新增 >R、R>、R@、2>R、2R>、2R@，保留双 cell 的原始顺序。示例 `: keep dup >r 1+ r> ; 7 keep` 留下 8、7。每次自定义词调用有自己的访问边界，不能弹出调用者暂存的数据；词返回和 eval 结束时必须平衡。错误会清理该调用暂存的数据并恢复上层边界。IF/BEGIN/DO 中可使用，返回栈与循环索引存储分离。
 
-返回栈最多 4096 个 cell，下溢/超限操作预先检查。顶层在单次 eval 中成对使用是本项目的解释模式扩展，不支持跨 eval 留存返回栈数据。它不暴露底层返回地址；EXIT、UNLOOP、编译期绑定及 DOES> 仍待实现。
+返回栈最多 4096 个 cell，下溢/超限操作预先检查。顶层在单次 eval 中成对使用是本项目的解释模式扩展，不支持跨 eval 留存返回栈数据。它不暴露底层返回地址；编译期绑定及 DOES> 仍待实现。
 
 操作语义参考 [Forth >R](https://forth-standard.org/standard/core/toR) 和 [2R@](https://forth-standard.org/standard/core/TwoRFetch)。本轮只运行新增 `return stack*` 的 5 组 JS 测试，包含顺序、嵌套调用、条件/循环、边界和异常恢复；未重复全套回归、未运行 Gforth 实机对照、未更新历史压缩包。
+
+
+## 0.7.0 开发更新：EXIT 与 UNLOOP
+
+EXIT 从当前自定义词返回，可穿过 IF 和 BEGIN；被调用词的 EXIT 不会退出调用者。计数循环内返回前须逐层 UNLOOP，且返回栈暂存数据必须取回。示例 `: find 5 0 do i dup 2 = if unloop exit then loop ; find` 留下 0、1、2。双层循环需 `unloop unloop exit`。
+
+UNLOOP 只移除当前词的循环参数，不允许破坏调用者循环；移除后继续执行该 LOOP 会报错。顶层 EXIT/UNLOOP 拒绝执行。异常与正常返回均恢复调用上下文，避免污染后续 eval。
+
+参考 [Forth EXIT](https://forth-standard.org/standard/core/EXIT) 与 [UNLOOP](https://forth-standard.org/standard/core/UNLOOP)。本轮新增 4 组 `word exit*` JS 测试通过，覆盖条件/BEGIN、调用者循环和返回栈、嵌套 UNLOOP、错误后恢复。未重复全套或打包；尚未完成编译期绑定、DOES> 和完整上游符合性对照。
