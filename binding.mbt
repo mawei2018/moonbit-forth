@@ -22,17 +22,34 @@ fn Machine::compile_word(
     "loop", "+loop",
   ]
 
+  let mut after_does = false
+  let mut nesting = 0
   let mut pc = 0
   while pc < body.length() {
     let word = body[pc]
     pc += 1
-    if word == "[']" {
+    if ["if", "begin", "do", "?do"].contains(word) {
+      nesting += 1
+    }
+    if ["then", "until", "again", "repeat", "loop", "+loop"].contains(word) {
+      nesting -= 1
+    }
+    if word == "does>" {
+      if nesting != 0 {
+        raise Invalid("DOES> inside control structure")
+      }
+      after_does = true
+      compiled.push("\u0001does>")
+    } else if word == "[']" {
       if pc >= body.length() {
         raise Invalid("missing execution token name")
       }
       compiled.push(self.capture_xt(body[pc]).to_string())
       pc += 1
     } else if word == "recurse" {
+      if after_does {
+        raise Invalid("RECURSE after DOES> is unsupported")
+      }
       compiled.push(own)
     } else if controls.contains(word) || number(word) is Some(_) {
       compiled.push(word)
@@ -55,6 +72,7 @@ fn Machine::compile_word(
   }
   self.words[own] = compiled
   self.words[name] = compiled
+  self.latest_created = None
 }
 
 ///|

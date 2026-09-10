@@ -7,6 +7,7 @@ pub suberror ForthError {
 pub struct Machine {
   priv stack : Array[Int]
   priv words : Map[String, Array[String]]
+  priv mut latest_created : Array[String]?
   priv mut input : Array[String]
   priv mut input_pc : Int
   priv execution_tokens : Array[Array[String]]
@@ -30,6 +31,7 @@ pub fn Machine::new() -> Machine {
     words: {},
     binding_id: 0,
     execution_tokens: [],
+    latest_created: None,
     input: [],
     input_pc: 0,
     output: [],
@@ -172,7 +174,19 @@ fn Machine::execute(
         }
         address
       }
-      self.words[name] = [value.to_string()]
+      let data_body = [value.to_string()]
+      if word == "create" {
+        let identity = self.binding_key()
+        self.words[identity] = []
+        data_body.push(identity)
+        self.latest_created = Some(data_body)
+      } else {
+        self.latest_created = None
+      }
+      self.words[name] = data_body
+    } else if word == "does>" {
+      self.attach_does(code[pc:].to_owned())
+      return
     } else if word == ":" {
       if pc >= code.length() {
         raise Invalid("missing definition name")

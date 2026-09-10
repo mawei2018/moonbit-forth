@@ -89,3 +89,14 @@ RECURSE 绑定当前定义自身，配合 IF/EXIT 和返回栈可实现递归，
 定义中的单引号在调用时读取名称；`[']` 仍在编译时捕获名称。名称消费推进共享输入游标，已消费名称不再当作普通词执行。缺失或非法名称会报错，eval 结束或失败后清理输入游标，字典/数据空间按已有规则保留。
 
 本轮只运行 `runtime names*` 的 5 组新增 JS 测试，覆盖变量/常量/CREATE、多个名称、嵌套解析、条件/循环、执行令牌及错误后恢复。未重复全套、未作 Gforth 实机对照或打包。当前仍使用预分词输入，不提供原始 SOURCE/>IN、EVALUATE 或完整编译状态；CREATE…DOES> 仍待补齐。
+
+
+## 0.11.0 开发更新：CREATE…DOES>
+
+新增 DOES>：为最近的 CREATE 词安装后续代码，并从当前定义返回。新词先压入自己的数据地址，再运行安装的代码。示例 `: con create , does> @ ; 7 con a 9 con b a b` 留下 7、9；`: array create cells allot does> swap cells + ; 3 array table` 创建按 cell 索引访问的表。
+
+支持 CREATE 位于辅助词、重复替换行为和多个 DOES> 分阶段替换。已捕获的词引用与执行令牌共享被创建词的行为更新；不同 CREATE 即使数据地址相同也拥有独立身份。新增定义若不是 CREATE，会使其不能成为 DOES> 修改对象。
+
+顶层 DOES>、缺失 CREATE、未平衡返回栈/循环和控制结构内 DOES> 会报错；DOES> 后 RECURSE 属于未支持场景，编译时明确拒绝。尚无 >BODY、IMMEDIATE、POSTPONE、原始输入缓冲区或完整 ANS 符合性证明。
+
+语义参考 [Forth DOES>](https://forth-standard.org/standard/core/DOES)。本轮只运行新增 `does*` 的 5 组 JS 测试，覆盖独立数据、数组与条件行为、辅助创建/重复替换、执行令牌身份、自替换及错误恢复；未重复全套、未运行 Gforth 实机对照或重新打包。
