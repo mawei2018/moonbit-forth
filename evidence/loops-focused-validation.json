@@ -1,0 +1,10 @@
+{
+  "timestamp": "2026-09-10T13:00:31.409742+00:00",
+  "target": "js",
+  "filter": "begin loops*",
+  "tests_passed": 4,
+  "scope": "BEGIN UNTIL AGAIN WHILE REPEAT nesting flags and termination budget",
+  "gforth_differential": "not run",
+  "full_suite_rerun": false,
+  "archive_refreshed": false
+}

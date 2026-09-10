@@ -158,6 +158,26 @@ fn Machine::execute(
       }
       pc += 1
       self.words[name] = body
+    } else if word == "begin" {
+      let (body, tail, ending, next) = begin_body(code, pc)
+      pc = next
+      while true {
+        self.fuel -= 1
+        if self.fuel < 0 {
+          raise Invalid("execution budget exhausted")
+        }
+        self.execute(body, depth + 1)
+        if ending == "until" {
+          if self.pop() != 0 {
+            break
+          }
+        } else if ending == "repeat" {
+          if self.pop() == 0 {
+            break
+          }
+          self.execute(tail, depth + 1)
+        }
+      }
     } else if word == "if" {
       let condition = self.pop()
       let yes = []
@@ -191,7 +211,9 @@ fn Machine::execute(
         raise Invalid("missing then")
       }
       self.execute(if condition != 0 { yes } else { no }, depth + 1)
-    } else if word == ";" || word == "else" || word == "then" {
+    } else if [";", "else", "then", "while", "repeat", "until", "again"].contains(
+        word,
+      ) {
       raise Invalid("unexpected control word: " + word)
     } else if self.words.get(word) is Some(body) {
       self.execute(body, depth + 1)
@@ -324,6 +346,18 @@ fn Machine::execute(
           for i in 0..<count {
             self.memory[dest + i] = copy[i]
           }
+        }
+        "0=" | "0<" | "0>" | "1+" | "1-" => {
+          let value = self.pop()
+          self.stack.push(
+            match word {
+              "0=" => if value == 0 { -1 } else { 0 }
+              "0<" => if value < 0 { -1 } else { 0 }
+              "0>" => if value > 0 { -1 } else { 0 }
+              "1+" => value + 1
+              _ => value - 1
+            },
+          )
         }
         "depth" => self.stack.push(self.stack.length())
         "." => self.output.push(self.pop().to_string())
