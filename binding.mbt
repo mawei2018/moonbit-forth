@@ -115,5 +115,7 @@ fn primitive_word(word : String) -> Bool {
     "j", "exit", "unloop", "leave", ">r", "r>", "r@", "2>r", "2r>", "2r@", "depth",
     ".", "negate", "+", "-", "*", "/", "mod", "=", "<", ">", "and", "or", "execute",
     "variable", "constant", "create", "'", ">body", "immediate", "compile,", "state",
+    "abs", "min", "max", "/mod", "*/", "*/mod", "2*", "2/", "invert", "xor", "lshift",
+    "rshift", "u<", "u>", "within", "<>", "0<>",
   ].contains(word)
 }

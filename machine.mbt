@@ -537,6 +537,23 @@ fn Machine::execute(
         }
         "depth" => self.stack.push(self.stack.length())
         "." => self.output.push(self.pop().to_string())
+        "abs"
+        | "min"
+        | "max"
+        | "/mod"
+        | "*/"
+        | "*/mod"
+        | "2*"
+        | "2/"
+        | "invert"
+        | "xor"
+        | "lshift"
+        | "rshift"
+        | "u<"
+        | "u>"
+        | "within"
+        | "<>"
+        | "0<>" => self.integer_word(word)
         "negate" => {
           let a = self.pop()
           self.stack.push(-a)

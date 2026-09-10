@@ -1,0 +1,10 @@
+{
+  "timestamp": "2026-09-10T13:38:48.093875+00:00",
+  "target": "js",
+  "filter": "integer extension*",
+  "passed": 5,
+  "failed": 0,
+  "full_suite_run": false,
+  "gforth_oracle_run": false,
+  "archives_rebuilt": false
+}

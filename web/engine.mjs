@@ -4252,15 +4252,15 @@ function _M0IPC16string6StringPC15debug5Debug8to__repr(self) {
 function _M0IPC15array5ArrayPC15debug5Debug8to__reprGiE(self) {
   return _M0MPC15debug4Repr5array(_M0MPC15array5Array3mapGiRPC15debug4ReprE(self, (x) => _M0MPC15debug4Repr4ReprGiE(x)));
 }
-function _M0IP211localreview5forth10ForthErrorPC15debug5Debug8to__repr(_x_240) {
-  let _arg_241;
+function _M0IP211localreview5forth10ForthErrorPC15debug5Debug8to__repr(_x_248) {
+  let _arg_249;
   _L: {
-    const _Invalid = _x_240;
-    const _$42$arg_241 = _Invalid._0;
-    _arg_241 = _$42$arg_241;
+    const _Invalid = _x_248;
+    const _$42$arg_249 = _Invalid._0;
+    _arg_249 = _$42$arg_249;
     break _L;
   }
-  return _M0MPC15debug4Repr4ctor("Invalid", [{ _0: undefined, _1: _M0IPC16string6StringPC15debug5Debug8to__repr(_arg_241) }]);
+  return _M0MPC15debug4Repr4ctor("Invalid", [{ _0: undefined, _1: _M0IPC16string6StringPC15debug5Debug8to__repr(_arg_249) }]);
 }
 function _M0FP211localreview5forth14bracket__chunk(body, start) {
   const chunk = [];
@@ -4615,7 +4615,7 @@ function _M0MP211localreview5forth7Machine13body__address(self, xt) {
   return new _M0DTPC16result6ResultGiRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid(">BODY requires a CREATE word"));
 }
 function _M0FP211localreview5forth15primitive__word(word) {
-  return _M0MPC15array5Array8containsGsE(["dup", "drop", "swap", "over", "rot", "nip", "tuck", "2dup", "2drop", "2swap", "here", "allot", "align", "aligned", "cells", "cell+", "@", "c@", "!", "c!", "+!", ",", "c,", "fill", "erase", "move", "0=", "0<", "0>", "1+", "1-", "i", "j", "exit", "unloop", "leave", ">r", "r>", "r@", "2>r", "2r>", "2r@", "depth", ".", "negate", "+", "-", "*", "/", "mod", "=", "<", ">", "and", "or", "execute", "variable", "constant", "create", "'", ">body", "immediate", "compile,", "state"], word);
+  return _M0MPC15array5Array8containsGsE(["dup", "drop", "swap", "over", "rot", "nip", "tuck", "2dup", "2drop", "2swap", "here", "allot", "align", "aligned", "cells", "cell+", "@", "c@", "!", "c!", "+!", ",", "c,", "fill", "erase", "move", "0=", "0<", "0>", "1+", "1-", "i", "j", "exit", "unloop", "leave", ">r", "r>", "r@", "2>r", "2r>", "2r@", "depth", ".", "negate", "+", "-", "*", "/", "mod", "=", "<", ">", "and", "or", "execute", "variable", "constant", "create", "'", ">body", "immediate", "compile,", "state", "abs", "min", "max", "/mod", "*/", "*/mod", "2*", "2/", "invert", "xor", "lshift", "rshift", "u<", "u>", "within", "<>", "0<>"], word);
 }
 function _M0MP211localreview5forth7Machine11capture__xt(self, name) {
   let body;
@@ -4738,6 +4738,180 @@ function _M0MP211localreview5forth7Machine15emit__postponed(self, name) {
     }
   }
   return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
+}
+function _M0MP211localreview5forth7Machine13integer__word(self, word) {
+  let count;
+  switch (word) {
+    case "within": {
+      count = 3;
+      break;
+    }
+    case "*/": {
+      count = 3;
+      break;
+    }
+    case "*/mod": {
+      count = 3;
+      break;
+    }
+    case "abs": {
+      count = 1;
+      break;
+    }
+    case "2*": {
+      count = 1;
+      break;
+    }
+    case "2/": {
+      count = 1;
+      break;
+    }
+    case "invert": {
+      count = 1;
+      break;
+    }
+    case "0<>": {
+      count = 1;
+      break;
+    }
+    default: {
+      count = 2;
+    }
+  }
+  if (self.stack.length < count) {
+    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("stack underflow"));
+  }
+  const _bind = _M0MP211localreview5forth7Machine3pop(self);
+  let c;
+  if (_bind.$tag === 1) {
+    const _ok = _bind;
+    c = _ok._0;
+  } else {
+    return _bind;
+  }
+  if (count === 1) {
+    const _tmp = self.stack;
+    let _tmp$2;
+    switch (word) {
+      case "abs": {
+        _tmp$2 = c < 0 ? -c | 0 : c;
+        break;
+      }
+      case "2*": {
+        _tmp$2 = c << 1;
+        break;
+      }
+      case "2/": {
+        _tmp$2 = c >> 1;
+        break;
+      }
+      case "invert": {
+        _tmp$2 = ~c;
+        break;
+      }
+      default: {
+        _tmp$2 = c !== 0 ? -1 : 0;
+      }
+    }
+    _M0MPC15array5Array4pushGiE(_tmp, _tmp$2);
+    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
+  }
+  const _bind$2 = _M0MP211localreview5forth7Machine3pop(self);
+  let b;
+  if (_bind$2.$tag === 1) {
+    const _ok = _bind$2;
+    b = _ok._0;
+  } else {
+    return _bind$2;
+  }
+  if (word === "*/" || (word === "*/mod" || word === "/mod")) {
+    let numerator;
+    if (word === "/mod") {
+      numerator = BigInt.asUintN(64, BigInt(b));
+    } else {
+      const _bind$3 = _M0MP211localreview5forth7Machine3pop(self);
+      let _tmp;
+      if (_bind$3.$tag === 1) {
+        const _ok = _bind$3;
+        _tmp = _ok._0;
+      } else {
+        return _bind$3;
+      }
+      numerator = BigInt.asUintN(64, BigInt.asUintN(64, BigInt(_tmp)) * BigInt.asUintN(64, BigInt(b)));
+    }
+    if (c === 0) {
+      return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("division by zero"));
+    }
+    const _tmp = BigInt.asUintN(64, BigInt(c));
+    if (_tmp === 0n) {
+      $panic();
+    }
+    const quotient = BigInt.asUintN(64, BigInt.asIntN(64, numerator) / BigInt.asIntN(64, _tmp));
+    if (BigInt.asIntN(64, quotient) < BigInt.asIntN(64, 18446744071562067968n) || BigInt.asIntN(64, quotient) > BigInt.asIntN(64, 2147483647n)) {
+      return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("quotient outside cell range"));
+    }
+    if (_M0IP016_24default__implPB2Eq10not__equalGsE(word, "*/")) {
+      const _tmp$2 = self.stack;
+      const _tmp$3 = BigInt.asUintN(64, BigInt(c));
+      if (_tmp$3 === 0n) {
+        $panic();
+      }
+      _M0MPC15array5Array4pushGiE(_tmp$2, Number(BigInt.asIntN(32, BigInt.asUintN(64, BigInt.asIntN(64, numerator) % BigInt.asIntN(64, _tmp$3)))) | 0);
+    }
+    _M0MPC15array5Array4pushGiE(self.stack, Number(BigInt.asIntN(32, quotient)) | 0);
+    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
+  }
+  if (word === "within") {
+    const _bind$3 = _M0MP211localreview5forth7Machine3pop(self);
+    let a;
+    if (_bind$3.$tag === 1) {
+      const _ok = _bind$3;
+      a = _ok._0;
+    } else {
+      return _bind$3;
+    }
+    _M0MPC15array5Array4pushGiE(self.stack, (a - b | 0) >>> 0 < (c - b | 0) >>> 0 ? -1 : 0);
+    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
+  }
+  if ((word === "lshift" || word === "rshift") && (c < 0 || c >= 32)) {
+    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("shift outside cell width"));
+  }
+  const _tmp = self.stack;
+  let _tmp$2;
+  switch (word) {
+    case "min": {
+      _tmp$2 = b < c ? b : c;
+      break;
+    }
+    case "max": {
+      _tmp$2 = b > c ? b : c;
+      break;
+    }
+    case "xor": {
+      _tmp$2 = b ^ c;
+      break;
+    }
+    case "lshift": {
+      _tmp$2 = b << c;
+      break;
+    }
+    case "rshift": {
+      _tmp$2 = b >>> c | 0;
+      break;
+    }
+    case "u<": {
+      _tmp$2 = b >>> 0 < c >>> 0 ? -1 : 0;
+      break;
+    }
+    case "u>": {
+      _tmp$2 = b >>> 0 > c >>> 0 ? -1 : 0;
+      break;
+    }
+    default: {
+      _tmp$2 = b !== c ? -1 : 0;
+    }
+  }
+  return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(_M0MPC15array5Array4pushGiE(_tmp, _tmp$2));
 }
 function _M0MP211localreview5forth7Machine13memory__range(self, address, count) {
   if (address < 0 || (count < 0 || (address > self.memory.length || count > (self.memory.length - address | 0)))) {
@@ -5425,599 +5599,673 @@ function _M0MP211localreview5forth7Machine7execute(self, code, depth) {
                                                           _L$18: {
                                                             _L$19: {
                                                               _L$20: {
-                                                                switch (word) {
-                                                                  case "dup": {
-                                                                    const _bind$4 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let a;
-                                                                    if (_bind$4.$tag === 1) {
-                                                                      const _ok = _bind$4;
-                                                                      a = _ok._0;
-                                                                    } else {
-                                                                      return _bind$4;
-                                                                    }
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, a);
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, a);
-                                                                    break;
-                                                                  }
-                                                                  case "drop": {
-                                                                    const _bind$5 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    if (_bind$5.$tag === 1) {
-                                                                      const _ok = _bind$5;
-                                                                      _ok._0;
-                                                                    } else {
-                                                                      return _bind$5;
-                                                                    }
-                                                                    break;
-                                                                  }
-                                                                  case "swap": {
-                                                                    const _bind$6 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let b;
-                                                                    if (_bind$6.$tag === 1) {
-                                                                      const _ok = _bind$6;
-                                                                      b = _ok._0;
-                                                                    } else {
-                                                                      return _bind$6;
-                                                                    }
-                                                                    const _bind$7 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let a$2;
-                                                                    if (_bind$7.$tag === 1) {
-                                                                      const _ok = _bind$7;
-                                                                      a$2 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$7;
-                                                                    }
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, b);
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, a$2);
-                                                                    break;
-                                                                  }
-                                                                  case "over": {
-                                                                    const _bind$8 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let b$2;
-                                                                    if (_bind$8.$tag === 1) {
-                                                                      const _ok = _bind$8;
-                                                                      b$2 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$8;
-                                                                    }
-                                                                    const _bind$9 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let a$3;
-                                                                    if (_bind$9.$tag === 1) {
-                                                                      const _ok = _bind$9;
-                                                                      a$3 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$9;
-                                                                    }
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, a$3);
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, b$2);
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, a$3);
-                                                                    break;
-                                                                  }
-                                                                  case "rot": {
-                                                                    const _bind$10 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let c;
-                                                                    if (_bind$10.$tag === 1) {
-                                                                      const _ok = _bind$10;
-                                                                      c = _ok._0;
-                                                                    } else {
-                                                                      return _bind$10;
-                                                                    }
-                                                                    const _bind$11 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let b$3;
-                                                                    if (_bind$11.$tag === 1) {
-                                                                      const _ok = _bind$11;
-                                                                      b$3 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$11;
-                                                                    }
-                                                                    const _bind$12 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let a$4;
-                                                                    if (_bind$12.$tag === 1) {
-                                                                      const _ok = _bind$12;
-                                                                      a$4 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$12;
-                                                                    }
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, b$3);
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, c);
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, a$4);
-                                                                    break;
-                                                                  }
-                                                                  case "nip": {
-                                                                    const _bind$13 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let b$4;
-                                                                    if (_bind$13.$tag === 1) {
-                                                                      const _ok = _bind$13;
-                                                                      b$4 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$13;
-                                                                    }
-                                                                    const _bind$14 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    if (_bind$14.$tag === 1) {
-                                                                      const _ok = _bind$14;
-                                                                      _ok._0;
-                                                                    } else {
-                                                                      return _bind$14;
-                                                                    }
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, b$4);
-                                                                    break;
-                                                                  }
-                                                                  case "tuck": {
-                                                                    const _bind$15 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let b$5;
-                                                                    if (_bind$15.$tag === 1) {
-                                                                      const _ok = _bind$15;
-                                                                      b$5 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$15;
-                                                                    }
-                                                                    const _bind$16 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let a$5;
-                                                                    if (_bind$16.$tag === 1) {
-                                                                      const _ok = _bind$16;
-                                                                      a$5 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$16;
-                                                                    }
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, b$5);
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, a$5);
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, b$5);
-                                                                    break;
-                                                                  }
-                                                                  case "2dup": {
-                                                                    const _bind$17 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let b$6;
-                                                                    if (_bind$17.$tag === 1) {
-                                                                      const _ok = _bind$17;
-                                                                      b$6 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$17;
-                                                                    }
-                                                                    const _bind$18 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let a$6;
-                                                                    if (_bind$18.$tag === 1) {
-                                                                      const _ok = _bind$18;
-                                                                      a$6 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$18;
-                                                                    }
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, a$6);
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, b$6);
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, a$6);
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, b$6);
-                                                                    break;
-                                                                  }
-                                                                  case "2drop": {
-                                                                    const _bind$19 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    if (_bind$19.$tag === 1) {
-                                                                      const _ok = _bind$19;
-                                                                      _ok._0;
-                                                                    } else {
-                                                                      return _bind$19;
-                                                                    }
-                                                                    const _bind$20 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    if (_bind$20.$tag === 1) {
-                                                                      const _ok = _bind$20;
-                                                                      _ok._0;
-                                                                    } else {
-                                                                      return _bind$20;
-                                                                    }
-                                                                    break;
-                                                                  }
-                                                                  case "2swap": {
-                                                                    const _bind$21 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let d;
-                                                                    if (_bind$21.$tag === 1) {
-                                                                      const _ok = _bind$21;
-                                                                      d = _ok._0;
-                                                                    } else {
-                                                                      return _bind$21;
-                                                                    }
-                                                                    const _bind$22 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let c$2;
-                                                                    if (_bind$22.$tag === 1) {
-                                                                      const _ok = _bind$22;
-                                                                      c$2 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$22;
-                                                                    }
-                                                                    const _bind$23 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let b$7;
-                                                                    if (_bind$23.$tag === 1) {
-                                                                      const _ok = _bind$23;
-                                                                      b$7 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$23;
-                                                                    }
-                                                                    const _bind$24 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let a$7;
-                                                                    if (_bind$24.$tag === 1) {
-                                                                      const _ok = _bind$24;
-                                                                      a$7 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$24;
-                                                                    }
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, c$2);
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, d);
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, a$7);
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, b$7);
-                                                                    break;
-                                                                  }
-                                                                  case "here": {
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, self.memory.length);
-                                                                    break;
-                                                                  }
-                                                                  case "allot": {
-                                                                    const _bind$25 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let count;
-                                                                    if (_bind$25.$tag === 1) {
-                                                                      const _ok = _bind$25;
-                                                                      count = _ok._0;
-                                                                    } else {
-                                                                      return _bind$25;
-                                                                    }
-                                                                    const _bind$26 = _M0MP211localreview5forth7Machine8allocate(self, count);
-                                                                    if (_bind$26.$tag === 1) {
-                                                                      const _ok = _bind$26;
-                                                                      _ok._0;
-                                                                    } else {
-                                                                      return _bind$26;
-                                                                    }
-                                                                    break;
-                                                                  }
-                                                                  case "align": {
-                                                                    if (4 === 0) {
-                                                                      $panic();
-                                                                    }
-                                                                    if (4 === 0) {
-                                                                      $panic();
-                                                                    }
-                                                                    const _bind$27 = _M0MP211localreview5forth7Machine8allocate(self, (4 - (self.memory.length % 4 | 0) | 0) % 4 | 0);
-                                                                    if (_bind$27.$tag === 1) {
-                                                                      const _ok = _bind$27;
-                                                                      _ok._0;
-                                                                    } else {
-                                                                      return _bind$27;
-                                                                    }
-                                                                    break;
-                                                                  }
-                                                                  case "aligned": {
-                                                                    const _bind$28 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let n$2;
-                                                                    if (_bind$28.$tag === 1) {
-                                                                      const _ok = _bind$28;
-                                                                      n$2 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$28;
-                                                                    }
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, (n$2 + 3 | 0) & -4);
-                                                                    break;
-                                                                  }
-                                                                  case "cells": {
-                                                                    const _bind$29 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let n$3;
-                                                                    if (_bind$29.$tag === 1) {
-                                                                      const _ok = _bind$29;
-                                                                      n$3 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$29;
-                                                                    }
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, Math.imul(n$3, 4) | 0);
-                                                                    break;
-                                                                  }
-                                                                  case "cell+": {
-                                                                    const _bind$30 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let n$4;
-                                                                    if (_bind$30.$tag === 1) {
-                                                                      const _ok = _bind$30;
-                                                                      n$4 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$30;
-                                                                    }
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, n$4 + 4 | 0);
-                                                                    break;
-                                                                  }
-                                                                  case "@": {
-                                                                    break _L$20;
-                                                                  }
-                                                                  case "c@": {
-                                                                    break _L$20;
-                                                                  }
-                                                                  case "!": {
-                                                                    break _L$18;
-                                                                  }
-                                                                  case "c!": {
-                                                                    break _L$18;
-                                                                  }
-                                                                  case "+!": {
-                                                                    break _L$18;
-                                                                  }
-                                                                  case ",": {
-                                                                    break _L$16;
-                                                                  }
-                                                                  case "c,": {
-                                                                    break _L$16;
-                                                                  }
-                                                                  case "fill": {
-                                                                    break _L$14;
-                                                                  }
-                                                                  case "erase": {
-                                                                    break _L$14;
-                                                                  }
-                                                                  case "move": {
-                                                                    const _bind$31 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let count$2;
-                                                                    if (_bind$31.$tag === 1) {
-                                                                      const _ok = _bind$31;
-                                                                      count$2 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$31;
-                                                                    }
-                                                                    const _bind$32 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let dest;
-                                                                    if (_bind$32.$tag === 1) {
-                                                                      const _ok = _bind$32;
-                                                                      dest = _ok._0;
-                                                                    } else {
-                                                                      return _bind$32;
-                                                                    }
-                                                                    const _bind$33 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let source;
-                                                                    if (_bind$33.$tag === 1) {
-                                                                      const _ok = _bind$33;
-                                                                      source = _ok._0;
-                                                                    } else {
-                                                                      return _bind$33;
-                                                                    }
-                                                                    const _bind$34 = _M0MP211localreview5forth7Machine13memory__range(self, source, count$2);
-                                                                    if (_bind$34.$tag === 1) {
-                                                                      const _ok = _bind$34;
-                                                                      _ok._0;
-                                                                    } else {
-                                                                      return _bind$34;
-                                                                    }
-                                                                    const _bind$35 = _M0MP211localreview5forth7Machine13memory__range(self, dest, count$2);
-                                                                    if (_bind$35.$tag === 1) {
-                                                                      const _ok = _bind$35;
-                                                                      _ok._0;
-                                                                    } else {
-                                                                      return _bind$35;
-                                                                    }
-                                                                    const copy = _M0MPC15array9ArrayView9to__ownedGyE(_M0MPC15array5Array12view_2einnerGyE(self.memory, source, source + count$2 | 0));
-                                                                    const _bind$36 = 0;
-                                                                    let _tmp = _bind$36;
-                                                                    while (true) {
-                                                                      const i = _tmp;
-                                                                      if (i < count$2) {
-                                                                        _M0MPC15array5Array3setGyE(self.memory, dest + i | 0, _M0MPC15array5Array2atGyE(copy, i));
-                                                                        _tmp = i + 1 | 0;
-                                                                        continue;
-                                                                      } else {
+                                                                _L$21: {
+                                                                  _L$22: {
+                                                                    switch (word) {
+                                                                      case "dup": {
+                                                                        const _bind$4 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let a;
+                                                                        if (_bind$4.$tag === 1) {
+                                                                          const _ok = _bind$4;
+                                                                          a = _ok._0;
+                                                                        } else {
+                                                                          return _bind$4;
+                                                                        }
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, a);
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, a);
                                                                         break;
                                                                       }
-                                                                    }
-                                                                    break;
-                                                                  }
-                                                                  case "0=": {
-                                                                    break _L$12;
-                                                                  }
-                                                                  case "0<": {
-                                                                    break _L$12;
-                                                                  }
-                                                                  case "0>": {
-                                                                    break _L$12;
-                                                                  }
-                                                                  case "1+": {
-                                                                    break _L$12;
-                                                                  }
-                                                                  case "1-": {
-                                                                    break _L$12;
-                                                                  }
-                                                                  case "i": {
-                                                                    break _L$10;
-                                                                  }
-                                                                  case "j": {
-                                                                    break _L$10;
-                                                                  }
-                                                                  case "exit": {
-                                                                    if (!self.in_word) {
-                                                                      return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("EXIT outside definition"));
-                                                                    }
-                                                                    if (self.loop_indices.length !== self.loop_base) {
-                                                                      return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("EXIT requires UNLOOP for active loops"));
-                                                                    }
-                                                                    if (self.returns.length !== self.return_base) {
-                                                                      return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("EXIT requires balanced return stack"));
-                                                                    }
-                                                                    self.exiting = true;
-                                                                    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
-                                                                  }
-                                                                  case "unloop": {
-                                                                    if (!self.in_word || self.loop_indices.length <= self.loop_base) {
-                                                                      return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("UNLOOP outside current word loop"));
-                                                                    }
-                                                                    _M0MPC15array5Array3popGiE(self.loop_indices);
-                                                                    break;
-                                                                  }
-                                                                  case "leave": {
-                                                                    if (_M0MPC15array5Array9is__emptyGiE(self.loop_indices)) {
-                                                                      return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("LEAVE outside counted loop"));
-                                                                    }
-                                                                    self.leaving = true;
-                                                                    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
-                                                                  }
-                                                                  case ">r": {
-                                                                    break _L$8;
-                                                                  }
-                                                                  case "r>": {
-                                                                    break _L$8;
-                                                                  }
-                                                                  case "r@": {
-                                                                    break _L$8;
-                                                                  }
-                                                                  case "2>r": {
-                                                                    break _L$8;
-                                                                  }
-                                                                  case "2r>": {
-                                                                    break _L$8;
-                                                                  }
-                                                                  case "2r@": {
-                                                                    break _L$8;
-                                                                  }
-                                                                  case "state": {
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, -4);
-                                                                    break;
-                                                                  }
-                                                                  case "immediate": {
-                                                                    if (self.compile_eval) {
-                                                                      return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("IMMEDIATE during active compilation is unsupported"));
-                                                                    }
-                                                                    let name;
-                                                                    _L$21: {
-                                                                      const _bind$37 = self.latest_name;
-                                                                      if (_bind$37 === undefined) {
-                                                                        return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("IMMEDIATE requires a named definition"));
-                                                                      } else {
-                                                                        const _Some = _bind$37;
-                                                                        const _name = _Some;
-                                                                        name = _name;
-                                                                        break _L$21;
+                                                                      case "drop": {
+                                                                        const _bind$5 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        if (_bind$5.$tag === 1) {
+                                                                          const _ok = _bind$5;
+                                                                          _ok._0;
+                                                                        } else {
+                                                                          return _bind$5;
+                                                                        }
+                                                                        break;
+                                                                      }
+                                                                      case "swap": {
+                                                                        const _bind$6 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let b;
+                                                                        if (_bind$6.$tag === 1) {
+                                                                          const _ok = _bind$6;
+                                                                          b = _ok._0;
+                                                                        } else {
+                                                                          return _bind$6;
+                                                                        }
+                                                                        const _bind$7 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let a$2;
+                                                                        if (_bind$7.$tag === 1) {
+                                                                          const _ok = _bind$7;
+                                                                          a$2 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$7;
+                                                                        }
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, b);
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, a$2);
+                                                                        break;
+                                                                      }
+                                                                      case "over": {
+                                                                        const _bind$8 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let b$2;
+                                                                        if (_bind$8.$tag === 1) {
+                                                                          const _ok = _bind$8;
+                                                                          b$2 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$8;
+                                                                        }
+                                                                        const _bind$9 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let a$3;
+                                                                        if (_bind$9.$tag === 1) {
+                                                                          const _ok = _bind$9;
+                                                                          a$3 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$9;
+                                                                        }
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, a$3);
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, b$2);
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, a$3);
+                                                                        break;
+                                                                      }
+                                                                      case "rot": {
+                                                                        const _bind$10 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let c;
+                                                                        if (_bind$10.$tag === 1) {
+                                                                          const _ok = _bind$10;
+                                                                          c = _ok._0;
+                                                                        } else {
+                                                                          return _bind$10;
+                                                                        }
+                                                                        const _bind$11 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let b$3;
+                                                                        if (_bind$11.$tag === 1) {
+                                                                          const _ok = _bind$11;
+                                                                          b$3 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$11;
+                                                                        }
+                                                                        const _bind$12 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let a$4;
+                                                                        if (_bind$12.$tag === 1) {
+                                                                          const _ok = _bind$12;
+                                                                          a$4 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$12;
+                                                                        }
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, b$3);
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, c);
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, a$4);
+                                                                        break;
+                                                                      }
+                                                                      case "nip": {
+                                                                        const _bind$13 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let b$4;
+                                                                        if (_bind$13.$tag === 1) {
+                                                                          const _ok = _bind$13;
+                                                                          b$4 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$13;
+                                                                        }
+                                                                        const _bind$14 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        if (_bind$14.$tag === 1) {
+                                                                          const _ok = _bind$14;
+                                                                          _ok._0;
+                                                                        } else {
+                                                                          return _bind$14;
+                                                                        }
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, b$4);
+                                                                        break;
+                                                                      }
+                                                                      case "tuck": {
+                                                                        const _bind$15 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let b$5;
+                                                                        if (_bind$15.$tag === 1) {
+                                                                          const _ok = _bind$15;
+                                                                          b$5 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$15;
+                                                                        }
+                                                                        const _bind$16 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let a$5;
+                                                                        if (_bind$16.$tag === 1) {
+                                                                          const _ok = _bind$16;
+                                                                          a$5 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$16;
+                                                                        }
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, b$5);
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, a$5);
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, b$5);
+                                                                        break;
+                                                                      }
+                                                                      case "2dup": {
+                                                                        const _bind$17 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let b$6;
+                                                                        if (_bind$17.$tag === 1) {
+                                                                          const _ok = _bind$17;
+                                                                          b$6 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$17;
+                                                                        }
+                                                                        const _bind$18 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let a$6;
+                                                                        if (_bind$18.$tag === 1) {
+                                                                          const _ok = _bind$18;
+                                                                          a$6 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$18;
+                                                                        }
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, a$6);
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, b$6);
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, a$6);
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, b$6);
+                                                                        break;
+                                                                      }
+                                                                      case "2drop": {
+                                                                        const _bind$19 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        if (_bind$19.$tag === 1) {
+                                                                          const _ok = _bind$19;
+                                                                          _ok._0;
+                                                                        } else {
+                                                                          return _bind$19;
+                                                                        }
+                                                                        const _bind$20 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        if (_bind$20.$tag === 1) {
+                                                                          const _ok = _bind$20;
+                                                                          _ok._0;
+                                                                        } else {
+                                                                          return _bind$20;
+                                                                        }
+                                                                        break;
+                                                                      }
+                                                                      case "2swap": {
+                                                                        const _bind$21 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let d;
+                                                                        if (_bind$21.$tag === 1) {
+                                                                          const _ok = _bind$21;
+                                                                          d = _ok._0;
+                                                                        } else {
+                                                                          return _bind$21;
+                                                                        }
+                                                                        const _bind$22 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let c$2;
+                                                                        if (_bind$22.$tag === 1) {
+                                                                          const _ok = _bind$22;
+                                                                          c$2 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$22;
+                                                                        }
+                                                                        const _bind$23 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let b$7;
+                                                                        if (_bind$23.$tag === 1) {
+                                                                          const _ok = _bind$23;
+                                                                          b$7 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$23;
+                                                                        }
+                                                                        const _bind$24 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let a$7;
+                                                                        if (_bind$24.$tag === 1) {
+                                                                          const _ok = _bind$24;
+                                                                          a$7 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$24;
+                                                                        }
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, c$2);
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, d);
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, a$7);
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, b$7);
+                                                                        break;
+                                                                      }
+                                                                      case "here": {
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, self.memory.length);
+                                                                        break;
+                                                                      }
+                                                                      case "allot": {
+                                                                        const _bind$25 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let count;
+                                                                        if (_bind$25.$tag === 1) {
+                                                                          const _ok = _bind$25;
+                                                                          count = _ok._0;
+                                                                        } else {
+                                                                          return _bind$25;
+                                                                        }
+                                                                        const _bind$26 = _M0MP211localreview5forth7Machine8allocate(self, count);
+                                                                        if (_bind$26.$tag === 1) {
+                                                                          const _ok = _bind$26;
+                                                                          _ok._0;
+                                                                        } else {
+                                                                          return _bind$26;
+                                                                        }
+                                                                        break;
+                                                                      }
+                                                                      case "align": {
+                                                                        if (4 === 0) {
+                                                                          $panic();
+                                                                        }
+                                                                        if (4 === 0) {
+                                                                          $panic();
+                                                                        }
+                                                                        const _bind$27 = _M0MP211localreview5forth7Machine8allocate(self, (4 - (self.memory.length % 4 | 0) | 0) % 4 | 0);
+                                                                        if (_bind$27.$tag === 1) {
+                                                                          const _ok = _bind$27;
+                                                                          _ok._0;
+                                                                        } else {
+                                                                          return _bind$27;
+                                                                        }
+                                                                        break;
+                                                                      }
+                                                                      case "aligned": {
+                                                                        const _bind$28 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let n$2;
+                                                                        if (_bind$28.$tag === 1) {
+                                                                          const _ok = _bind$28;
+                                                                          n$2 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$28;
+                                                                        }
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, (n$2 + 3 | 0) & -4);
+                                                                        break;
+                                                                      }
+                                                                      case "cells": {
+                                                                        const _bind$29 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let n$3;
+                                                                        if (_bind$29.$tag === 1) {
+                                                                          const _ok = _bind$29;
+                                                                          n$3 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$29;
+                                                                        }
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, Math.imul(n$3, 4) | 0);
+                                                                        break;
+                                                                      }
+                                                                      case "cell+": {
+                                                                        const _bind$30 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let n$4;
+                                                                        if (_bind$30.$tag === 1) {
+                                                                          const _ok = _bind$30;
+                                                                          n$4 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$30;
+                                                                        }
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, n$4 + 4 | 0);
+                                                                        break;
+                                                                      }
+                                                                      case "@": {
+                                                                        break _L$22;
+                                                                      }
+                                                                      case "c@": {
+                                                                        break _L$22;
+                                                                      }
+                                                                      case "!": {
+                                                                        break _L$20;
+                                                                      }
+                                                                      case "c!": {
+                                                                        break _L$20;
+                                                                      }
+                                                                      case "+!": {
+                                                                        break _L$20;
+                                                                      }
+                                                                      case ",": {
+                                                                        break _L$18;
+                                                                      }
+                                                                      case "c,": {
+                                                                        break _L$18;
+                                                                      }
+                                                                      case "fill": {
+                                                                        break _L$16;
+                                                                      }
+                                                                      case "erase": {
+                                                                        break _L$16;
+                                                                      }
+                                                                      case "move": {
+                                                                        const _bind$31 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let count$2;
+                                                                        if (_bind$31.$tag === 1) {
+                                                                          const _ok = _bind$31;
+                                                                          count$2 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$31;
+                                                                        }
+                                                                        const _bind$32 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let dest;
+                                                                        if (_bind$32.$tag === 1) {
+                                                                          const _ok = _bind$32;
+                                                                          dest = _ok._0;
+                                                                        } else {
+                                                                          return _bind$32;
+                                                                        }
+                                                                        const _bind$33 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let source;
+                                                                        if (_bind$33.$tag === 1) {
+                                                                          const _ok = _bind$33;
+                                                                          source = _ok._0;
+                                                                        } else {
+                                                                          return _bind$33;
+                                                                        }
+                                                                        const _bind$34 = _M0MP211localreview5forth7Machine13memory__range(self, source, count$2);
+                                                                        if (_bind$34.$tag === 1) {
+                                                                          const _ok = _bind$34;
+                                                                          _ok._0;
+                                                                        } else {
+                                                                          return _bind$34;
+                                                                        }
+                                                                        const _bind$35 = _M0MP211localreview5forth7Machine13memory__range(self, dest, count$2);
+                                                                        if (_bind$35.$tag === 1) {
+                                                                          const _ok = _bind$35;
+                                                                          _ok._0;
+                                                                        } else {
+                                                                          return _bind$35;
+                                                                        }
+                                                                        const copy = _M0MPC15array9ArrayView9to__ownedGyE(_M0MPC15array5Array12view_2einnerGyE(self.memory, source, source + count$2 | 0));
+                                                                        const _bind$36 = 0;
+                                                                        let _tmp = _bind$36;
+                                                                        while (true) {
+                                                                          const i = _tmp;
+                                                                          if (i < count$2) {
+                                                                            _M0MPC15array5Array3setGyE(self.memory, dest + i | 0, _M0MPC15array5Array2atGyE(copy, i));
+                                                                            _tmp = i + 1 | 0;
+                                                                            continue;
+                                                                          } else {
+                                                                            break;
+                                                                          }
+                                                                        }
+                                                                        break;
+                                                                      }
+                                                                      case "0=": {
+                                                                        break _L$14;
+                                                                      }
+                                                                      case "0<": {
+                                                                        break _L$14;
+                                                                      }
+                                                                      case "0>": {
+                                                                        break _L$14;
+                                                                      }
+                                                                      case "1+": {
+                                                                        break _L$14;
+                                                                      }
+                                                                      case "1-": {
+                                                                        break _L$14;
+                                                                      }
+                                                                      case "i": {
+                                                                        break _L$12;
+                                                                      }
+                                                                      case "j": {
+                                                                        break _L$12;
+                                                                      }
+                                                                      case "exit": {
+                                                                        if (!self.in_word) {
+                                                                          return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("EXIT outside definition"));
+                                                                        }
+                                                                        if (self.loop_indices.length !== self.loop_base) {
+                                                                          return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("EXIT requires UNLOOP for active loops"));
+                                                                        }
+                                                                        if (self.returns.length !== self.return_base) {
+                                                                          return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("EXIT requires balanced return stack"));
+                                                                        }
+                                                                        self.exiting = true;
+                                                                        return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
+                                                                      }
+                                                                      case "unloop": {
+                                                                        if (!self.in_word || self.loop_indices.length <= self.loop_base) {
+                                                                          return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("UNLOOP outside current word loop"));
+                                                                        }
+                                                                        _M0MPC15array5Array3popGiE(self.loop_indices);
+                                                                        break;
+                                                                      }
+                                                                      case "leave": {
+                                                                        if (_M0MPC15array5Array9is__emptyGiE(self.loop_indices)) {
+                                                                          return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("LEAVE outside counted loop"));
+                                                                        }
+                                                                        self.leaving = true;
+                                                                        return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE2Ok(undefined);
+                                                                      }
+                                                                      case ">r": {
+                                                                        break _L$10;
+                                                                      }
+                                                                      case "r>": {
+                                                                        break _L$10;
+                                                                      }
+                                                                      case "r@": {
+                                                                        break _L$10;
+                                                                      }
+                                                                      case "2>r": {
+                                                                        break _L$10;
+                                                                      }
+                                                                      case "2r>": {
+                                                                        break _L$10;
+                                                                      }
+                                                                      case "2r@": {
+                                                                        break _L$10;
+                                                                      }
+                                                                      case "state": {
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, -4);
+                                                                        break;
+                                                                      }
+                                                                      case "immediate": {
+                                                                        if (self.compile_eval) {
+                                                                          return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("IMMEDIATE during active compilation is unsupported"));
+                                                                        }
+                                                                        let name;
+                                                                        _L$23: {
+                                                                          const _bind$37 = self.latest_name;
+                                                                          if (_bind$37 === undefined) {
+                                                                            return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("IMMEDIATE requires a named definition"));
+                                                                          } else {
+                                                                            const _Some = _bind$37;
+                                                                            const _name = _Some;
+                                                                            name = _name;
+                                                                            break _L$23;
+                                                                          }
+                                                                        }
+                                                                        _M0MPB3Map3setGsbE(self.immediate_words, name, true);
+                                                                        break;
+                                                                      }
+                                                                      case "compile,": {
+                                                                        let output;
+                                                                        const _bind$37 = self.compile_output;
+                                                                        if (_bind$37.$tag === 1) {
+                                                                          const _Some = _bind$37;
+                                                                          const _output = _Some._0;
+                                                                          output = _output;
+                                                                        } else {
+                                                                          return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("COMPILE, outside compilation"));
+                                                                        }
+                                                                        const _bind$38 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let xt;
+                                                                        if (_bind$38.$tag === 1) {
+                                                                          const _ok = _bind$38;
+                                                                          xt = _ok._0;
+                                                                        } else {
+                                                                          return _bind$38;
+                                                                        }
+                                                                        if (xt < 1 || xt > self.execution_tokens.length) {
+                                                                          return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("invalid execution token"));
+                                                                        }
+                                                                        if (output.length >= 65534) {
+                                                                          return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("compiled definition limit"));
+                                                                        }
+                                                                        _M0MPC15array5Array4pushGsE(output, _M0MPC13int3Int18to__string_2einner(xt, 10));
+                                                                        _M0MPC15array5Array4pushGsE(output, "\u0001execute");
+                                                                        break;
+                                                                      }
+                                                                      case ">body": {
+                                                                        const _bind$39 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let xt$2;
+                                                                        if (_bind$39.$tag === 1) {
+                                                                          const _ok = _bind$39;
+                                                                          xt$2 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$39;
+                                                                        }
+                                                                        const _tmp$2 = self.stack;
+                                                                        const _bind$40 = _M0MP211localreview5forth7Machine13body__address(self, xt$2);
+                                                                        let _tmp$3;
+                                                                        if (_bind$40.$tag === 1) {
+                                                                          const _ok = _bind$40;
+                                                                          _tmp$3 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$40;
+                                                                        }
+                                                                        _M0MPC15array5Array4pushGiE(_tmp$2, _tmp$3);
+                                                                        break;
+                                                                      }
+                                                                      case "execute": {
+                                                                        const _bind$41 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let xt$3;
+                                                                        if (_bind$41.$tag === 1) {
+                                                                          const _ok = _bind$41;
+                                                                          xt$3 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$41;
+                                                                        }
+                                                                        if (xt$3 < 1 || xt$3 > self.execution_tokens.length) {
+                                                                          return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("invalid execution token"));
+                                                                        }
+                                                                        const _bind$42 = _M0MP211localreview5forth7Machine14execute__frame(self, _M0MPC15array5Array2atGRPB5ArrayGsEE(self.execution_tokens, xt$3 - 1 | 0), depth + 1 | 0, true);
+                                                                        if (_bind$42.$tag === 1) {
+                                                                          const _ok = _bind$42;
+                                                                          _ok._0;
+                                                                        } else {
+                                                                          return _bind$42;
+                                                                        }
+                                                                        break;
+                                                                      }
+                                                                      case "depth": {
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, self.stack.length);
+                                                                        break;
+                                                                      }
+                                                                      case ".": {
+                                                                        const _tmp$4 = self.output;
+                                                                        const _bind$43 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let _tmp$5;
+                                                                        if (_bind$43.$tag === 1) {
+                                                                          const _ok = _bind$43;
+                                                                          _tmp$5 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$43;
+                                                                        }
+                                                                        _M0MPC15array5Array4pushGsE(_tmp$4, _M0MPC13int3Int18to__string_2einner(_tmp$5, 10));
+                                                                        break;
+                                                                      }
+                                                                      case "abs": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "min": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "max": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "/mod": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "*/": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "*/mod": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "2*": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "2/": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "invert": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "xor": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "lshift": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "rshift": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "u<": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "u>": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "within": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "<>": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "0<>": {
+                                                                        break _L$8;
+                                                                      }
+                                                                      case "negate": {
+                                                                        const _bind$44 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                        let a$8;
+                                                                        if (_bind$44.$tag === 1) {
+                                                                          const _ok = _bind$44;
+                                                                          a$8 = _ok._0;
+                                                                        } else {
+                                                                          return _bind$44;
+                                                                        }
+                                                                        _M0MPC15array5Array4pushGiE(self.stack, -a$8 | 0);
+                                                                        break;
+                                                                      }
+                                                                      case "+": {
+                                                                        break _L$6;
+                                                                      }
+                                                                      case "-": {
+                                                                        break _L$6;
+                                                                      }
+                                                                      case "*": {
+                                                                        break _L$6;
+                                                                      }
+                                                                      case "/": {
+                                                                        break _L$6;
+                                                                      }
+                                                                      case "mod": {
+                                                                        break _L$6;
+                                                                      }
+                                                                      case "=": {
+                                                                        break _L$6;
+                                                                      }
+                                                                      case "<": {
+                                                                        break _L$6;
+                                                                      }
+                                                                      case ">": {
+                                                                        break _L$6;
+                                                                      }
+                                                                      case "and": {
+                                                                        break _L$6;
+                                                                      }
+                                                                      case "or": {
+                                                                        break _L$6;
+                                                                      }
+                                                                      default: {
+                                                                        return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid(`unknown word: ${word}`));
                                                                       }
                                                                     }
-                                                                    _M0MPB3Map3setGsbE(self.immediate_words, name, true);
-                                                                    break;
+                                                                    break _L$21;
                                                                   }
-                                                                  case "compile,": {
-                                                                    let output;
-                                                                    const _bind$37 = self.compile_output;
-                                                                    if (_bind$37.$tag === 1) {
-                                                                      const _Some = _bind$37;
-                                                                      const _output = _Some._0;
-                                                                      output = _output;
-                                                                    } else {
-                                                                      return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("COMPILE, outside compilation"));
-                                                                    }
-                                                                    const _bind$38 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let xt;
-                                                                    if (_bind$38.$tag === 1) {
-                                                                      const _ok = _bind$38;
-                                                                      xt = _ok._0;
-                                                                    } else {
-                                                                      return _bind$38;
-                                                                    }
-                                                                    if (xt < 1 || xt > self.execution_tokens.length) {
-                                                                      return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("invalid execution token"));
-                                                                    }
-                                                                    if (output.length >= 65534) {
-                                                                      return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("compiled definition limit"));
-                                                                    }
-                                                                    _M0MPC15array5Array4pushGsE(output, _M0MPC13int3Int18to__string_2einner(xt, 10));
-                                                                    _M0MPC15array5Array4pushGsE(output, "\u0001execute");
-                                                                    break;
+                                                                  const _bind$4 = _M0MP211localreview5forth7Machine3pop(self);
+                                                                  let address;
+                                                                  if (_bind$4.$tag === 1) {
+                                                                    const _ok = _bind$4;
+                                                                    address = _ok._0;
+                                                                  } else {
+                                                                    return _bind$4;
                                                                   }
-                                                                  case ">body": {
-                                                                    const _bind$39 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let xt$2;
-                                                                    if (_bind$39.$tag === 1) {
-                                                                      const _ok = _bind$39;
-                                                                      xt$2 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$39;
-                                                                    }
-                                                                    const _tmp$2 = self.stack;
-                                                                    const _bind$40 = _M0MP211localreview5forth7Machine13body__address(self, xt$2);
-                                                                    let _tmp$3;
-                                                                    if (_bind$40.$tag === 1) {
-                                                                      const _ok = _bind$40;
-                                                                      _tmp$3 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$40;
-                                                                    }
-                                                                    _M0MPC15array5Array4pushGiE(_tmp$2, _tmp$3);
-                                                                    break;
+                                                                  const _tmp = self.stack;
+                                                                  const _bind$5 = _M0MP211localreview5forth7Machine4load(self, address, word === "@");
+                                                                  let _tmp$2;
+                                                                  if (_bind$5.$tag === 1) {
+                                                                    const _ok = _bind$5;
+                                                                    _tmp$2 = _ok._0;
+                                                                  } else {
+                                                                    return _bind$5;
                                                                   }
-                                                                  case "execute": {
-                                                                    const _bind$41 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let xt$3;
-                                                                    if (_bind$41.$tag === 1) {
-                                                                      const _ok = _bind$41;
-                                                                      xt$3 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$41;
-                                                                    }
-                                                                    if (xt$3 < 1 || xt$3 > self.execution_tokens.length) {
-                                                                      return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("invalid execution token"));
-                                                                    }
-                                                                    const _bind$42 = _M0MP211localreview5forth7Machine14execute__frame(self, _M0MPC15array5Array2atGRPB5ArrayGsEE(self.execution_tokens, xt$3 - 1 | 0), depth + 1 | 0, true);
-                                                                    if (_bind$42.$tag === 1) {
-                                                                      const _ok = _bind$42;
-                                                                      _ok._0;
-                                                                    } else {
-                                                                      return _bind$42;
-                                                                    }
-                                                                    break;
-                                                                  }
-                                                                  case "depth": {
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, self.stack.length);
-                                                                    break;
-                                                                  }
-                                                                  case ".": {
-                                                                    const _tmp$4 = self.output;
-                                                                    const _bind$43 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let _tmp$5;
-                                                                    if (_bind$43.$tag === 1) {
-                                                                      const _ok = _bind$43;
-                                                                      _tmp$5 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$43;
-                                                                    }
-                                                                    _M0MPC15array5Array4pushGsE(_tmp$4, _M0MPC13int3Int18to__string_2einner(_tmp$5, 10));
-                                                                    break;
-                                                                  }
-                                                                  case "negate": {
-                                                                    const _bind$44 = _M0MP211localreview5forth7Machine3pop(self);
-                                                                    let a$8;
-                                                                    if (_bind$44.$tag === 1) {
-                                                                      const _ok = _bind$44;
-                                                                      a$8 = _ok._0;
-                                                                    } else {
-                                                                      return _bind$44;
-                                                                    }
-                                                                    _M0MPC15array5Array4pushGiE(self.stack, -a$8 | 0);
-                                                                    break;
-                                                                  }
-                                                                  case "+": {
-                                                                    break _L$6;
-                                                                  }
-                                                                  case "-": {
-                                                                    break _L$6;
-                                                                  }
-                                                                  case "*": {
-                                                                    break _L$6;
-                                                                  }
-                                                                  case "/": {
-                                                                    break _L$6;
-                                                                  }
-                                                                  case "mod": {
-                                                                    break _L$6;
-                                                                  }
-                                                                  case "=": {
-                                                                    break _L$6;
-                                                                  }
-                                                                  case "<": {
-                                                                    break _L$6;
-                                                                  }
-                                                                  case ">": {
-                                                                    break _L$6;
-                                                                  }
-                                                                  case "and": {
-                                                                    break _L$6;
-                                                                  }
-                                                                  case "or": {
-                                                                    break _L$6;
-                                                                  }
-                                                                  default: {
-                                                                    return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid(`unknown word: ${word}`));
-                                                                  }
+                                                                  _M0MPC15array5Array4pushGiE(_tmp, _tmp$2);
                                                                 }
                                                                 break _L$19;
                                                               }
@@ -6029,50 +6277,67 @@ function _M0MP211localreview5forth7Machine7execute(self, code, depth) {
                                                               } else {
                                                                 return _bind$4;
                                                               }
-                                                              const _tmp = self.stack;
-                                                              const _bind$5 = _M0MP211localreview5forth7Machine4load(self, address, word === "@");
-                                                              let _tmp$2;
+                                                              const _bind$5 = _M0MP211localreview5forth7Machine3pop(self);
+                                                              let value;
                                                               if (_bind$5.$tag === 1) {
                                                                 const _ok = _bind$5;
-                                                                _tmp$2 = _ok._0;
+                                                                value = _ok._0;
                                                               } else {
                                                                 return _bind$5;
                                                               }
-                                                              _M0MPC15array5Array4pushGiE(_tmp, _tmp$2);
+                                                              let next;
+                                                              if (word === "+!") {
+                                                                const _bind$6 = _M0MP211localreview5forth7Machine4load(self, address, true);
+                                                                let _tmp;
+                                                                if (_bind$6.$tag === 1) {
+                                                                  const _ok = _bind$6;
+                                                                  _tmp = _ok._0;
+                                                                } else {
+                                                                  return _bind$6;
+                                                                }
+                                                                next = _tmp + value | 0;
+                                                              } else {
+                                                                next = value;
+                                                              }
+                                                              const _bind$6 = _M0MP211localreview5forth7Machine4save(self, address, next, _M0IP016_24default__implPB2Eq10not__equalGsE(word, "c!"));
+                                                              if (_bind$6.$tag === 1) {
+                                                                const _ok = _bind$6;
+                                                                _ok._0;
+                                                              } else {
+                                                                return _bind$6;
+                                                              }
                                                             }
                                                             break _L$17;
                                                           }
                                                           const _bind$4 = _M0MP211localreview5forth7Machine3pop(self);
-                                                          let address;
+                                                          let value;
                                                           if (_bind$4.$tag === 1) {
                                                             const _ok = _bind$4;
-                                                            address = _ok._0;
+                                                            value = _ok._0;
                                                           } else {
                                                             return _bind$4;
                                                           }
-                                                          const _bind$5 = _M0MP211localreview5forth7Machine3pop(self);
-                                                          let value;
+                                                          const address = self.memory.length;
+                                                          let _tmp;
+                                                          if (word === ",") {
+                                                            if (4 === 0) {
+                                                              $panic();
+                                                            }
+                                                            _tmp = (address % 4 | 0) !== 0;
+                                                          } else {
+                                                            _tmp = false;
+                                                          }
+                                                          if (_tmp) {
+                                                            return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("unaligned comma"));
+                                                          }
+                                                          const _bind$5 = _M0MP211localreview5forth7Machine8allocate(self, word === "," ? 4 : 1);
                                                           if (_bind$5.$tag === 1) {
                                                             const _ok = _bind$5;
-                                                            value = _ok._0;
+                                                            _ok._0;
                                                           } else {
                                                             return _bind$5;
                                                           }
-                                                          let next;
-                                                          if (word === "+!") {
-                                                            const _bind$6 = _M0MP211localreview5forth7Machine4load(self, address, true);
-                                                            let _tmp;
-                                                            if (_bind$6.$tag === 1) {
-                                                              const _ok = _bind$6;
-                                                              _tmp = _ok._0;
-                                                            } else {
-                                                              return _bind$6;
-                                                            }
-                                                            next = _tmp + value | 0;
-                                                          } else {
-                                                            next = value;
-                                                          }
-                                                          const _bind$6 = _M0MP211localreview5forth7Machine4save(self, address, next, _M0IP016_24default__implPB2Eq10not__equalGsE(word, "c!"));
+                                                          const _bind$6 = _M0MP211localreview5forth7Machine4save(self, address, value, word === ",");
                                                           if (_bind$6.$tag === 1) {
                                                             const _ok = _bind$6;
                                                             _ok._0;
@@ -6082,140 +6347,112 @@ function _M0MP211localreview5forth7Machine7execute(self, code, depth) {
                                                         }
                                                         break _L$15;
                                                       }
-                                                      const _bind$4 = _M0MP211localreview5forth7Machine3pop(self);
                                                       let value;
+                                                      if (word === "fill") {
+                                                        const _bind$4 = _M0MP211localreview5forth7Machine3pop(self);
+                                                        let _tmp;
+                                                        if (_bind$4.$tag === 1) {
+                                                          const _ok = _bind$4;
+                                                          _tmp = _ok._0;
+                                                        } else {
+                                                          return _bind$4;
+                                                        }
+                                                        value = _tmp & 255;
+                                                      } else {
+                                                        value = 0;
+                                                      }
+                                                      const _bind$4 = _M0MP211localreview5forth7Machine3pop(self);
+                                                      let count;
                                                       if (_bind$4.$tag === 1) {
                                                         const _ok = _bind$4;
-                                                        value = _ok._0;
+                                                        count = _ok._0;
                                                       } else {
                                                         return _bind$4;
                                                       }
-                                                      const address = self.memory.length;
-                                                      let _tmp;
-                                                      if (word === ",") {
-                                                        if (4 === 0) {
-                                                          $panic();
-                                                        }
-                                                        _tmp = (address % 4 | 0) !== 0;
-                                                      } else {
-                                                        _tmp = false;
-                                                      }
-                                                      if (_tmp) {
-                                                        return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("unaligned comma"));
-                                                      }
-                                                      const _bind$5 = _M0MP211localreview5forth7Machine8allocate(self, word === "," ? 4 : 1);
+                                                      const _bind$5 = _M0MP211localreview5forth7Machine3pop(self);
+                                                      let address;
                                                       if (_bind$5.$tag === 1) {
                                                         const _ok = _bind$5;
-                                                        _ok._0;
+                                                        address = _ok._0;
                                                       } else {
                                                         return _bind$5;
                                                       }
-                                                      const _bind$6 = _M0MP211localreview5forth7Machine4save(self, address, value, word === ",");
+                                                      const _bind$6 = _M0MP211localreview5forth7Machine13memory__range(self, address, count);
                                                       if (_bind$6.$tag === 1) {
                                                         const _ok = _bind$6;
                                                         _ok._0;
                                                       } else {
                                                         return _bind$6;
                                                       }
+                                                      const _bind$7 = 0;
+                                                      let _tmp = _bind$7;
+                                                      while (true) {
+                                                        const i = _tmp;
+                                                        if (i < count) {
+                                                          _M0MPC15array5Array3setGyE(self.memory, address + i | 0, value);
+                                                          _tmp = i + 1 | 0;
+                                                          continue;
+                                                        } else {
+                                                          break;
+                                                        }
+                                                      }
                                                     }
                                                     break _L$13;
                                                   }
-                                                  let value;
-                                                  if (word === "fill") {
-                                                    const _bind$4 = _M0MP211localreview5forth7Machine3pop(self);
-                                                    let _tmp;
-                                                    if (_bind$4.$tag === 1) {
-                                                      const _ok = _bind$4;
-                                                      _tmp = _ok._0;
-                                                    } else {
-                                                      return _bind$4;
-                                                    }
-                                                    value = _tmp & 255;
-                                                  } else {
-                                                    value = 0;
-                                                  }
                                                   const _bind$4 = _M0MP211localreview5forth7Machine3pop(self);
-                                                  let count;
+                                                  let value;
                                                   if (_bind$4.$tag === 1) {
                                                     const _ok = _bind$4;
-                                                    count = _ok._0;
+                                                    value = _ok._0;
                                                   } else {
                                                     return _bind$4;
                                                   }
-                                                  const _bind$5 = _M0MP211localreview5forth7Machine3pop(self);
-                                                  let address;
-                                                  if (_bind$5.$tag === 1) {
-                                                    const _ok = _bind$5;
-                                                    address = _ok._0;
-                                                  } else {
-                                                    return _bind$5;
-                                                  }
-                                                  const _bind$6 = _M0MP211localreview5forth7Machine13memory__range(self, address, count);
-                                                  if (_bind$6.$tag === 1) {
-                                                    const _ok = _bind$6;
-                                                    _ok._0;
-                                                  } else {
-                                                    return _bind$6;
-                                                  }
-                                                  const _bind$7 = 0;
-                                                  let _tmp = _bind$7;
-                                                  while (true) {
-                                                    const i = _tmp;
-                                                    if (i < count) {
-                                                      _M0MPC15array5Array3setGyE(self.memory, address + i | 0, value);
-                                                      _tmp = i + 1 | 0;
-                                                      continue;
-                                                    } else {
+                                                  const _tmp = self.stack;
+                                                  let _tmp$2;
+                                                  switch (word) {
+                                                    case "0=": {
+                                                      _tmp$2 = value === 0 ? -1 : 0;
                                                       break;
                                                     }
+                                                    case "0<": {
+                                                      _tmp$2 = value < 0 ? -1 : 0;
+                                                      break;
+                                                    }
+                                                    case "0>": {
+                                                      _tmp$2 = value > 0 ? -1 : 0;
+                                                      break;
+                                                    }
+                                                    case "1+": {
+                                                      _tmp$2 = value + 1 | 0;
+                                                      break;
+                                                    }
+                                                    default: {
+                                                      _tmp$2 = value - 1 | 0;
+                                                    }
                                                   }
+                                                  _M0MPC15array5Array4pushGiE(_tmp, _tmp$2);
                                                 }
                                                 break _L$11;
                                               }
-                                              const _bind$4 = _M0MP211localreview5forth7Machine3pop(self);
-                                              let value;
-                                              if (_bind$4.$tag === 1) {
-                                                const _ok = _bind$4;
-                                                value = _ok._0;
-                                              } else {
-                                                return _bind$4;
+                                              const back = word === "i" ? 1 : 2;
+                                              if (self.loop_indices.length < back) {
+                                                return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("loop index unavailable"));
                                               }
-                                              const _tmp = self.stack;
-                                              let _tmp$2;
-                                              switch (word) {
-                                                case "0=": {
-                                                  _tmp$2 = value === 0 ? -1 : 0;
-                                                  break;
-                                                }
-                                                case "0<": {
-                                                  _tmp$2 = value < 0 ? -1 : 0;
-                                                  break;
-                                                }
-                                                case "0>": {
-                                                  _tmp$2 = value > 0 ? -1 : 0;
-                                                  break;
-                                                }
-                                                case "1+": {
-                                                  _tmp$2 = value + 1 | 0;
-                                                  break;
-                                                }
-                                                default: {
-                                                  _tmp$2 = value - 1 | 0;
-                                                }
-                                              }
-                                              _M0MPC15array5Array4pushGiE(_tmp, _tmp$2);
+                                              _M0MPC15array5Array4pushGiE(self.stack, _M0MPC15array5Array2atGiE(self.loop_indices, self.loop_indices.length - back | 0));
                                             }
                                             break _L$9;
                                           }
-                                          const back = word === "i" ? 1 : 2;
-                                          if (self.loop_indices.length < back) {
-                                            return new _M0DTPC16result6ResultGuRP211localreview5forth10ForthErrorE3Err(new _M0DTPC15error5Error42localreview_2fforth_2eForthError_2eInvalid("loop index unavailable"));
+                                          const _bind$4 = _M0MP211localreview5forth7Machine12return__word(self, word);
+                                          if (_bind$4.$tag === 1) {
+                                            const _ok = _bind$4;
+                                            _ok._0;
+                                          } else {
+                                            return _bind$4;
                                           }
-                                          _M0MPC15array5Array4pushGiE(self.stack, _M0MPC15array5Array2atGiE(self.loop_indices, self.loop_indices.length - back | 0));
                                         }
                                         break _L$7;
                                       }
-                                      const _bind$4 = _M0MP211localreview5forth7Machine12return__word(self, word);
+                                      const _bind$4 = _M0MP211localreview5forth7Machine13integer__word(self, word);
                                       if (_bind$4.$tag === 1) {
                                         const _ok = _bind$4;
                                         _ok._0;
