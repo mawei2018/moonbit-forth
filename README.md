@@ -1,6 +1,6 @@
 # Forth 栈式解释器
 
-可嵌入、具执行预算的 Forth 子集。本地开发版 0.13.0，供比较和代码审查；尚未作为完整竞赛作品提交。
+可嵌入、具执行预算的 Forth 子集。本地开发版 0.14.0，供比较和代码审查；尚未作为完整竞赛作品提交。
 
 ## 运行
 
@@ -175,3 +175,14 @@ RECURSE 绑定当前定义自身，配合 IF/EXIT 和返回栈可实现递归，
 编译过程暂存内部词引用，成功后才加入字典；失败时恢复绑定编号并撤销本次新建令牌，避免反复失败消耗内部资源。已存在令牌和字典保持有效。
 
 本轮仅运行 `compile structure*` 的 4 组新增 JS 测试：22 种错配/未闭合结构、合法混合嵌套和 DOES>、匿名递归与错误、100 次失败编译后的令牌使用。未重复全套、未作 Gforth 实机对照或打包。该检查覆盖当前结构化子集，不支持标准控制流栈的任意重排及多 WHILE 编排；IMMEDIATE/POSTPONE 和完整编译状态仍待补齐。
+
+
+## 0.14.0 开发更新：编译期计算与 LITERAL
+
+定义内 `[ … ]` 在编译时执行，LITERAL 消费当时栈顶并将整数写入运行代码。示例 `: value [ 7 7 * 2 + ] literal ; value` 得到 51。可调用已定义词、访问现有变量、获取执行令牌；`: double [ ' dup ] literal execute + ; 5 double` 得到 10。
+
+编译期计算共享执行预算，使用独立临时输入上下文，结束或失败后恢复外层输入和模式。LITERAL 可位于条件分支或 DOES> 后；编译期副作用只发生一次。数据栈与既有内存的修改沿用错误前保留规则；本轮失败的新定义不发布。
+
+当前支持定义内成对的 `[ … ]` 和 LITERAL，不支持跨 eval 编译、STATE、IMMEDIATE、POSTPONE、任意控制流栈操作或在编译期间运行定义词；嵌套方括号明确拒绝。这些限制仍需继续补齐。
+
+参考 [Forth LITERAL](https://forth-standard.org/standard/core/LITERAL) 与 [left bracket](https://forth-standard.org/standard/core/Bracket)。本轮只运行 `compile evaluation*` 的 5 组新增 JS 测试，覆盖计算、一次性副作用、令牌/匿名定义、分支/DOES>、错误恢复及预算。未重复全套、未作 Gforth 实机对照或打包。

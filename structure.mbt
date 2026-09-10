@@ -5,6 +5,14 @@ fn validate_structure(body : Array[String]) -> Unit raise ForthError {
   while pc < body.length() {
     let word = body[pc]
     pc += 1
+    if word == "[" {
+      let (_, next) = bracket_chunk(body, pc)
+      pc = next
+      continue
+    }
+    if word == "]" {
+      raise Invalid("unexpected closing bracket")
+    }
     if word == "[']" {
       if pc >= body.length() {
         raise Invalid("missing execution token name")

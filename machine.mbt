@@ -7,6 +7,7 @@ pub suberror ForthError {
 pub struct Machine {
   priv stack : Array[Int]
   priv words : Map[String, Array[String]]
+  priv mut compile_eval : Bool
   priv data_addresses : Map[String, Int]
   priv mut latest_created : Array[String]?
   priv mut input : Array[String]
@@ -32,6 +33,7 @@ pub fn Machine::new() -> Machine {
     words: {},
     binding_id: 0,
     execution_tokens: [],
+    compile_eval: false,
     data_addresses: {},
     latest_created: None,
     input: [],
@@ -160,6 +162,9 @@ fn Machine::execute(
       pc = next
       self.stack.push(self.capture_xt(name))
     } else if word == "variable" || word == "constant" || word == "create" {
+      if self.compile_eval {
+        raise Invalid("defining words during compilation are unsupported")
+      }
       let (name, next) = self.runtime_name(code, pc, depth)
       pc = next
       if number(name) is Some(_) ||
@@ -191,6 +196,9 @@ fn Machine::execute(
       self.attach_does(code[pc:].to_owned())
       return
     } else if word == ":" || word == ":noname" {
+      if self.compile_eval {
+        raise Invalid("nested compilation")
+      }
       let anonymous = word == ":noname"
       let name = if anonymous {
         self.binding_key()

@@ -37,7 +37,13 @@ fn Machine::compile_word(
   while pc < body.length() {
     let word = body[pc]
     pc += 1
-    if word == "does>" {
+    if word == "[" {
+      let (chunk, next) = bracket_chunk(body, pc)
+      pc = next
+      self.interpret_compile_chunk(chunk)
+    } else if word == "literal" {
+      compiled.push(self.pop().to_string())
+    } else if word == "does>" {
       after_does = true
       compiled.push("\u0001does>")
     } else if word == "[']" {
