@@ -8,12 +8,13 @@ pub struct Machine {
   priv stack : Array[Int]
   priv words : Map[String, Array[String]]
   priv output : Array[String]
+  priv memory : Array[Byte]
   priv mut fuel : Int
 } derive(Debug)
 
 ///|
 pub fn Machine::new() -> Machine {
-  { stack: [], words: {}, output: [], fuel: 0, }
+  { stack: [], words: {}, output: [], memory: [], fuel: 0, }
 }
 
 ///|
@@ -114,7 +115,28 @@ fn Machine::execute(
     }
     let word = code[pc]
     pc += 1
-    if word == ":" {
+    if word == "variable" || word == "constant" || word == "create" {
+      if pc >= code.length() {
+        raise Invalid("missing data word name")
+      }
+      let name = code[pc]
+      pc += 1
+      if number(name) is Some(_) ||
+        [":", ";", "if", "else", "then"].contains(name) {
+        raise Invalid("invalid data word name")
+      }
+      let value = if word == "constant" {
+        self.pop()
+      } else {
+        self.allocate((4 - self.memory.length() % 4) % 4)
+        let address = self.memory.length()
+        if word == "variable" {
+          self.allocate(4)
+        }
+        address
+      }
+      self.words[name] = [value.to_string()]
+    } else if word == ":" {
       if pc >= code.length() {
         raise Invalid("missing definition name")
       }
@@ -237,6 +259,71 @@ fn Machine::execute(
           self.stack.push(d)
           self.stack.push(a)
           self.stack.push(b)
+        }
+        "here" => self.stack.push(self.memory.length())
+        "allot" => {
+          let count = self.pop()
+          self.allocate(count)
+        }
+        "align" => self.allocate((4 - self.memory.length() % 4) % 4)
+        "aligned" => {
+          let n = self.pop()
+          self.stack.push((n + 3) & -4)
+        }
+        "cells" => {
+          let n = self.pop()
+          self.stack.push(n * 4)
+        }
+        "cell+" => {
+          let n = self.pop()
+          self.stack.push(n + 4)
+        }
+        "@" | "c@" => {
+          let address = self.pop()
+          self.stack.push(self.load(address, word == "@"))
+        }
+        "!" | "c!" | "+!" => {
+          let address = self.pop()
+          let value = self.pop()
+          let next = if word == "+!" {
+            self.load(address, true) + value
+          } else {
+            value
+          }
+          self.save(address, next, word != "c!")
+        }
+        "," | "c," => {
+          let value = self.pop()
+          let address = self.memory.length()
+          if word == "," && address % 4 != 0 {
+            raise Invalid("unaligned comma")
+          }
+          self.allocate(if word == "," { 4 } else { 1 })
+          self.save(address, value, word == ",")
+        }
+        "fill" | "erase" => {
+          let value = if word == "fill" {
+            self.pop().to_byte()
+          } else {
+            b'\x00'
+          }
+          let count = self.pop()
+          let address = self.pop()
+          self.memory_range(address, count)
+          for i in 0..<count {
+            self.memory[address + i] = value
+          }
+        }
+        "move" => {
+          let count = self.pop()
+          let dest = self.pop()
+          let source = self.pop()
+          self.memory_range(source, count)
+          self.memory_range(dest, count)
+          let copy = self.memory[source:source + count].to_owned()
+          for i in 0..<count {
+            self.memory[dest + i] = copy[i]
+          }
         }
         "depth" => self.stack.push(self.stack.length())
         "." => self.output.push(self.pop().to_string())

@@ -1,0 +1,10 @@
+{
+  "timestamp": "2026-09-10T12:58:25.480731+00:00",
+  "target": "js",
+  "filter": "data space*",
+  "tests_passed": 4,
+  "scope": "variables constants memory allocation byte/cell access overlapping move and invalid ranges",
+  "gforth_differential": "not run",
+  "full_suite_rerun": false,
+  "archive_refreshed": false
+}
