@@ -82,7 +82,7 @@ fn tokens(source : String) -> Array[String] raise ForthError {
   let mut comment = false
   let mut line_comment = false
   for c in source.iter() {
-    if c == '\u0000' || c == '\u0001' {
+    if c == '\u0000' || c == '\u0001' || c == '\u0002' {
       raise Invalid("reserved source character")
     }
     if line_comment {
@@ -163,7 +163,9 @@ fn Machine::execute(
     if depth == 0 {
       self.input_pc = pc
     }
-    if word == "'" {
+    if raw.has_prefix("\u0002") {
+      self.emit_postponed(raw[1:].to_owned())
+    } else if word == "'" {
       let (name, next) = self.runtime_name(code, pc, depth)
       pc = next
       self.stack.push(self.capture_xt(name))

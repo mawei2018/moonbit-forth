@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-09-10T13:29:06.627468+00:00",
+  "target": "js",
+  "filters": {
+    "postpone*": 5,
+    "compile structure*": 4
+  },
+  "passed": 9,
+  "failed": 0,
+  "full_suite_run": false,
+  "gforth_oracle_run": false,
+  "archives_rebuilt": false
+}

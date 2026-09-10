@@ -1,6 +1,6 @@
 # Forth 栈式解释器
 
-可嵌入、具执行预算的 Forth 子集。本地开发版 0.15.0，供比较和代码审查；尚未作为完整竞赛作品提交。
+可嵌入、具执行预算的 Forth 子集。本地开发版 0.16.0，供比较和代码审查；尚未作为完整竞赛作品提交。
 
 ## 运行
 
@@ -197,3 +197,14 @@ COMPILE, 将执行令牌对应的调用写入当前定义，保留当时引用�
 本实现拒绝在活跃编译期间再次执行 IMMEDIATE；匿名定义后不能标记 IMMEDIATE。COMPILE, 仅用于已有支持的执行令牌，不提供控制流词令牌。尚缺 POSTPONE、STATE、跨 eval 编译和任意控制流栈编排。
 
 参考 [Forth IMMEDIATE](https://forth-standard.org/standard/core/IMMEDIATE) 与 [COMPILE,](https://forth-standard.org/standard/core/COMPILEComma)。本轮只运行 `immediate*` 的 5 组新增 JS 测试，覆盖立即执行/解释、常量、调用生成及绑定、名称解析、一次性副作用和错误恢复。未重复全套、未作 Gforth 实机对照或打包。
+
+
+## 0.16.0 开发更新：POSTPONE 与生成代码检查
+
+POSTPONE 保存目标词的编译行为：普通词延后生成调用，用户立即词延后执行，受支持控制词/LITERAL/DOES> 延后执行编译动作。引用保留定义时版本。示例 `: endif postpone then ; immediate : choice if 7 else 8 endif ;`，以及 `: lit7 7 postpone literal ; immediate : value lit7 ; value` 得到 7。
+
+支持生成 IF/ELSE/THEN、BEGIN 循环、DO 循环及 DOES>。结构检查改为验证最终生成代码，让宏可以开闭结构，同时拒绝未闭合或错配的生成结果。无当前编译输出时执行需要编译上下文的延期动作会报错；延期调用用户立即词仍可在解释时执行其正常行为。
+
+POSTPONE 暂不支持方括号状态切换、[']、RECURSE、POSTPONE 自身等解析/状态编译词；STATE、跨 eval 编译和标准控制流栈任意编排仍待补齐。
+
+参考 [Forth POSTPONE](https://forth-standard.org/standard/core/POSTPONE)。本轮新增 `postpone*` 5 组 JS 测试通过，另对受改动影响的 `compile structure*` 4 组作定向回归，均通过。未重复其他套件、未作 Gforth 实机对照或打包。

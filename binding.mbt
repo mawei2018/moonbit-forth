@@ -14,7 +14,6 @@ fn Machine::compile_word(
   name : String,
   body : Array[String],
 ) -> Unit raise ForthError {
-  validate_structure(body)
   let old_binding_id = self.binding_id
   let old_tokens = self.execution_tokens.length()
   errdefer {
@@ -42,7 +41,13 @@ fn Machine::compile_word(
   while pc < body.length() {
     let word = body[pc]
     pc += 1
-    if word == "[" {
+    if word == "postpone" {
+      if pc >= body.length() {
+        raise Invalid("missing POSTPONE name")
+      }
+      self.postpone_into(body[pc], compiled)
+      pc += 1
+    } else if word == "[" {
       let (chunk, next) = bracket_chunk(body, pc)
       pc = next
       self.interpret_compile_chunk(chunk)
@@ -85,6 +90,9 @@ fn Machine::compile_word(
       raise Invalid("unknown or unsupported compile-time word: " + word)
     }
   }
+  validate_structure(
+    compiled.map(fn(word) { if word == "\u0001does>" { "does>" } else { word } }),
+  )
   for key, target in pending {
     self.words[key] = target
   }
