@@ -1,0 +1,47 @@
+{
+  "project": "moonbit-forth",
+  "timestamp": "2026-09-10T10:39:46.709687+00:00",
+  "exit_code": 0,
+  "backend_test_counts": [
+    [
+      "7",
+      "7",
+      "0"
+    ],
+    [
+      "7",
+      "7",
+      "0"
+    ]
+  ],
+  "scope": "Local Windows verify.ps1; remote CI and full upstream conformance not run",
+  "coverage": {
+    "covered": 168,
+    "total": 188,
+    "measurement": "MoonBit instrumentation points, not upstream feature coverage"
+  },
+  "robustness": {
+    "project": "forth",
+    "seed": 20260910,
+    "cases": 307,
+    "expected_error_responses": 302,
+    "uncaught_exceptions": 0,
+    "scope": "bounded malformed-input robustness, not proof of full language/protocol conformance"
+  },
+  "benchmark": {
+    "project": "forth",
+    "utc": "2026-09-10T10:39:46.498Z",
+    "runtime": "v24.11.0",
+    "platform": "win32",
+    "cpu": "Intel(R) Core(TM) i7-14700HX",
+    "input_utf8_bytes": 54,
+    "samples": 30,
+    "warmup": 5,
+    "median_ms": 0.04229999999999734,
+    "p95_ms": 0.2612000000000023,
+    "max_ms": 0.5998000000000019,
+    "scope": "JS warm execution of documented example; no cross-project or upstream performance claim"
+  },
+  "remote_ci": "not run",
+  "network_interoperability": "not run"
+}

@@ -204,6 +204,40 @@ fn Machine::execute(
           self.stack.push(c)
           self.stack.push(a)
         }
+        "nip" => {
+          let b = self.pop()
+          ignore(self.pop())
+          self.stack.push(b)
+        }
+        "tuck" => {
+          let b = self.pop()
+          let a = self.pop()
+          self.stack.push(b)
+          self.stack.push(a)
+          self.stack.push(b)
+        }
+        "2dup" => {
+          let b = self.pop()
+          let a = self.pop()
+          self.stack.push(a)
+          self.stack.push(b)
+          self.stack.push(a)
+          self.stack.push(b)
+        }
+        "2drop" => {
+          ignore(self.pop())
+          ignore(self.pop())
+        }
+        "2swap" => {
+          let d = self.pop()
+          let c = self.pop()
+          let b = self.pop()
+          let a = self.pop()
+          self.stack.push(c)
+          self.stack.push(d)
+          self.stack.push(a)
+          self.stack.push(b)
+        }
         "depth" => self.stack.push(self.stack.length())
         "." => self.output.push(self.pop().to_string())
         "negate" => {
