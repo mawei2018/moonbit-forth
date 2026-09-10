@@ -1,6 +1,6 @@
 # Forth 栈式解释器
 
-可嵌入、具执行预算的 Forth 子集。本地开发版 0.7.0，供比较和代码审查；尚未作为完整竞赛作品提交。
+可嵌入、具执行预算的 Forth 子集。本地开发版 0.8.0，供比较和代码审查；尚未作为完整竞赛作品提交。
 
 ## 运行
 
@@ -32,7 +32,7 @@ moon run cmd/main
 
 ## 下一阶段与明确限制
 
-增加编译期词绑定、REPL 和 ANS 子集符合性测试；当前词字典为运行时查找，32 位整数按 MoonBit 溢出语义回绕，错误发生前的栈/字典修改会保留。
+增加完整编译词集、REPL 和 ANS 子集符合性测试；顶层词查找为运行时查找，冒号定义保留定义时的词引用，32 位整数按 MoonBit 溢出语义回绕，错误发生前的栈/字典修改会保留。
 
 本分装包自带 `web/index.html`（用 `start-review.ps1` 启动）。`cmd/web/main.mbt` 为薄适配层，网页调用编译后的真实 MoonBit 模块。
 
@@ -115,3 +115,14 @@ EXIT 从当前自定义词返回，可穿过 IF 和 BEGIN；被调用词的 EXIT
 UNLOOP 只移除当前词的循环参数，不允许破坏调用者循环；移除后继续执行该 LOOP 会报错。顶层 EXIT/UNLOOP 拒绝执行。异常与正常返回均恢复调用上下文，避免污染后续 eval。
 
 参考 [Forth EXIT](https://forth-standard.org/standard/core/EXIT) 与 [UNLOOP](https://forth-standard.org/standard/core/UNLOOP)。本轮新增 4 组 `word exit*` JS 测试通过，覆盖条件/BEGIN、调用者循环和返回栈、嵌套 UNLOOP、错误后恢复。未重复全套或打包；尚未完成编译期绑定、DOES> 和完整上游符合性对照。
+
+
+## 0.8.0 开发更新：词绑定与 RECURSE
+
+冒号定义现在在定义时绑定已有自定义词、变量/常量和内建操作。后续同名定义不改变已编译引用；例如 `: a 3 ; : b a ; : a 9 ; b a` 留下 3、9。重定义中的同名引用绑定旧版本：`: a 1 ; : a a 1+ ; a` 得到 2。
+
+RECURSE 绑定当前定义自身，配合 IF/EXIT 和返回栈可实现递归，即使之后重定义同名词也不改变旧递归。未知词在定义时拒绝，失败不替换同名旧定义。内部绑定标识不允许从输入注入，绑定数量上限为 65536。
+
+这是已有词集的绑定编译器；尚无 IMMEDIATE、POSTPONE、编译模式切换、执行令牌或 DOES>。控制结构仍由原有结构化执行器处理，不能重定义这些保留控制词。VARIABLE/CONSTANT/CREATE 目前用于顶层定义，不支持在冒号定义内解析新的输入名称；定义词机制仍待补齐。
+
+参考 [Forth colon definition](https://forth-standard.org/standard/core/Colon) 与 [RECURSE](https://forth-standard.org/standard/core/RECURSE)。本轮 `binding*` 的 5 组新增 JS 测试通过，覆盖用户词/内建词/数据词重定义、同名旧引用、递归身份、返回栈递归和失败恢复；未重复全套回归、未作 Gforth 实机对照或重新打包。

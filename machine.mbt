@@ -7,6 +7,7 @@ pub suberror ForthError {
 pub struct Machine {
   priv stack : Array[Int]
   priv words : Map[String, Array[String]]
+  priv mut binding_id : Int
   priv output : Array[String]
   priv memory : Array[Byte]
   priv returns : Array[Int]
@@ -24,6 +25,7 @@ pub fn Machine::new() -> Machine {
   {
     stack: [],
     words: {},
+    binding_id: 0,
     output: [],
     memory: [],
     returns: [],
@@ -62,6 +64,9 @@ fn tokens(source : String) -> Array[String] raise ForthError {
   let mut comment = false
   let mut line_comment = false
   for c in source.iter() {
+    if c == '\u0000' || c == '\u0001' {
+      raise Invalid("reserved source character")
+    }
     if line_comment {
       if c == '\n' {
         line_comment = false
@@ -133,7 +138,9 @@ fn Machine::execute(
     if self.fuel < 0 {
       raise Invalid("execution budget exhausted")
     }
-    let word = code[pc]
+    let raw = code[pc]
+    let builtin = raw.has_prefix("\u0001")
+    let word = if builtin { raw[1:].to_owned() } else { raw }
     pc += 1
     if word == "variable" || word == "constant" || word == "create" {
       if pc >= code.length() {
@@ -177,7 +184,7 @@ fn Machine::execute(
         raise Invalid("unterminated definition")
       }
       pc += 1
-      self.words[name] = body
+      self.compile_word(name, body)
     } else if word == "do" || word == "?do" {
       let (body, plus, next) = counted_body(code, pc)
       pc = next
@@ -249,7 +256,7 @@ fn Machine::execute(
         ";", "else", "then", "while", "repeat", "until", "again", "loop", "+loop",
       ].contains(word) {
       raise Invalid("unexpected control word: " + word)
-    } else if self.words.get(word) is Some(body) {
+    } else if !builtin && self.words.get(word) is Some(body) {
       self.execute_frame(body, depth + 1, true)
     } else if number(word) is Some(n) {
       self.stack.push(n)
