@@ -1,0 +1,515 @@
+[
+  {
+    "name": "arithmetic",
+    "source": "7 3 + 2 * 5 -"
+  },
+  {
+    "name": "stack",
+    "source": "1 2 3 rot 2dup +"
+  },
+  {
+    "name": "binding",
+    "source": ": a 3 ; : b a ; : a 9 ; b a"
+  },
+  {
+    "name": "same name",
+    "source": ": a 1 ; : a a 1+ ; a"
+  },
+  {
+    "name": "primitive binding",
+    "source": ": saved dup ; : dup 99 ; 2 saved dup"
+  },
+  {
+    "name": "begin",
+    "source": ": count 0 begin 1+ dup 4 = until ; count"
+  },
+  {
+    "name": "while",
+    "source": ": count 3 begin dup 0> while 1- repeat ; count"
+  },
+  {
+    "name": "do",
+    "source": ": indices 3 0 do i loop ; indices"
+  },
+  {
+    "name": "nested do",
+    "source": ": indices 2 0 do 2 0 do j i loop loop ; indices"
+  },
+  {
+    "name": "plusloop",
+    "source": ": indices 5 0 do i 2 +loop ; indices"
+  },
+  {
+    "name": "negative loop",
+    "source": ": indices 0 3 do i -1 +loop ; indices"
+  },
+  {
+    "name": "leave",
+    "source": ": indices 9 0 do i dup 2 = if leave then loop ; indices"
+  },
+  {
+    "name": "return stack",
+    "source": ": f 3 >r 8 r@ r> ; f"
+  },
+  {
+    "name": "pair return",
+    "source": ": f 3 4 2>r 2r@ 2r> ; f"
+  },
+  {
+    "name": "exit",
+    "source": ": f dup 0= if drop 7 exit then 1+ ; 0 f 4 f"
+  },
+  {
+    "name": "unloop",
+    "source": ": f 5 0 do i dup 2 = if unloop exit then loop ; f"
+  },
+  {
+    "name": "recurse",
+    "source": ": f dup 2 < if drop 1 exit then dup 1- recurse * ; 5 f"
+  },
+  {
+    "name": "xt",
+    "source": ": f 4 ; ' f constant old : f 8 ; old execute f"
+  },
+  {
+    "name": "anonymous",
+    "source": ":noname dup * ; constant square 7 square execute"
+  },
+  {
+    "name": "does",
+    "source": ": con create , does> @ ; 7 con a 9 con b a b"
+  },
+  {
+    "name": "body",
+    "source": ": con create , does> @ ; 4 con a 7 ' a >body ! a"
+  },
+  {
+    "name": "literal",
+    "source": ": value [ 7 7 * 2 + ] literal ; value"
+  },
+  {
+    "name": "immediate",
+    "source": ": seven 7 ; immediate : value seven literal ; value"
+  },
+  {
+    "name": "compile comma",
+    "source": ": emitdup ['] dup compile, ; immediate : double emitdup + ; 6 double"
+  },
+  {
+    "name": "postpone",
+    "source": ": endif postpone then ; immediate : choice if 7 else 8 endif ; 1 choice 0 choice"
+  },
+  {
+    "name": "state",
+    "source": ": mode state @ ; immediate : compiled mode literal ; : interpreted [ mode ] literal ; compiled interpreted mode"
+  },
+  {
+    "name": "literal string",
+    "source": "s\" Hello 世界\" type"
+  },
+  {
+    "name": "compiled print",
+    "source": ": hi .\" Mixed CASE\" cr ; hi hi"
+  },
+  {
+    "name": "counted string",
+    "source": ": data c\" Case\" ; data count type"
+  },
+  {
+    "name": "empty strings",
+    "source": "s\" \" dup . type s\" \" s\" \" compare"
+  },
+  {
+    "name": "char literal",
+    "source": "char Z 'A' : x [char] Q ; x"
+  },
+  {
+    "name": "parse name",
+    "source": ": read parse-name type ; read MiXeD read 世界"
+  },
+  {
+    "name": "parse delimiter",
+    "source": "124 parse abc  def| type"
+  },
+  {
+    "name": "parse end",
+    "source": ": rest 124 parse type ; rest xyz"
+  },
+  {
+    "name": "parse empty",
+    "source": "124 parse | dup . type"
+  },
+  {
+    "name": "input cursor",
+    "source": ": peek source drop >in @ + c@ ; peek 7"
+  },
+  {
+    "name": "skip input",
+    "source": "source nip >in ! bad-ignored"
+  },
+  {
+    "name": "source length",
+    "source": "source nip"
+  },
+  {
+    "name": "source id",
+    "source": "source-id"
+  },
+  {
+    "name": "evaluate",
+    "source": "s\" 3 4 +\" evaluate 9"
+  },
+  {
+    "name": "nested eval",
+    "source": ": input s\" 7 9 +\" ; : second s\" input evaluate\" ; second evaluate"
+  },
+  {
+    "name": "evaluate define",
+    "source": "s\" : x 7 ; x\" evaluate x"
+  },
+  {
+    "name": "parse immediate",
+    "source": ": size parse-name nip postpone literal ; immediate : x size MiXeD ; x"
+  },
+  {
+    "name": "unbalanced compile data stack rejected",
+    "source": ": text s\" 4 5 +\" ; immediate : x text evaluate ; x"
+  },
+  {
+    "name": "base compile",
+    "source": "hex : x 10 ff ; decimal x"
+  },
+  {
+    "name": "explicit prefixes",
+    "source": "$FF %1010 #12"
+  },
+  {
+    "name": "base setter",
+    "source": "16 base ! ab decimal"
+  },
+  {
+    "name": "number output",
+    "source": "hex 123 . 255 u. decimal -7 4 .r 255 4 u.r"
+  },
+  {
+    "name": "trim",
+    "source": "s\" abc   \" -trailing type"
+  },
+  {
+    "name": "slice",
+    "source": "s\" abcdef\" 3 /string type"
+  },
+  {
+    "name": "compare",
+    "source": "s\" abc\" s\" abd\" compare s\" x\" s\" x\" compare"
+  },
+  {
+    "name": "search",
+    "source": "s\" abcdef\" s\" cd\" search . type"
+  },
+  {
+    "name": "not found",
+    "source": "s\" abc\" s\" z\" search . type"
+  },
+  {
+    "name": "word",
+    "source": ": item 32 word count type ; item Hello item World"
+  },
+  {
+    "name": "two cell",
+    "source": "create x 2 cells allot 12 34 x 2! x 2@"
+  },
+  {
+    "name": "extra stack",
+    "source": "1 2 3 4 2over 1 pick 2 roll"
+  },
+  {
+    "name": "catch success",
+    "source": ": x 7 ; 1 ' x catch"
+  },
+  {
+    "name": "catch throw",
+    "source": ": x 9 -77 throw ; 5 ' x catch"
+  },
+  {
+    "name": "nested catch",
+    "source": ": x -77 throw ; : y ['] x catch -88 throw ; 4 ' y catch"
+  },
+  {
+    "name": "throw zero",
+    "source": "1 0 throw 2"
+  },
+  {
+    "name": "catch divide",
+    "source": ": x 1 0 / ; ' x catch"
+  },
+  {
+    "name": "catch unknown",
+    "source": ": x s\" missing\" evaluate ; ' x catch"
+  },
+  {
+    "name": "catch return",
+    "source": ": x 3 >r -88 throw r> ; 4 ' x catch 5"
+  },
+  {
+    "name": "catch loop",
+    "source": ": x 9 0 do i 3 = if -99 throw then loop ; 4 ' x catch"
+  },
+  {
+    "name": "catch eval",
+    "source": ": x s\" -12 throw\" evaluate ; ' x catch 6"
+  },
+  {
+    "name": "undefined",
+    "source": "missing"
+  },
+  {
+    "name": "division",
+    "source": "1 0 /"
+  },
+  {
+    "name": "underflow",
+    "source": "drop"
+  },
+  {
+    "name": "string length 0",
+    "source": "s\" \" dup . type"
+  },
+  {
+    "name": "string length 1",
+    "source": "s\" Z\" dup . type"
+  },
+  {
+    "name": "string length 2",
+    "source": "s\" Ab\" dup . type"
+  },
+  {
+    "name": "string length 7",
+    "source": "s\" AbAbAbZ\" dup . type"
+  },
+  {
+    "name": "string length 31",
+    "source": "s\" AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbZ\" dup . type"
+  },
+  {
+    "name": "string length 127",
+    "source": "s\" AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbZ\" dup . type"
+  },
+  {
+    "name": "string length 255",
+    "source": "s\" AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbZ\" dup . type"
+  },
+  {
+    "name": "radix format 2/0",
+    "source": "0 2 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 2/1",
+    "source": "1 2 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 2/15",
+    "source": "15 2 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 2/255",
+    "source": "255 2 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 2/12345",
+    "source": "12345 2 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 3/0",
+    "source": "0 3 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 3/1",
+    "source": "1 3 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 3/15",
+    "source": "15 3 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 3/255",
+    "source": "255 3 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 3/12345",
+    "source": "12345 3 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 8/0",
+    "source": "0 8 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 8/1",
+    "source": "1 8 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 8/15",
+    "source": "15 8 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 8/255",
+    "source": "255 8 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 8/12345",
+    "source": "12345 8 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 10/0",
+    "source": "0 10 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 10/1",
+    "source": "1 10 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 10/15",
+    "source": "15 10 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 10/255",
+    "source": "255 10 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 10/12345",
+    "source": "12345 10 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 16/0",
+    "source": "0 16 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 16/1",
+    "source": "1 16 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 16/15",
+    "source": "15 16 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 16/255",
+    "source": "255 16 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 16/12345",
+    "source": "12345 16 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 24/0",
+    "source": "0 24 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 24/1",
+    "source": "1 24 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 24/15",
+    "source": "15 24 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 24/255",
+    "source": "255 24 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 24/12345",
+    "source": "12345 24 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 36/0",
+    "source": "0 36 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 36/1",
+    "source": "1 36 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 36/15",
+    "source": "15 36 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 36/255",
+    "source": "255 36 base ! dup . decimal"
+  },
+  {
+    "name": "radix format 36/12345",
+    "source": "12345 36 base ! dup . decimal"
+  },
+  {
+    "name": "throw -1",
+    "source": ": fail -1 throw ; 10 20 ' fail catch"
+  },
+  {
+    "name": "throw -2",
+    "source": ": fail -2 throw ; 10 20 ' fail catch"
+  },
+  {
+    "name": "throw -77",
+    "source": ": fail -77 throw ; 10 20 ' fail catch"
+  },
+  {
+    "name": "throw 1",
+    "source": ": fail 1 throw ; 10 20 ' fail catch"
+  },
+  {
+    "name": "throw 99",
+    "source": ": fail 99 throw ; 10 20 ' fail catch"
+  },
+  {
+    "name": "evaluate during compilation",
+    "source": ": text s\" 4 5 +\" evaluate ; immediate : x text ; x"
+  },
+  {
+    "name": "escaped bytes",
+    "source": ": bytes s\\\" A\\nB\\xFF\\z\\q\\m\\t\\v\\\\\" ; bytes type"
+  },
+  {
+    "name": "saved input",
+    "source": ": twice save-input parse-name type restore-input drop parse-name type ; twice AbC refill"
+  },
+  {
+    "name": "abort quote",
+    "source": ": checked abort\" Bad value\" 9 ; 0 checked 1 ' checked catch swap drop",
+    "note": "CATCH restores stack depth; overwritten cells are unspecified, so discard the flag cell before comparison."
+  },
+  {
+    "name": "postponed quote",
+    "source": ": message postpone .\" ; immediate : x message Hello CASE\" ; x"
+  },
+  {
+    "name": "parenthesis output",
+    "source": ".( Case Here) 7"
+  },
+  {
+    "name": "blank buffer",
+    "source": "create b 8 allot b 8 65 fill b 4 blank b 8 type"
+  },
+  {
+    "name": "byte copy",
+    "source": "create b 8 allot s\" AbCdEfGh\" b swap move b 8 type"
+  },
+  {
+    "name": "number output letters",
+    "source": "hex abcd . ff u. decimal"
+  },
+  {
+    "name": "search repeated prefix",
+    "source": "s\" aaaaab\" s\" aaab\" search . type"
+  },
+  {
+    "name": "search empty needle",
+    "source": "s\" abc\" s\" \" search . type"
+  },
+  {
+    "name": "comment in string",
+    "source": "s\" ( This \\ is not a comment )\" type"
+  },
+  {
+    "name": "empty parse name",
+    "source": ": end parse-name nip ; end"
+  }
+]

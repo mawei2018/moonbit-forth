@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-17T17:54:27.097Z",
+  "passed": 9,
+  "groups": [
+    "Persistent compiler and dictionary survive chunks; failures abort only the unfinished definition",
+    "UTF8 and arbitrary byte output are preserved; caught errors leave the session usable",
+    "Operation serialization, instruction budget and timeout reject boundedly",
+    "Abort terminates an in-flight worker and a new session can recover",
+    "Compiled bridge validates options, caps handles and closes them",
+    "Actual CLI runs multiple files in one machine and emits unchanged bytes",
+    "Actual line REPL and JSONL protocol preserve state and diagnose unfinished definitions",
+    "Actual CLI rejects malformed UTF8, input size and invalid options",
+    "One thousand real worker exchanges retain variables without accumulating output"
+  ],
+  "measured": {
+    "requests": 1000,
+    "elapsedMs": 76.44200000000001,
+    "runtime": "v24.11.0",
+    "cpu": "Intel(R) Core(TM) i7-14700HX",
+    "scope": "One local Worker session, request serialization and validation included; no upstream throughput or exact memory claim"
+  }
+}

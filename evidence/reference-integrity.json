@@ -1,0 +1,1247 @@
+{
+  "date": "2026-09-18",
+  "source": "Previously downloaded Ubuntu Gforth 0.7.3 packages; local archives rehashed and every regular extracted file compared against its archive member. No upstream code modifications. Package publication authenticity is the historical acquisition record, not re-established by this local hash check.",
+  "packages": [
+    {
+      "package": "gforth-common_0.7.3+dfsg-9build4.1_all.deb",
+      "sha256": "efe52d2bad0eb431ce0e4663e6fd5244747f54c22223aace68cf1c7dbf2c5aa8",
+      "regularFiles": [
+        {
+          "path": "usr/share/doc/gforth-common/NEWS.gz",
+          "sha256": "924240cba0641011d173e2463e6a7ba09b433a5007ea75587a9623834d500522",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/doc/gforth-common/changelog.Debian.gz",
+          "sha256": "a2eacc5b65a4db24d7eb6591efbed4268de48dae45275e7c266d706115cc26fd",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/doc/gforth-common/copyright",
+          "sha256": "237c40f980e5da2f8cacafb9b43c2be76427c0ab1c9adb06491db8b141905c60",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/TAGS",
+          "sha256": "f09a44012c8caeca71d7af467288793fbfcc94e86b97b882815916542e055108",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/add.fs",
+          "sha256": "fc43da37cf5c15b42b5a08d6311039997c3809f4f4aaff82ed094957e300de36",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/ans-report.fs",
+          "sha256": "58002f2933a7b60714b2158090a1322c43b106e6f67e498dacf6821146e34272",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/ansi.fs",
+          "sha256": "f49db4ada7d81af75efa8ccf78cf709a4b1824166dfb6326831f8ba1eb1b6fd0",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/answords.fs",
+          "sha256": "8efa551e55672370b79a6fd49ed9aeb5be7a010cbb3d9523a904427d783d03c8",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/arch/386/asm.fs",
+          "sha256": "62b08ca108ed541b705967b1a17a1f896f64d3765ed341e95f035d60579b1cb1",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/arch/386/disasm.fs",
+          "sha256": "4dfd0cde8de097c9db118ebae08efc6830271ce32c47a3a616320618cce28668",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/arch/alpha/asm.fs",
+          "sha256": "108fef090fa63271e7838f87c8b1c1c17da6f62b4016b3959e4f153439f7e6dd",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/arch/alpha/disasm.fs",
+          "sha256": "668bb0153f26cfef89923368251f75d5883199356956f55299ed7ad95f4c40f9",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/arch/alpha/testasm.fs",
+          "sha256": "bf78bcb9875addae590e1dee58f1cdb9c9d78b073a52a152749f09c521ff64f0",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/arch/amd64/asm.fs",
+          "sha256": "5d73804f7c6ffc13a6c127a9d0e415190509d017ce1fe669248b0bca9877be53",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/arch/amd64/disasm.fs",
+          "sha256": "caad986691aba81126802a3c1e5c864e600aa4578bb6c47be7da9de89d2f294d",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/arch/mips/asm.fs",
+          "sha256": "3c69a0fb3eac65df6745f4e09055b7f4893c29b671a683897141ab42d147a34f",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/arch/mips/disasm.fs",
+          "sha256": "38590eaa8726a93c055d672f60c02bc29075d13336ba9c9b6471db9b90dd128c",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/arch/mips/insts.fs",
+          "sha256": "f82de9226a06b85ae6fd662c546dfa79fe7c3a1bd7e9f147163b62f9c9b278c4",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/arch/mips/testasm.fs",
+          "sha256": "a3bf84dbf91ff924e7d09b9bcede7b4b9c1aed36e0e05af5f1a9799893efde7a",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/arch/mips/testdisasm.fs",
+          "sha256": "907c3f041a72004ebbc261be74f9214912116af1254d1ced40b7553c4b34ee59",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/arch/power/asm.fs",
+          "sha256": "32b3653bf2e0494baeae010c18c7c20c4a59350ebfe2f049e55ffc78a5c5ede8",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/arch/power/disasm.fs",
+          "sha256": "115238982ae67de3cd6f3716469e302bb383c6d2300568c465ceb8b4d93745b0",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/arch/power/inst.fs",
+          "sha256": "fbb9ae4cd57c613ce5085b8ace9bc2d738feeac64d296f4604a418a9a30c4691",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/asm/README",
+          "sha256": "083872dd27c588e3fcb112e7448032d4ea06eb032673b4f0054722a3dab051d3",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/asm/basic.fs",
+          "sha256": "1f6adb4f4c4863a51507e422797cfcfdcdec702fe2426202ff38da3c09dcd6f7",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/asm/bitmask.fs",
+          "sha256": "ad02536070aaa4b9e8bc4b7424d62ecc9dc63720305f66a08ff022dc91e5f8e8",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/asm/generic.fs",
+          "sha256": "ea097bfd3a8309f7d5129ce14e7d502a7de082d51524126c8929fe542db67699",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/asm/numref.fs",
+          "sha256": "99bea39e6da69dcaadd60381ed8ffd35b62a28423b52f7b8c4105718dd920c95",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/asm/target.fs",
+          "sha256": "d377e54db6b2c6c042fe6fa595ccd3e8a24a841edb396853766d07fffa249b3b",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/assert.fs",
+          "sha256": "778b750923ac778a66950086c3e5c702e1cb7cf3c6c8ed60e8ac5f93c12367ee",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/backtrac.fs",
+          "sha256": "f2b0f1ef3cc3c0bfde16a2f8c7ba6023cc79253bf51afaf5628297a80575522a",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/blocked.fb",
+          "sha256": "0b98a9e4d91ef6039281225797de1754fd87de0b993d46d8d4d57b90a4a2fb9c",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/blocks.fs",
+          "sha256": "4a47e66852cc1db8d606a3b352f62c5ce366b21cf0a2e57332d20746e6cc5aca",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/bubble.fs",
+          "sha256": "f0c3e8cea7c557a710ef990f4e100428006d3061453c89a11f28a35e15677437",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/bufio.fs",
+          "sha256": "1fed64760ac40ef04a5645de2c68b549ede426ca530b7dc2775996cebda41635",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/build-ec.in",
+          "sha256": "fe6f9575304f0a489b2fd158865dd9a285ee95591434a89d980b5d66101d3787",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/chains.fs",
+          "sha256": "5324eb9716a3e3584f0ebeec81a27d6f082fb92e457530224ee5b17bd745716a",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/code.fs",
+          "sha256": "2a5a00e46edb469a31a75d5d44045d07b25194ae8aa6b577abe8447ec10b3ff7",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/colorize.fs",
+          "sha256": "9230c7463e11c362071e2795d71caae745aa9de535d6397ccbd1e5fb3a47bf80",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/comp-i.fs",
+          "sha256": "c6bd66fe3bf730871aeb8bd8875320788600a42e93d3cdf28498245b7447dc30",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/compat/README",
+          "sha256": "18c8525ce668ef3982be75a482ba0929549be9c5297d2e0e6804cba2ac28dc59",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/compat/anslocal.fs",
+          "sha256": "5212deb2a4f1cbeaceee492d69111008e08ed67331c17689e4eba952562eda84",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/compat/assert.fs",
+          "sha256": "d263680a827ec41f8179dfb7650c5ad5a702a701d56d731820ba41d6456cf5f6",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/compat/control.fs",
+          "sha256": "3257fa758ba5702310fcda44cb5c65d50f9dde39f2d5bd666eb2b4bb03380120",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/compat/defer.fs",
+          "sha256": "e4fcdb603f5bed97024debaf76c05304abf50d7e39a2f5c47d1b678a6e051e72",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/compat/exception.fs",
+          "sha256": "855e6be9b6f1621b36a5fabe2f1c5b37afc182b70b9073de04a5a9b2dcfa1401",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/compat/execute-parsing.fs",
+          "sha256": "33382d52cebbadcd911a934e23a8f240cfe54c77d1df64ab633331a2833dca70",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/compat/loops.fs",
+          "sha256": "7a92288bef17558761c468e8aa7b6d7fc017e906935fe8a3606a89d5c0a9b372",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/compat/required.fs",
+          "sha256": "2c02c9e9d3f4bc9019f40a8b17e159f3bd0004472663ecf21733157df33e6575",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/compat/strcomp.fs",
+          "sha256": "e13d2ef5322c51d1bfbd479833a0515aa632013bd8841ed18eada13d4a75f074",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/compat/struct.fs",
+          "sha256": "28a8234942e3204e3ac33139c0f4ea1ce67660f96adf0362606d80057603e866",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/compat/vocabulary.fs",
+          "sha256": "ce642cbf242181c663452c60146a3bec0ee5de3b44d7eba9474a74ae22a8cb72",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/complex.fs",
+          "sha256": "aa49da89bf29af3d9ffb8da51f049b33404e9641628d9edf2f40b2c0d4b8f6eb",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/cross.fs",
+          "sha256": "355b5f654cb8dca334e05ac2ba9f36abf72540c47c1847a0880c8e3a996304af",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/cstr.fs",
+          "sha256": "58098c9f93d5c9e6dc617cd7422f938fb5cb41df5a03ac7febe967b5198480a3",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/debug.fs",
+          "sha256": "d6b026c553188d8f1986bef47d0cac580f9fedbd3a1605f10d3f6af69de5be91",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/debugs.fs",
+          "sha256": "782d3293a5f653a287438b0bdd0c718a61eb6dc180e315652b39b902a09d78c6",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/depth-changes.fs",
+          "sha256": "cb3c1dc41f8483386ad752f6b111f4f540e51d5af55165156eb9019cdecda86a",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/dis-gdb.fs",
+          "sha256": "8155f8465f2b9d4e9933512d5f69e2937943fbd0ca0784b9b0c36d277e46b0ef",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/doc/makedoc.fs",
+          "sha256": "6924be4a94501e4450972a2782ea044722016d215f46b2a6446ea04bd68f4d53",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/dosekey.fs",
+          "sha256": "cc9c73735cdbf475acc841f1cf951731d527b340c1d42610ac379a6cb32daed6",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/doskey.fs",
+          "sha256": "e2be8028bfa638a71c310745f4b9337433abd49f10afe51c1b97ce3f765ed17f",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/ds2texi.fs",
+          "sha256": "b9335263bb6ca112d1b8598330dd622ead94bcc319aa06c0af330df58f22a39c",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/ec/README",
+          "sha256": "b60125f74f7dfea330af6bb149448284825d205995b5174fbd1007b60eb756f1",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/ec/builttag.fs",
+          "sha256": "4e5d8c23f25729191b12d13fb1f9c6ba062ac8a5abdfabc9de7a145821e0d3e6",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/ec/dotx.fs",
+          "sha256": "bbe77af8ce4915c81925ada023fe0a423663f20af889e9acea49beb79ed9adc9",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/ec/mirror.fs",
+          "sha256": "95c495864610abf60e64e6ddf04cac7d902258118a8df00299664c705a5daeb6",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/ec/nesting.fs",
+          "sha256": "50d347c474d75143ba4893071749c1ffe8f92a1486db8afc553d137949dddd4a",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/ec/shex.fs",
+          "sha256": "6e5455eaba47b236afe3f493c6ed9b21f3753707d81ba026d827402881d40528",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/ekey.fs",
+          "sha256": "c93223a4a06e7936f3dae0edd17b782fff7f4930fc43abc81a97540ed77476aa",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/endtry-iferror.fs",
+          "sha256": "6271ec3676ff5044ca785a40a91ffb38d290ac7077c82f6cc889995f64bfe3a4",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/environ.fs",
+          "sha256": "a740e69f15bc1cb1ad43728944d3f1e88d075b1c696473cebdadd85ac1d459c5",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/envos.dos",
+          "sha256": "0a970223e10f7e4e56b723b7c9a45b1415c99238d1fb7f21df004fd0b984c85e",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/envos.fs",
+          "sha256": "9d8a91e394e15929620d88c4e492741a8002ea2f505f1e7f11a6fa49e66df330",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/envos.os2",
+          "sha256": "62abe3cf7b9752d0cac8ed5d300758a068dc7e0fa98b0388ca67e461f6d854e3",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/errors.fs",
+          "sha256": "8113f8cb1d65c6a0b85961f2529c4d2c68901b31e764df4651110b52df9b0753",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/etags.fs",
+          "sha256": "9c4a83ace1723aecfedd206f0fb0f160ed3c5c4647ac5b43a76cc381c7a7dae4",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/exboot.fs",
+          "sha256": "1a6ba45d1ac95b7f9810d5c7db10e23eccb70d687265de8f67cfe237fe9ebad2",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/except.fs",
+          "sha256": "e857187a798a0051df8c73ea768840e3b043dc17a70987010e1c7de961861ddf",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/extend.fs",
+          "sha256": "f3f82008917535ce1115dcdb499c585ad00ba1d59a43d3e2d5d8d5c94242ffba",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/fflib.fs",
+          "sha256": "a2a33cafed6d37b0a1004f4cfefc74a09d12addc6b996a86989ba7eaa1e570d6",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/fft.fs",
+          "sha256": "ecb8cba849e940e76531f48b65bf43ae04019483b702a1108e13925cd104b047",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/fi2c.fs",
+          "sha256": "4cb77fca97aa4dbc42d6e63b9ff9d65e6d8f0691f57ff89ee2a08b0939831fdf",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/fib.fs",
+          "sha256": "744286263714a3d6c028369254e19d54670651fab9a8cda43ef2fe05a63e26f5",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/filedump.fs",
+          "sha256": "daa5fc9a6feb5395c30024c296d41f7f9a5656cb3f8cf2c50f3ba7ddda292adc",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/fixpath.fs",
+          "sha256": "5aed631a47d52eded76c084b2e71bbaff681aae03dcceb670ce8c231a82519e0",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/float.fs",
+          "sha256": "2dd248c6ae25e41495b3c08f60ed93e5936b2555a1d854c9349600cb6692f16b",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/fsl-util.4th",
+          "sha256": "73414a578a3bd0ca74d2a0df8709166d0c9f5abc3485d1c7e98debe393504c6d",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/glocals.fs",
+          "sha256": "4bd777381a78f0050cc81389d67c00a038573ffc37dd66e3e698ac3a0a1bdf38",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/glosgen.fs",
+          "sha256": "a4d57aea5c63441d697aa2d30c2ea93c0d4f6f00bab99e547425855070def86f",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/gray.fs",
+          "sha256": "9bc4fd62b65cfb212162a2e2e16304bae6a73ede4857c12f2a54ad5ff2b2c808",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/hash.fs",
+          "sha256": "88208af452fa65a0d44a1150a744a8aab28fc759e521250171f9e4325b589a21",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/history.fs",
+          "sha256": "45181e71ef56b210ffb3ab7e647cc8285c5250dc09a801d507db5d4de583412c",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/httpd.fs",
+          "sha256": "0859aa1c8b9bd0b62f29db85971bb8d17e5a5a86253b277f8eef09724d0b0529",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/install-tags.fs",
+          "sha256": "a199f1e429c858475ac027c4353ea508c20832ff571c6fab0873da0c14044f47",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/intcomp.fs",
+          "sha256": "38abe1e00d92f8d5602169815027712ddb359befde804c256ec0933357315953",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/accept.fs",
+          "sha256": "f50e605f1a5fb3c14640d64b6f7230fc9db831382741fb166ab94c94c17d5a27",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/aliases.fs",
+          "sha256": "19083eb950bce1df2d197485016d365b00bea13e67b64057e1cb25de8a5ece32",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/aliases0.fs",
+          "sha256": "8339c64173dd5502b44e24f583980ae620a7f18d6d3c7c49a8070432f2d2fc38",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/args.fs",
+          "sha256": "355385fcbb37a2ecc31bbc648f1b76026c338dcac3313fbd620df1fc85f5485a",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/basics.fs",
+          "sha256": "de40b2c1e644aaadee934c2b7643ece785bc252053c76f4e166bf566a9fedf07",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/cbr.fs",
+          "sha256": "2f86117b8261e614fdcb29c3776bae8ccdbe98057262e29d18e50225f109ad33",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/cloop.fs",
+          "sha256": "a1d62cc7111a0c2ff8246e01c0711a1d5f622673718e8c3385e4f678bd5c9317",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/comp.fs",
+          "sha256": "c223eb3755f0f1093791eb8fd27e6635df786c4e5a1401c4e11039eea2f5016a",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/cond-old.fs",
+          "sha256": "3221b6b6e536eb6ae8f26f769b7cc3f2af82176be2e6c4850e93f363d908b09e",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/cond.fs",
+          "sha256": "1fbc00190248c24481ef45dead516df438a6af9f822502db4f80bc6567da8fb0",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/doers.fs",
+          "sha256": "f2a9a61a022eb1f613aedf6155de52103513daa22321dfdbf70626578f2e67c2",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/errore.fs",
+          "sha256": "17100c2bfcc77e1bb76bd824f81171e804ce30a0fb7c1fc38699b82cce99c6a0",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/files.fs",
+          "sha256": "1e90f23f35b7d795e6b8d0fe41f4f3bfbd3cd12704675439aaaefd768a66471d",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/getdoers.fs",
+          "sha256": "519f1e27607d09b8b6e55e3d1d627c7ddaa142dfcebd708a51f608017ae678d0",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/input.fs",
+          "sha256": "46f5a3c04b3d6717cab2ae60845afc9e214ea1da8ece475f9ab88f63dda2bfb6",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/int.fs",
+          "sha256": "155c84d5110d98e36105db42a5eb697ad4c4cf7ebbc24f9534207926241735ac",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/io.fs",
+          "sha256": "ad2df7252bf6fdec347322cb8347904c46f08ec9b3b39f004ad8ef854561fe18",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/kernel.fs",
+          "sha256": "8d344f30e2453d206448ebf5f4dc1279a7d1b8381d5711bc76f1914e149dcabe",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/license.fs",
+          "sha256": "1cb1d9cab54c7a15098b46b69252625d5c672f705952bf15d106104ee4bae59d",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/main.fs",
+          "sha256": "179000826a49f837c8f9084ecba2ecf43eeea208c6514fdfaa4d1a2ee9049763",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/nio.fs",
+          "sha256": "a1a1e0bf148dbe1566691807da2b146fea113c57c148e84a905b27886eda97d0",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/pass.fs",
+          "sha256": "9e8f45c74ac4d62b5dec20a11ba9c0ead99226ea6d01a7bdd4a4a1986c3bbd4c",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/paths.fs",
+          "sha256": "a6b3e9eee93c2d72f487fbadea43321ca03eaa82533221bd527f1e5bf0b6436f",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/prim0.fs",
+          "sha256": "7161546c86d60ef1ae5f6a158ce4f1f333f0c3be578105f5ee46ac842307e278",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/quotes.fs",
+          "sha256": "544f45d89ab8a2efe644a51efa3ae9403ffb0542c9d868b6df42bb5b8c4f4f7e",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/require.fs",
+          "sha256": "ea66b8e0b1f856fdfcefb21cd09789791d0d207558707f39ca2742643adb80c8",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/saccept.fs",
+          "sha256": "4459142441f2610a07ca25004858516698b7e50221062258033d6bb34a09442e",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/tools.fs",
+          "sha256": "02a04182fe11789b7daeb827ddce822ef79283ef9e0ce5ca05565c6126cb3ba1",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/toolsext.fs",
+          "sha256": "26660e9eeb9332df40ad713bdbba5e4222689feb61f1bc0476640d4a84e05694",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/vars.fs",
+          "sha256": "3b6a0ea596a5fe2794668b2be7cbdde2f316cf2fc92de6c5ea25dfcd862e98ef",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernel/xchars.fs",
+          "sha256": "a8ea37e0a998e491ce0dc67cc100efa5401b11288f9cfce9f7b08b9ed3531301",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/kernl64l.fi",
+          "sha256": "f3eb09627a09ff28e51460f4bb5fb0d79575e80ade9ba61d6839f0ea2b1ddb67",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/lib.fs",
+          "sha256": "cf8d7d9df28ef193803b19aea6fb1c8e46003cc33b252d1277cf097465c4d90d",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/libcc.fs",
+          "sha256": "f329160f7ee3246c569ae8d4867f89782132cda329f187d0bb0de8dca7711d0a",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/libffi.fs",
+          "sha256": "0415706739dd9bf91acac2fb4410b7438633fcb4bdff770a93f8ff6f39206c0f",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/locals.fs",
+          "sha256": "db9324f753310ce9ba5082d10b8656881c2f370bff956dae0b32a823115441ac",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/locate.fs",
+          "sha256": "c4851b7b01a3cf5025fc92cea75ba49e90ef993bf390461ddfab5311b00a09f2",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/look.fs",
+          "sha256": "7ef63898c6470244e5122b6b65c7e3961649aacb8cd40221589e5bca4528fa5a",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/mach16b.fs",
+          "sha256": "0f067600c28bf38245dd61f5f5bcca7727198c42308ca0c355f82875cf555ed2",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/mach16l.fs",
+          "sha256": "d401c383f2e88ad9639357915673c1a98a2b53f913570a20647724cd62b5b4ac",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/mach32b.fs",
+          "sha256": "9fa741bc23bed93c1619673102e0176785a285c3e0aebcaa5618d9faf437c566",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/mach32l.fs",
+          "sha256": "14e9812888384f8f0a702fee9b012639188203f21af27ab617415dda1e713b1f",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/mach64b.fs",
+          "sha256": "e81eed9f6f08497e1dd016613cc218ad1c8582e08da9beb2f0b313c522cfc3d6",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/mach64l.fs",
+          "sha256": "68be1ba86a84e3300631377c38658d843405dfd531d123630c6b310afae8a997",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/machpc.fs.in",
+          "sha256": "c183fff19535d883b1e58ce7cf8e08b85f339aae71680f5c1306a5cf783fee79",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/make-app.fs",
+          "sha256": "81925c4647aac623ff66580bd80ba69021a536383be84708a5a2c4d0daff55e9",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/matrix.fs",
+          "sha256": "a467836e146b78a509d24359856c446881e5d1a8e9669e78ac9828c946d9b00b",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/mini-oof.fs",
+          "sha256": "759b85a0e19877b70cddcf7248e0f2339859ac9e86ae6ba4c8f1fce2735d6859",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/mkdir.fs",
+          "sha256": "c68c99c72e65e519c55e24a181f3ad7ae72fe6b8f0973d04d1b4d018533b302b",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/moof-exm.fs",
+          "sha256": "abd4f5835a0848fc4528a2e766d7ab2b5fe3bf1710a7bfae2669899f4321e2d5",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/moofglos.fs",
+          "sha256": "e7677d846bc48742d4b7a2b44ef504093bfba70486b887b3f5bf0bd1d933f744",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/more.fs",
+          "sha256": "29f740bf20f9662b72edde957f54a817e1d7a90d82ad2b0ce2b24aa2b417640b",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/objects.fs",
+          "sha256": "61856917b6abc5fa9e365db3d61ff4edd1e87aecb30118a0e4907a09a379683d",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/objexamp.fs",
+          "sha256": "3b040c11fd302512c340d7933217cff019334bcba64f13bf7e0f2740d71ab27c",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/oldlib.fs",
+          "sha256": "1fc1c9521e45b33293e362fc1566ed887ef4e5f2d093a75ceec6dc6bf4af0d64",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/onebench.fs",
+          "sha256": "a6046fe9bd1c08afe8dbddf9c1e6797dc37f12eaf0050a1e258211f28ac87e67",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/oof.fs",
+          "sha256": "cd6463ce2348c2331221b6b8029222da62e558b35573a968f68ecdf5598121d4",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/oofsampl.fs",
+          "sha256": "20549f41c632803d0117150b4a11492f01936de161e4309c6617886adc608b7e",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/other.fs",
+          "sha256": "c13eedb020e46e3dd3c1b176f9954f4712ead3d7ae8d4a658edace6f1fa87b12",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/prim",
+          "sha256": "ed91b31284f2a2af1b9bb9f6c957642830b0795e0704959eee9af96ca3fe21a1",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/prims2x.fs",
+          "sha256": "c1dc60bcbd4585db0590b564f480fd72baaced5d12598cdb48b6c67b922ea3e4",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/prims2x0.6.2.fs",
+          "sha256": "468fcaab49637504f27c2ba0faae45e0bd6d1c8c338b76c7c253da77899de4b0",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/proxy.fs",
+          "sha256": "8d89cedf15a4067dca958413889ff003ffee701dba4f3f7ea3580a479757b726",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/quotes.fs",
+          "sha256": "1fe265205be44ae0212de6c5d8a34177781185212149941aee85b5f961e25ba1",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/random.fs",
+          "sha256": "6ce7cbd789f0812f476e3606653e9da383b1a64da9015621203d0426455ffd55",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/recover-endtry.fs",
+          "sha256": "70a429d048d434f6bbf2478b357b5aa44e262dadc7334884c8b6702490277178",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/regexp.fs",
+          "sha256": "034c04c5ceab3687f8c3c9eebbe255e3aef33bdb932af21d0af14d9b8f85df82",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/savesys.fs",
+          "sha256": "7bbb1e3279c0a17358fb200c0987119b83b97d1f48271b80b3cba64fedcd3ded",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/search.fs",
+          "sha256": "a3b9e0a50b701399e5327a39b8c26d0832ecde07f8ceb1e0cbe5454d0b8ab51c",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/see-ext.fs",
+          "sha256": "c671c75ff6246c7f7b50faeb5298c49c9b2e1c469429d12b0f13e13943a5030e",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/see.fs",
+          "sha256": "82dedc6778085acd36d93c47ea3e6fd84270afd1c966d0b30d86a6a5821df8e4",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/siev.fs",
+          "sha256": "65befcb2704a2d90648333db3ccf6391e7c1ee910239a26d0c30e282f28d9123",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/sieve.fs",
+          "sha256": "9a5ff032da28deffa89d40231dff31c85f00dae9c72897c7d404c513bb1ccbb3",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/simp-see.fs",
+          "sha256": "896f0ce13b555ad565f4a78aace4990099b426d3f7198f4ad0a0b367902a295d",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/sokoban.fs",
+          "sha256": "77faebba817e15efe283af55578bbd372ba4cbf07fdc5f564e13e65df60a0460",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/source.fs",
+          "sha256": "20d92368d4a2395261fead0d94c0a3f0afb6cfde9466107bbb24084fbdfa653f",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/startup.fs",
+          "sha256": "e1e0127c4516b8da574f013c75772d7d1fe58eaf67eae573d676c12c8be796d1",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/string.fs",
+          "sha256": "f85b2aefa44f31c1272b2b009bb059564304c69c870e39583b9a46d1f4ce00a4",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/struct.fs",
+          "sha256": "c639bd50b02a08665b58a65539f287ea891ff127a0398aa14483ff443b29b726",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/struct0x.fs",
+          "sha256": "4dc2b1ebb988cdb7431bc3063131077a45225fe4fbafbbed59b2dfb8c5ba22cf",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/stuff.fs",
+          "sha256": "dee8a2f12f9905a9600f1903a2168508c9b2e15fd7b7b219fdf9f42eb374a1b0",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/table.fs",
+          "sha256": "10fa0fa25f7bc855e87faf738b46dc70ca32999776535d0e50bb073f84d771e0",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/tags.fs",
+          "sha256": "08b6ecda4fbe8853b9b9f4e07fe9f24b6743e3166e8ca3cfd11f4748b5fc0893",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/tasker.fs",
+          "sha256": "efd3ed082107d974ed2c0d93a8f587f818f0f0b28413973dbaa131c9f7fcc41f",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/termsize.fs",
+          "sha256": "a583599bdbaeb57c6376656662c43fac38dda261145bed971493854a00c2be5f",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/checkans.fs",
+          "sha256": "153a207e6067aa0310a2e8179c4e0d9f6baea115874b30f79a60ea1214589d99",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/coreext.fs",
+          "sha256": "730050d596085bc9da353150148c8f58eb52fb5c0a22147211532e6658f29d97",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/coremore.fs",
+          "sha256": "e3dc4893cb3d859f58f5687cc4774d11dfa9b7f21d5524eaa894cea52874b476",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/coretest.fs",
+          "sha256": "4698d6c0f3ff9bb8b0fae171acdc5bdaf1900ae2f71210d2ae0a002fe2b213d2",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/dbltest.fs",
+          "sha256": "526db5f152064a1cfffc41bc71fc75df256dbfc6cd03e6e6ceea41c274de4313",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/deferred.fs",
+          "sha256": "2203fda4fa251a658e3e6c7db8cb5c6f4c1917e65d40fe6c2fb425f870bf8535",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/float.fs",
+          "sha256": "fa2b16ec7083bf5532b5534de10d3d193e46343ad0f1fe4df1da3aabb645be59",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/gforth-nofast.fs",
+          "sha256": "3a20870cba16376f27c2385703db64633c2376d951db286e48850a5b7c0b6c14",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/gforth.fs",
+          "sha256": "8635da09a103a65485b53b5aa14d348005d72a6489ae07bc051d8259b3ba9b86",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/libcc.fs",
+          "sha256": "e5b741b100abe8b7e97961d9b4730439557479e1cc8742c00f8274558afdc87d",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/other.fs",
+          "sha256": "6a44b401e10436a00832e6c7a93cfe3a129a22f494acca339781b6e311a37b50",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/postpone.fs",
+          "sha256": "bf697aef82391ca006e47f82f012a5915636d2157b066c473157552b36cf48e6",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/primtest.fs",
+          "sha256": "f7e0a36ac744327c7056c8babef212d5a36540d78396fdf68ba62f318dcd5af7",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/search.fs",
+          "sha256": "80c25c4079e92b203edaa2a1325095beda50cb6e80ac28e144bfb4fde9b7fda7",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/signals.fs",
+          "sha256": "11ec9e2f5b9fa7bd96417f698062554eb10b79c547bffb064f30c633d19b5b14",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/string.fs",
+          "sha256": "12b21c18ea7f70f2165b72e56f5388bbdf17e577d87883f2eb24e52d90368634",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/tester.fs",
+          "sha256": "3462d407de39645b79123a8d1976f597eaebf4bfc8d3f967b2baee73eca27b96",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/test/ttester.fs",
+          "sha256": "62c153ed48e011531392b360e140e627bc0fe7472b5b2e8e2f4674e2de6137ed",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/tt.fs",
+          "sha256": "b6c588cc13f4344fdfe018af40302b2e63a6d2c4b13e2b783ceeb53ef43a4874",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/unbuffer.fs",
+          "sha256": "3beef5beb543907acd2894654066a6382ed37e0bcf5b14bfd98b4e4749fc4496",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/unix/socket.fs",
+          "sha256": "6b655750a8aa4c2993fbceeb7501883a656cc6de761ffaa53449c0c8c01c28fa",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/utf-8.fs",
+          "sha256": "81fd246cb4a8c2e293fc791a4b56822af1e5bcf26c0ce7bf2dea527ae7604e1b",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/vt100.fs",
+          "sha256": "6820f0eb0d5fb56da06850015d29f394777ebf1a76924951af0d52004df54305",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/vt100key.fs",
+          "sha256": "3efac73a44cd80f1c0466366d3aae0257a71013a634a228dfb8def9b3ea024e4",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/wordinfo.fs",
+          "sha256": "82f97341ac0fc214421a8a7bc5a4f53dfedc199d903bc5ee8abcc289fc1ec975",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/wordsets.fs",
+          "sha256": "ba9c71ba6d7a725957846b93f1aa00e938002fd8a1d60dc54146ef7daee7bca8",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/0.7.3/xwords.fs",
+          "sha256": "cefad5ced60069620640b2f999110d0d5e9794e3174ecfc00ed2b0f4f52d1b2c",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/gforth/site-forth/siteinit.fs",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/lintian/overrides/gforth-common",
+          "sha256": "95654d7e79d743e4944099cb243ee3a7c0630b92d997c5e7dc4f9718061b824a",
+          "matchesExtracted": true
+        }
+      ]
+    },
+    {
+      "package": "gforth-lib_0.7.3+dfsg-9build4.1_amd64.deb",
+      "sha256": "bceffd9e225cc62acfc7ac32d3e20adfc08494c229b4ae04daa9c9ebc55467cd",
+      "regularFiles": [
+        {
+          "path": "usr/lib/x86_64-linux-gnu/gforth/0.7.3/gforth-ditc",
+          "sha256": "bed1607f512d527f6e074511dc608dd5c5a2e21cd48c2f3256928cd48bdb49f1",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/lib/x86_64-linux-gnu/gforth/0.7.3/gforth.fi",
+          "sha256": "0c3e5918da880ccfd0ac5b6f4b111dc98b524ada9e73253f254f8a78a2d3ea5b",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/lib/x86_64-linux-gnu/gforth/0.7.3/libcc-named/cstr.a",
+          "sha256": "a980aaf449fd5c745196f3526f18d9cce2050891a82d5d8859a25e05a527104c",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/lib/x86_64-linux-gnu/gforth/0.7.3/libcc-named/cstr.so.0.0.0",
+          "sha256": "01c385a2e0bafd901d4314d2f4ee61d64a19c9196d5c248ab38cb2c047ac51b0",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/lib/x86_64-linux-gnu/gforth/0.7.3/libcc-named/libffi.a",
+          "sha256": "0380ae5a7af3db2e25d92fe5d6f36cec0e7412781e93fa3a175bac5e7d010e34",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/lib/x86_64-linux-gnu/gforth/0.7.3/libcc-named/libffi.so.0.0.0",
+          "sha256": "4716ca3bdb4633a06272493babca93dc363e08787f4cf8acfb212c870a1ecc59",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/lib/x86_64-linux-gnu/gforth/0.7.3/libcc-named/socket.a",
+          "sha256": "7eaac24ba7438d5381e8a720e7cbbdbf8a6b0c5970c8c8864ae7ad061a9a5390",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/lib/x86_64-linux-gnu/gforth/0.7.3/libcc-named/socket.so.0.0.0",
+          "sha256": "0c864579dfe67590c0c03ef671f0f4eed93354e8150013f8b9717cf5faf3169b",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/doc/gforth-lib/NEWS.gz",
+          "sha256": "924240cba0641011d173e2463e6a7ba09b433a5007ea75587a9623834d500522",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/doc/gforth-lib/changelog.Debian.gz",
+          "sha256": "4e90998522c0cf336e703da40d9f713345d543fb358e7167419c606268cf34ca",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/doc/gforth-lib/copyright",
+          "sha256": "237c40f980e5da2f8cacafb9b43c2be76427c0ab1c9adb06491db8b141905c60",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/lintian/overrides/gforth-lib",
+          "sha256": "f809c7c443bca7bb86b7f465e89ef7c4ee5c5692939b351aa5d52e22bb036dc0",
+          "matchesExtracted": true
+        }
+      ]
+    },
+    {
+      "package": "gforth_0.7.3+dfsg-9build4.1_amd64.deb",
+      "sha256": "3cf30523adaf1adc98bfb98ffc7b90a6b0ec80ceec2e0636a7e8f1cbbb5cd7ee",
+      "regularFiles": [
+        {
+          "path": "etc/emacs/site-start.d/50gforth.el",
+          "sha256": "2c28409f50bd2f53635f24e9adfe99849a1bd119a4a1353455225841596cf09d",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/bin/gforth-0.7.3",
+          "sha256": "bebb2687fa78cb7a072eb1b6a961e6bf6ebd2bcc66616ce4586907f639bc17f2",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/bin/gforth-fast-0.7.3",
+          "sha256": "2db2f5a6bff97caa318cf60f6b78e7e85fa96484cc16ab8f716e7aef67cdff93",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/bin/gforth-itc-0.7.3",
+          "sha256": "23fde8ab1d5cc9e8e2fe14d2d4cc514f2ac05132dea62ac3afafaa0e3c8772f0",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/bin/gforthmi-0.7.3",
+          "sha256": "095d3169a81d110a3f20db2388ea84fbd01b01159527a8759dd2b4b03b9071ba",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/bin/vmgen-0.7.3",
+          "sha256": "cfd65e8e18440583c3bd40691386073077b83f2f807ea540e4e88340117d6fcb",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/include/gforth/0.7.3/config.h",
+          "sha256": "3fcd26fa075ffc68280f626aec5d31e48d63bd515f608d216ebcb7679a4b62d8",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/include/gforth/0.7.3/libcc.h",
+          "sha256": "ef48e747cf9fb1e338493138ac58b834b003495826c3a25586c23431b1373990",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/lib/emacsen-common/packages/compat/gforth",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/lib/emacsen-common/packages/install/gforth",
+          "sha256": "3762619b99398381eeebf9efdcbeef2831bd3166754e34834122386b25a0c2d6",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/lib/emacsen-common/packages/remove/gforth",
+          "sha256": "0a19428ef403d1931b23cf466e1a27eaf20f0b7c49ce54a519662d7cfc5a8b5c",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/lib/gforth/site-forth/site-init.fs",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/doc/gforth/copyright",
+          "sha256": "237c40f980e5da2f8cacafb9b43c2be76427c0ab1c9adb06491db8b141905c60",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/emacs/site-lisp/gforth/gforth.el",
+          "sha256": "b826de92fe43b3c68aa8ae998d5a47d8e43d8b14caf28b2916b593c7c050ce26",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/man/man1/gforth.1.gz",
+          "sha256": "0571243c4a00cf073b315849f6810ea50cca15d4570efe67678484b56168c644",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/man/man1/vmgen.1.gz",
+          "sha256": "3b1700d81f8d72b3fbf864a61bee374f214cd8e610de571927139f436f9c8933",
+          "matchesExtracted": true
+        }
+      ]
+    },
+    {
+      "package": "libltdl7_2.5.4-9_amd64.deb",
+      "sha256": "c0279172b218093c674151044326457f6cb3e2ce0b1241380e3897e65677283e",
+      "regularFiles": [
+        {
+          "path": "usr/lib/x86_64-linux-gnu/libltdl.so.7.3.3",
+          "sha256": "38cb2e4cc0047e5228cb8727c9c8b6e9265424bc71b20d64dd898a14f4e31176",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/doc/libltdl7/NEWS.gz",
+          "sha256": "3f0036161796078478d9c3c28f559f210e5ca4f25bcf299bc7f17ee5c0384d00",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/doc/libltdl7/README",
+          "sha256": "26e2d89c51590f945f7b4c7ce1223568892ef654751ddb347d512370b725240d",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/doc/libltdl7/changelog.Debian.gz",
+          "sha256": "5470e7f87c3d5c2932fea9c532dc59db27391b3a9493ad981a2d43d66eb16dce",
+          "matchesExtracted": true
+        },
+        {
+          "path": "usr/share/doc/libltdl7/copyright",
+          "sha256": "89186d1b870fc70e23f3cac2ccfa657c1697a53c1386e85dbaaa2042d4b76048",
+          "matchesExtracted": true
+        }
+      ]
+    }
+  ],
+  "filesChecked": 243,
+  "mismatches": []
+}

@@ -1,0 +1,85 @@
+{
+  "tool": "Codex in-app browser via cua_repl",
+  "url": "http://127.0.0.1:8771/web/",
+  "date": "2026-09-18",
+  "checks": [
+    {
+      "case": "default UTF8 output",
+      "output": "Hello, Forth! 世界\n144 "
+    },
+    {
+      "case": "retained square definition",
+      "stack": [
+        49
+      ]
+    },
+    {
+      "case": "first compiler fragment",
+      "mode": "等待定义结束"
+    },
+    {
+      "case": "second compiler fragment",
+      "stack": [
+        49,
+        15
+      ]
+    },
+    {
+      "case": "unknown word preserves session",
+      "errorCode": -13,
+      "stack": [
+        49,
+        15
+      ]
+    },
+    {
+      "case": "after-error execution",
+      "stack": [
+        49,
+        15,
+        6
+      ]
+    },
+    {
+      "case": "fuel bound",
+      "errorCode": -256
+    },
+    {
+      "case": "stop heavy byte loop",
+      "status": "已停止；再次运行会创建新会话。"
+    },
+    {
+      "case": "fresh worker after stop",
+      "output": "42 "
+    },
+    {
+      "case": "mobile layout",
+      "viewportWidth": 390,
+      "documentScrollWidth": 375
+    },
+    {
+      "case": "actual download bytes",
+      "bytes": 25,
+      "sha256": "4dd2d009131838b5eee8982d41776a70580a5a55ff441b7893628cb2d0ca1342"
+    },
+    {
+      "case": "reset button",
+      "output": "会话已准备好。",
+      "status": "就绪 · 可运行程序或发送片段",
+      "downloadDisabled": true
+    }
+  ],
+  "consoleWarningsAndErrors": [],
+  "notes": "Observed real browser interactions; desktop and 390px screenshots visually reviewed. Timing numbers are not performance parity evidence.",
+  "finalBuildReloadSmoke": {
+    "output": "Hello, Forth! 世界\n144 ",
+    "engineSHA256": "192ab209383dd32a0cbe3be7f29bda5dc1bb56cbd56994bbaa3f98e77b0e00a5",
+    "notes": "Default program rerun after the final counted-string capacity correction; main UI checks preceded that correction."
+  },
+  "documentationLinkHTTPStatus": 200,
+  "cleanup": {
+    "tabClosed": true,
+    "viewportReset": true,
+    "serverStopped": true
+  }
+}

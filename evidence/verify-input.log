@@ -1,0 +1,13 @@
+Finished. moon: ran 2 tasks, now up to date
+Finished. moon: ran 2 tasks, now up to date
+Finished. moon: ran 3 tasks, now up to date
+Total tests: 92, passed: 92, failed: 0.
+Total tests: 92, passed: 92, failed: 0.
+Finished. moon: ran 5 tasks, now up to date
+144 99
+forth: standalone engine passed
+forth: CLI input/file/stdin/error/exit-status checks passed
+{"reference":"gforth 0.7.3","offlineReplay":128,"failed":0}
+{"passed":9,"measured":{"requests":1000,"elapsedMs":82.10159999999996,"runtime":"v24.11.0","cpu":"Intel(R) Core(TM) i7-14700HX","scope":"One local Worker session, request serialization and validation included; no upstream throughput or exact memory claim"}}
+forth: 307 bounded inputs, no uncaught runtime failure
+{"project":"forth","utc":"2026-09-17T17:52:33.609Z","runtime":"v24.11.0","platform":"win32","cpu":"Intel(R) Core(TM) i7-14700HX","input_utf8_bytes":54,"samples":30,"warmup":5,"median_ms":0.10370000000000346,"p95_ms":0.22229999999999706,"max_ms":0.2272000000000034,"scope":"JS warm execution of documented example; no cross-project or upstream performance claim"}

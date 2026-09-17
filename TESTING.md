@@ -1,19 +1,51 @@
-# Validation contract
+# Validation contract · 0.19.0
 
-- Explicit Wasm-GC and JS targets: no inference from the toolchain default.
-- Public API tests plus compiled browser engine, CLI stdin/file/argument and failure exit-code checks.
-- 307 seeded bounded malformed inputs including UTF-16 surrogates. The worker has a 20-second limit.
-- Local code coverage: `moon coverage analyze -p localreview/forth -- -f summary`. No coverage upload is configured. Coverage is evidence about current code, not upstream feature coverage.
-- Benchmark: 5 warmups and 30 measured documented-example executions; median and p95 recorded locally.
-- Generated API and browser artifact must match the same source revision.
+All evidence is local. Remote CI is configured but has not run. Older evidence files retain their original dates and scope.
 
-CI files are prepared locally; remote CI has not run because this repository has not been uploaded. Compatibility beyond README scope remains unverified.
+## Reproduce the local suite
 
+~~~powershell
+./verify.ps1 -MoonPath /absolute/path/to/moon.exe
+~~~
 
-## Gforth 实机对照（2026-09-10）
+This runs fmt/info/check, explicit Wasm-GC and JS tests, the example, a real JS build, shipped-engine refresh, legacy demo/CLI checks, official input replay, persistent Worker/CLI tests, bounded malformed inputs and the local example benchmark.
 
-新增可独立运行的 `node tools/test-gforth.mjs`，默认调用 PATH 中的 gforth；也可用 `GFORTH_COMMAND_JSON` 指定命令及参数数组，通过 WSL 调用时设置 `GFORTH_WSL=1`。测试脚本直接调用本仓库浏览器引擎，并与独立 Gforth 进程运行相同程序后的数据栈逐项比较。每个进程超时 15 秒，临时输入文件完成后清理；任一差异退出码为 1。
+On this machine: Moon 0.1.20260904, moonc 0.10.12, Node 24.11.0, Windows, i7-14700HX. Both backends passed 92 test groups. The generated oracle group contains 128 programs; these are not 128 additional test groups. Full output is evidence/verify-input.log.
 
-本次使用 Ubuntu 软件源的 Gforth 0.7.3，26/26 个原创代表性程序结果一致，覆盖算术、词绑定、BEGIN/DO/+LOOP/LEAVE、返回栈、EXIT/UNLOOP、递归、令牌、匿名定义、CREATE…DOES>、>BODY、LITERAL、IMMEDIATE、COMPILE,、POSTPONE 和 STATE。逐例结果和引擎/用例 SHA256 见 `evidence/gforth-comparison.json`；参考软件包指纹见 `evidence/gforth-reference-packages.json`。
+## Independent reference
 
-这是共享整数行为的实机对照，不验证完整词集、原始地址相等、32/64 位边界、性能或所有异常语义。没有运行其他套件或重新打包。参考二进制仅存于工作区外部测试目录，不随项目分发；历史开发记录中的“未作 Gforth 对照”描述的是各自当时的检查范围。
+`node tools/compare-input.mjs` launches unmodified Gforth 0.7.3 for each project-authored input. Default command is `gforth`; `GFORTH_COMMAND_JSON` can specify an executable/argument array. For Windows paths passed through WSL, set `GFORTH_WSL=1`.
+
+~~~powershell
+$env:GFORTH_COMMAND_JSON='["wsl","--exec","bash","/path/to/your/run-gforth.sh"]'
+$env:GFORTH_WSL='1'
+node tools/compare-input.mjs
+~~~
+
+The wrapper should select your extracted executable, library path and Gforth data search path. No external reference binary is bundled or installed by this repository. Each reference process has a 15-second timeout.
+
+The harness reads the entire authored file and calls EVALUATE to match this library's string-source semantics. For successful programs, it compares every stack integer and exact output byte; for uncaught failures, only error codes are comparable. Partial stack/output after failure, raw addresses and 32/64-bit cell boundaries are excluded. A CATCH/ABORT" case discards a stack cell whose overwritten contents are unspecified. All 128 cases passed, with complete reference/local output in evidence/input-comparison.json. That capture records the engine at capture time; subsequent final engine parity is established by offline replay and generated dual-backend vectors.
+
+The four reference archives were rehashed and all 243 regular extracted files matched their archive members, with no mismatch: evidence/reference-integrity.json. These are local integrity checks; original acquisition source/fingerprints are in evidence/gforth-reference-packages.json. WSL emits a localhost proxy warning; captured stderr is preserved without treating it as a test failure.
+
+~~~sh
+python tools/generate-input-golden.py
+moon fmt
+node tools/replay-input.mjs
+~~~
+
+The generator reads only official `reference` fields, not the local `actual` fields. The replay checks current engine results and case-file SHA256 against that capture. The historical 26-program comparison remains evidence/gforth-comparison.json and is not added to the 128 as new cases. Full upstream suites have not run.
+
+## Host and browser
+
+`node tools/test-session.mjs` passed 9 groups: persistent state/compiler/recovery, exact output bytes, budget/concurrency/timeout, AbortSignal cancellation, strict bridge/handle limits, actual multi-file CLI, line/JSONL protocol, malformed UTF-8/size/arguments and 1000 real Worker exchanges. Details and timing are in evidence/session-validation.json. The 512 MiB Worker setting is an old-generation limit, not a measured RSS ceiling.
+
+Actual browser interactions verified retained words, pending/completed multi-buffer compilation, error recovery, fuel exhaustion, stop/restart, raw-byte download and 390px layout. Console warning/error capture was empty. evidence/browser-session.json records observations; evidence/browser-downloads/forth-output.bin is the downloaded file and was checked byte-for-byte.
+
+307 seeded malformed inputs passed through the existing bounded runner; this is robustness evidence for its corpus, not exhaustive validation of the new protocol. Existing coverage snapshots were not refreshed and must not be presented as current coverage.
+
+## Performance and final integrity
+
+The documented 54-byte JS example uses 5 warmups and 30 measured runs. A separate 1000-request Worker measurement includes serialization and validation. These are local sanity measurements, not equivalent Gforth workloads, peak memory measurements, or throughput parity.
+
+Final source/evidence hashes are recorded in evidence/input-upgrade.json and checked against committed Git blobs by `python tools/check-proof.py`. The final manifest itself is excluded to avoid a circular hash. Generated files are checked for idempotence and the shipped engine against the final build. No old ZIP/bundle is silently replaced.

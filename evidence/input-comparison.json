@@ -1,0 +1,3696 @@
+{
+  "reference": "gforth 0.7.3",
+  "engineSHA256": "5112c8be99c88aa3e8c4405e7feb0ade6d8b8f4c91c009c451ab3926cd3fecb2",
+  "casesSHA256": "915cc3df89e11207db05e34061562a698c368d1935197ffa0cef2686201eb154",
+  "scope": "Unmodified Gforth 0.7.3, whole-source EVALUATE harness to match input buffers. Portable values only; raw addresses and 64/32-bit boundaries excluded. On uncaught errors compare codes, not implementation-defined partial stack/output.",
+  "rows": [
+    {
+      "name": "arithmetic",
+      "source": "7 3 + 2 * 5 -",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          15
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          15
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "stack",
+      "source": "1 2 3 rot 2dup +",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          2,
+          3,
+          1,
+          4
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          2,
+          3,
+          1,
+          4
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "binding",
+      "source": ": a 3 ; : b a ; : a 9 ; b a",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          3,
+          9
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          3,
+          9
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000redefined a  "
+    },
+    {
+      "name": "same name",
+      "source": ": a 1 ; : a a 1+ ; a",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          2
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          2
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000redefined a  "
+    },
+    {
+      "name": "primitive binding",
+      "source": ": saved dup ; : dup 99 ; 2 saved dup",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          2,
+          2,
+          99
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          2,
+          2,
+          99
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000redefined dup  "
+    },
+    {
+      "name": "begin",
+      "source": ": count 0 begin 1+ dup 4 = until ; count",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          4
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          4
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000redefined count  "
+    },
+    {
+      "name": "while",
+      "source": ": count 3 begin dup 0> while 1- repeat ; count",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          0
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          0
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000redefined count  "
+    },
+    {
+      "name": "do",
+      "source": ": indices 3 0 do i loop ; indices",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          0,
+          1,
+          2
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          0,
+          1,
+          2
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "nested do",
+      "source": ": indices 2 0 do 2 0 do j i loop loop ; indices",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          1
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "plusloop",
+      "source": ": indices 5 0 do i 2 +loop ; indices",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          0,
+          2,
+          4
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          0,
+          2,
+          4
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "negative loop",
+      "source": ": indices 0 3 do i -1 +loop ; indices",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          3,
+          2,
+          1,
+          0
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "leave",
+      "source": ": indices 9 0 do i dup 2 = if leave then loop ; indices",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          0,
+          1,
+          2
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          0,
+          1,
+          2
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "return stack",
+      "source": ": f 3 >r 8 r@ r> ; f",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          8,
+          3,
+          3
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          8,
+          3,
+          3
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "pair return",
+      "source": ": f 3 4 2>r 2r@ 2r> ; f",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          3,
+          4,
+          3,
+          4
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          3,
+          4,
+          3,
+          4
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "exit",
+      "source": ": f dup 0= if drop 7 exit then 1+ ; 0 f 4 f",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          7,
+          5
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          7,
+          5
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "unloop",
+      "source": ": f 5 0 do i dup 2 = if unloop exit then loop ; f",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          0,
+          1,
+          2
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          0,
+          1,
+          2
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "recurse",
+      "source": ": f dup 2 < if drop 1 exit then dup 1- recurse * ; 5 f",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          120
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          120
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "xt",
+      "source": ": f 4 ; ' f constant old : f 8 ; old execute f",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          4,
+          8
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          4,
+          8
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000redefined f  "
+    },
+    {
+      "name": "anonymous",
+      "source": ":noname dup * ; constant square 7 square execute",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          49
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          49
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "does",
+      "source": ": con create , does> @ ; 7 con a 9 con b a b",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          7,
+          9
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          7,
+          9
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "body",
+      "source": ": con create , does> @ ; 4 con a 7 ' a >body ! a",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          7
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          7
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "literal",
+      "source": ": value [ 7 7 * 2 + ] literal ; value",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          51
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          51
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000redefined Value with value  "
+    },
+    {
+      "name": "immediate",
+      "source": ": seven 7 ; immediate : value seven literal ; value",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          7
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          7
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000redefined Value with value  "
+    },
+    {
+      "name": "compile comma",
+      "source": ": emitdup ['] dup compile, ; immediate : double emitdup + ; 6 double",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          12
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          12
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "postpone",
+      "source": ": endif postpone then ; immediate : choice if 7 else 8 endif ; 1 choice 0 choice",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          7,
+          8
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          7,
+          8
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000redefined ENDIF with endif  "
+    },
+    {
+      "name": "state",
+      "source": ": mode state @ ; immediate : compiled mode literal ; : interpreted [ mode ] literal ; compiled interpreted mode",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          -1,
+          0,
+          0
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          -1,
+          0,
+          0
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "literal string",
+      "source": "s\" Hello 世界\" type",
+      "reference": {
+        "code": 0,
+        "output": "Hello 世界",
+        "outputHex": "48656c6c6f20e4b896e7958c",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "Hello 世界",
+        "bytes": [
+          72,
+          101,
+          108,
+          108,
+          111,
+          32,
+          228,
+          184,
+          150,
+          231,
+          149,
+          140
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "compiled print",
+      "source": ": hi .\" Mixed CASE\" cr ; hi hi",
+      "reference": {
+        "code": 0,
+        "output": "Mixed CASE\nMixed CASE\n",
+        "outputHex": "4d6978656420434153450a4d6978656420434153450a",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "Mixed CASE\nMixed CASE\n",
+        "bytes": [
+          77,
+          105,
+          120,
+          101,
+          100,
+          32,
+          67,
+          65,
+          83,
+          69,
+          10,
+          77,
+          105,
+          120,
+          101,
+          100,
+          32,
+          67,
+          65,
+          83,
+          69,
+          10
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "counted string",
+      "source": ": data c\" Case\" ; data count type",
+      "reference": {
+        "code": 0,
+        "output": "Case",
+        "outputHex": "43617365",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "Case",
+        "bytes": [
+          67,
+          97,
+          115,
+          101
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "empty strings",
+      "source": "s\" \" dup . type s\" \" s\" \" compare",
+      "reference": {
+        "code": 0,
+        "output": "0 ",
+        "outputHex": "3020",
+        "stack": [
+          0
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          0
+        ],
+        "output": "0 ",
+        "bytes": [
+          48,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "char literal",
+      "source": "char Z 'A' : x [char] Q ; x",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          90,
+          65,
+          81
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          90,
+          65,
+          81
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "parse name",
+      "source": ": read parse-name type ; read MiXeD read 世界",
+      "reference": {
+        "code": 0,
+        "output": "MiXeD世界",
+        "outputHex": "4d69586544e4b896e7958c",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "MiXeD世界",
+        "bytes": [
+          77,
+          105,
+          88,
+          101,
+          68,
+          228,
+          184,
+          150,
+          231,
+          149,
+          140
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "parse delimiter",
+      "source": "124 parse abc  def| type",
+      "reference": {
+        "code": 0,
+        "output": "abc  def",
+        "outputHex": "6162632020646566",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "abc  def",
+        "bytes": [
+          97,
+          98,
+          99,
+          32,
+          32,
+          100,
+          101,
+          102
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "parse end",
+      "source": ": rest 124 parse type ; rest xyz",
+      "reference": {
+        "code": 0,
+        "output": "xyz",
+        "outputHex": "78797a",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "xyz",
+        "bytes": [
+          120,
+          121,
+          122
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "parse empty",
+      "source": "124 parse | dup . type",
+      "reference": {
+        "code": 0,
+        "output": "0 ",
+        "outputHex": "3020",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "0 ",
+        "bytes": [
+          48,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "input cursor",
+      "source": ": peek source drop >in @ + c@ ; peek 7",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          55,
+          7
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          55,
+          7
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "skip input",
+      "source": "source nip >in ! bad-ignored",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "source length",
+      "source": "source nip",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          10
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          10
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "source id",
+      "source": "source-id",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          -1
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          -1
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "evaluate",
+      "source": "s\" 3 4 +\" evaluate 9",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          7,
+          9
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          7,
+          9
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "nested eval",
+      "source": ": input s\" 7 9 +\" ; : second s\" input evaluate\" ; second evaluate",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          16
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          16
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "evaluate define",
+      "source": "s\" : x 7 ; x\" evaluate x",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          7,
+          7
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          7,
+          7
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "parse immediate",
+      "source": ": size parse-name nip postpone literal ; immediate : x size MiXeD ; x",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          5
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          5
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "unbalanced compile data stack rejected",
+      "source": ": text s\" 4 5 +\" ; immediate : x text evaluate ; x",
+      "reference": {
+        "code": -2,
+        "output": "",
+        "outputHex": "",
+        "stack": null
+      },
+      "actual": {
+        "ok": false,
+        "error": "Thrown(-2)",
+        "code": -2,
+        "stack": [
+          1048576,
+          5
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "base compile",
+      "source": "hex : x 10 ff ; decimal x",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          16,
+          255
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          16,
+          255
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "explicit prefixes",
+      "source": "$FF %1010 #12",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          255,
+          10,
+          12
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          255,
+          10,
+          12
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "base setter",
+      "source": "16 base ! ab decimal",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          171
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          171
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "number output",
+      "source": "hex 123 . 255 u. decimal -7 4 .r 255 4 u.r",
+      "reference": {
+        "code": 0,
+        "output": "123 255   -7 255",
+        "outputHex": "313233203235352020202d3720323535",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "123 255   -7 255",
+        "bytes": [
+          49,
+          50,
+          51,
+          32,
+          50,
+          53,
+          53,
+          32,
+          32,
+          32,
+          45,
+          55,
+          32,
+          50,
+          53,
+          53
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "trim",
+      "source": "s\" abc   \" -trailing type",
+      "reference": {
+        "code": 0,
+        "output": "abc",
+        "outputHex": "616263",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "abc",
+        "bytes": [
+          97,
+          98,
+          99
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "slice",
+      "source": "s\" abcdef\" 3 /string type",
+      "reference": {
+        "code": 0,
+        "output": "def",
+        "outputHex": "646566",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "def",
+        "bytes": [
+          100,
+          101,
+          102
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "compare",
+      "source": "s\" abc\" s\" abd\" compare s\" x\" s\" x\" compare",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          -1,
+          0
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          -1,
+          0
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "search",
+      "source": "s\" abcdef\" s\" cd\" search . type",
+      "reference": {
+        "code": 0,
+        "output": "-1 cdef",
+        "outputHex": "2d312063646566",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "-1 cdef",
+        "bytes": [
+          45,
+          49,
+          32,
+          99,
+          100,
+          101,
+          102
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "not found",
+      "source": "s\" abc\" s\" z\" search . type",
+      "reference": {
+        "code": 0,
+        "output": "0 abc",
+        "outputHex": "3020616263",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "0 abc",
+        "bytes": [
+          48,
+          32,
+          97,
+          98,
+          99
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "word",
+      "source": ": item 32 word count type ; item Hello item World",
+      "reference": {
+        "code": 0,
+        "output": "HelloWorld",
+        "outputHex": "48656c6c6f576f726c64",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "HelloWorld",
+        "bytes": [
+          72,
+          101,
+          108,
+          108,
+          111,
+          87,
+          111,
+          114,
+          108,
+          100
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "two cell",
+      "source": "create x 2 cells allot 12 34 x 2! x 2@",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          12,
+          34
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          12,
+          34
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "extra stack",
+      "source": "1 2 3 4 2over 1 pick 2 roll",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          1,
+          2,
+          3,
+          4,
+          2,
+          1,
+          1
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          1,
+          2,
+          3,
+          4,
+          2,
+          1,
+          1
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "catch success",
+      "source": ": x 7 ; 1 ' x catch",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          1,
+          7,
+          0
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          1,
+          7,
+          0
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "catch throw",
+      "source": ": x 9 -77 throw ; 5 ' x catch",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          5,
+          -77
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          5,
+          -77
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "nested catch",
+      "source": ": x -77 throw ; : y ['] x catch -88 throw ; 4 ' y catch",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          4,
+          -88
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          4,
+          -88
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "throw zero",
+      "source": "1 0 throw 2",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          1,
+          2
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          1,
+          2
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "catch divide",
+      "source": ": x 1 0 / ; ' x catch",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          -10
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          -10
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "catch unknown",
+      "source": ": x s\" missing\" evaluate ; ' x catch",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          -13
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          -13
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "catch return",
+      "source": ": x 3 >r -88 throw r> ; 4 ' x catch 5",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          4,
+          -88,
+          5
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          4,
+          -88,
+          5
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "catch loop",
+      "source": ": x 9 0 do i 3 = if -99 throw then loop ; 4 ' x catch",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          4,
+          -99
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          4,
+          -99
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "catch eval",
+      "source": ": x s\" -12 throw\" evaluate ; ' x catch 6",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          -12,
+          6
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          -12,
+          6
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "undefined",
+      "source": "missing",
+      "reference": {
+        "code": -13,
+        "output": "",
+        "outputHex": "",
+        "stack": null
+      },
+      "actual": {
+        "ok": false,
+        "error": "Invalid(\"unknown word: missing\")",
+        "code": -13,
+        "stack": [],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "division",
+      "source": "1 0 /",
+      "reference": {
+        "code": -10,
+        "output": "",
+        "outputHex": "",
+        "stack": null
+      },
+      "actual": {
+        "ok": false,
+        "error": "Invalid(\"invalid division\")",
+        "code": -10,
+        "stack": [],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "underflow",
+      "source": "drop",
+      "reference": {
+        "code": -4,
+        "output": "",
+        "outputHex": "",
+        "stack": null
+      },
+      "actual": {
+        "ok": false,
+        "error": "Invalid(\"stack underflow\")",
+        "code": -4,
+        "stack": [],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "string length 0",
+      "source": "s\" \" dup . type",
+      "reference": {
+        "code": 0,
+        "output": "0 ",
+        "outputHex": "3020",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "0 ",
+        "bytes": [
+          48,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "string length 1",
+      "source": "s\" Z\" dup . type",
+      "reference": {
+        "code": 0,
+        "output": "1 Z",
+        "outputHex": "31205a",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "1 Z",
+        "bytes": [
+          49,
+          32,
+          90
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "string length 2",
+      "source": "s\" Ab\" dup . type",
+      "reference": {
+        "code": 0,
+        "output": "2 Ab",
+        "outputHex": "32204162",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "2 Ab",
+        "bytes": [
+          50,
+          32,
+          65,
+          98
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "string length 7",
+      "source": "s\" AbAbAbZ\" dup . type",
+      "reference": {
+        "code": 0,
+        "output": "7 AbAbAbZ",
+        "outputHex": "37204162416241625a",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "7 AbAbAbZ",
+        "bytes": [
+          55,
+          32,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          90
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "string length 31",
+      "source": "s\" AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbZ\" dup . type",
+      "reference": {
+        "code": 0,
+        "output": "31 AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbZ",
+        "outputHex": "3331204162416241624162416241624162416241624162416241624162416241625a",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "31 AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbZ",
+        "bytes": [
+          51,
+          49,
+          32,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          90
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "string length 127",
+      "source": "s\" AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbZ\" dup . type",
+      "reference": {
+        "code": 0,
+        "output": "127 AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbZ",
+        "outputHex": "313237204162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241625a",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "127 AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbZ",
+        "bytes": [
+          49,
+          50,
+          55,
+          32,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          90
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "string length 255",
+      "source": "s\" AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbZ\" dup . type",
+      "reference": {
+        "code": 0,
+        "output": "255 AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbZ",
+        "outputHex": "3235352041624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241624162416241625a",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "255 AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbZ",
+        "bytes": [
+          50,
+          53,
+          53,
+          32,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          65,
+          98,
+          90
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 2/0",
+      "source": "0 2 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "0 ",
+        "outputHex": "3020",
+        "stack": [
+          0
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          0
+        ],
+        "output": "0 ",
+        "bytes": [
+          48,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 2/1",
+      "source": "1 2 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "1 ",
+        "outputHex": "3120",
+        "stack": [
+          1
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          1
+        ],
+        "output": "1 ",
+        "bytes": [
+          49,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 2/15",
+      "source": "15 2 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "1111 ",
+        "outputHex": "3131313120",
+        "stack": [
+          15
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          15
+        ],
+        "output": "1111 ",
+        "bytes": [
+          49,
+          49,
+          49,
+          49,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 2/255",
+      "source": "255 2 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "11111111 ",
+        "outputHex": "313131313131313120",
+        "stack": [
+          255
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          255
+        ],
+        "output": "11111111 ",
+        "bytes": [
+          49,
+          49,
+          49,
+          49,
+          49,
+          49,
+          49,
+          49,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 2/12345",
+      "source": "12345 2 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "11000000111001 ",
+        "outputHex": "313130303030303031313130303120",
+        "stack": [
+          12345
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          12345
+        ],
+        "output": "11000000111001 ",
+        "bytes": [
+          49,
+          49,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          49,
+          49,
+          49,
+          48,
+          48,
+          49,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 3/0",
+      "source": "0 3 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "0 ",
+        "outputHex": "3020",
+        "stack": [
+          0
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          0
+        ],
+        "output": "0 ",
+        "bytes": [
+          48,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 3/1",
+      "source": "1 3 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "1 ",
+        "outputHex": "3120",
+        "stack": [
+          1
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          1
+        ],
+        "output": "1 ",
+        "bytes": [
+          49,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 3/15",
+      "source": "15 3 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "120 ",
+        "outputHex": "31323020",
+        "stack": [
+          15
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          15
+        ],
+        "output": "120 ",
+        "bytes": [
+          49,
+          50,
+          48,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 3/255",
+      "source": "255 3 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "100110 ",
+        "outputHex": "31303031313020",
+        "stack": [
+          255
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          255
+        ],
+        "output": "100110 ",
+        "bytes": [
+          49,
+          48,
+          48,
+          49,
+          49,
+          48,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 3/12345",
+      "source": "12345 3 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "121221020 ",
+        "outputHex": "31323132323130323020",
+        "stack": [
+          12345
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          12345
+        ],
+        "output": "121221020 ",
+        "bytes": [
+          49,
+          50,
+          49,
+          50,
+          50,
+          49,
+          48,
+          50,
+          48,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 8/0",
+      "source": "0 8 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "0 ",
+        "outputHex": "3020",
+        "stack": [
+          0
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          0
+        ],
+        "output": "0 ",
+        "bytes": [
+          48,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 8/1",
+      "source": "1 8 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "1 ",
+        "outputHex": "3120",
+        "stack": [
+          1
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          1
+        ],
+        "output": "1 ",
+        "bytes": [
+          49,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 8/15",
+      "source": "15 8 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "17 ",
+        "outputHex": "313720",
+        "stack": [
+          15
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          15
+        ],
+        "output": "17 ",
+        "bytes": [
+          49,
+          55,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 8/255",
+      "source": "255 8 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "377 ",
+        "outputHex": "33373720",
+        "stack": [
+          255
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          255
+        ],
+        "output": "377 ",
+        "bytes": [
+          51,
+          55,
+          55,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 8/12345",
+      "source": "12345 8 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "30071 ",
+        "outputHex": "333030373120",
+        "stack": [
+          12345
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          12345
+        ],
+        "output": "30071 ",
+        "bytes": [
+          51,
+          48,
+          48,
+          55,
+          49,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 10/0",
+      "source": "0 10 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "0 ",
+        "outputHex": "3020",
+        "stack": [
+          0
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          0
+        ],
+        "output": "0 ",
+        "bytes": [
+          48,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 10/1",
+      "source": "1 10 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "1 ",
+        "outputHex": "3120",
+        "stack": [
+          1
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          1
+        ],
+        "output": "1 ",
+        "bytes": [
+          49,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 10/15",
+      "source": "15 10 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "15 ",
+        "outputHex": "313520",
+        "stack": [
+          15
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          15
+        ],
+        "output": "15 ",
+        "bytes": [
+          49,
+          53,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 10/255",
+      "source": "255 10 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "255 ",
+        "outputHex": "32353520",
+        "stack": [
+          255
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          255
+        ],
+        "output": "255 ",
+        "bytes": [
+          50,
+          53,
+          53,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 10/12345",
+      "source": "12345 10 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "12345 ",
+        "outputHex": "313233343520",
+        "stack": [
+          12345
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          12345
+        ],
+        "output": "12345 ",
+        "bytes": [
+          49,
+          50,
+          51,
+          52,
+          53,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 16/0",
+      "source": "0 16 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "0 ",
+        "outputHex": "3020",
+        "stack": [
+          0
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          0
+        ],
+        "output": "0 ",
+        "bytes": [
+          48,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 16/1",
+      "source": "1 16 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "1 ",
+        "outputHex": "3120",
+        "stack": [
+          1
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          1
+        ],
+        "output": "1 ",
+        "bytes": [
+          49,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 16/15",
+      "source": "15 16 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "F ",
+        "outputHex": "4620",
+        "stack": [
+          15
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          15
+        ],
+        "output": "F ",
+        "bytes": [
+          70,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 16/255",
+      "source": "255 16 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "FF ",
+        "outputHex": "464620",
+        "stack": [
+          255
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          255
+        ],
+        "output": "FF ",
+        "bytes": [
+          70,
+          70,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 16/12345",
+      "source": "12345 16 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "3039 ",
+        "outputHex": "3330333920",
+        "stack": [
+          12345
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          12345
+        ],
+        "output": "3039 ",
+        "bytes": [
+          51,
+          48,
+          51,
+          57,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 24/0",
+      "source": "0 24 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "0 ",
+        "outputHex": "3020",
+        "stack": [
+          0
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          0
+        ],
+        "output": "0 ",
+        "bytes": [
+          48,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 24/1",
+      "source": "1 24 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "1 ",
+        "outputHex": "3120",
+        "stack": [
+          1
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          1
+        ],
+        "output": "1 ",
+        "bytes": [
+          49,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 24/15",
+      "source": "15 24 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "F ",
+        "outputHex": "4620",
+        "stack": [
+          15
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          15
+        ],
+        "output": "F ",
+        "bytes": [
+          70,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 24/255",
+      "source": "255 24 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "AF ",
+        "outputHex": "414620",
+        "stack": [
+          255
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          255
+        ],
+        "output": "AF ",
+        "bytes": [
+          65,
+          70,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 24/12345",
+      "source": "12345 24 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "LA9 ",
+        "outputHex": "4c413920",
+        "stack": [
+          12345
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          12345
+        ],
+        "output": "LA9 ",
+        "bytes": [
+          76,
+          65,
+          57,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 36/0",
+      "source": "0 36 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "0 ",
+        "outputHex": "3020",
+        "stack": [
+          0
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          0
+        ],
+        "output": "0 ",
+        "bytes": [
+          48,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 36/1",
+      "source": "1 36 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "1 ",
+        "outputHex": "3120",
+        "stack": [
+          1
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          1
+        ],
+        "output": "1 ",
+        "bytes": [
+          49,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 36/15",
+      "source": "15 36 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "F ",
+        "outputHex": "4620",
+        "stack": [
+          15
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          15
+        ],
+        "output": "F ",
+        "bytes": [
+          70,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 36/255",
+      "source": "255 36 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "73 ",
+        "outputHex": "373320",
+        "stack": [
+          255
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          255
+        ],
+        "output": "73 ",
+        "bytes": [
+          55,
+          51,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "radix format 36/12345",
+      "source": "12345 36 base ! dup . decimal",
+      "reference": {
+        "code": 0,
+        "output": "9IX ",
+        "outputHex": "39495820",
+        "stack": [
+          12345
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          12345
+        ],
+        "output": "9IX ",
+        "bytes": [
+          57,
+          73,
+          88,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "throw -1",
+      "source": ": fail -1 throw ; 10 20 ' fail catch",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          10,
+          20,
+          -1
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          10,
+          20,
+          -1
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "throw -2",
+      "source": ": fail -2 throw ; 10 20 ' fail catch",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          10,
+          20,
+          -2
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          10,
+          20,
+          -2
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "throw -77",
+      "source": ": fail -77 throw ; 10 20 ' fail catch",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          10,
+          20,
+          -77
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          10,
+          20,
+          -77
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "throw 1",
+      "source": ": fail 1 throw ; 10 20 ' fail catch",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          10,
+          20,
+          1
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          10,
+          20,
+          1
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "throw 99",
+      "source": ": fail 99 throw ; 10 20 ' fail catch",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          10,
+          20,
+          99
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          10,
+          20,
+          99
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "evaluate during compilation",
+      "source": ": text s\" 4 5 +\" evaluate ; immediate : x text ; x",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          9
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          9
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "escaped bytes",
+      "source": ": bytes s\\\" A\\nB\\xFF\\z\\q\\m\\t\\v\\\\\" ; bytes type",
+      "reference": {
+        "code": 0,
+        "output": "A\nB�\u0000\"\r\n\t\u000b\\",
+        "outputHex": "410a42ff00220d0a090b5c",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "A\nB�\u0000\"\r\n\t\u000b\\",
+        "bytes": [
+          65,
+          10,
+          66,
+          255,
+          0,
+          34,
+          13,
+          10,
+          9,
+          11,
+          92
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "saved input",
+      "source": ": twice save-input parse-name type restore-input drop parse-name type ; twice AbC refill",
+      "reference": {
+        "code": 0,
+        "output": "AbCAbC",
+        "outputHex": "416243416243",
+        "stack": [
+          0
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          0
+        ],
+        "output": "AbCAbC",
+        "bytes": [
+          65,
+          98,
+          67,
+          65,
+          98,
+          67
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "abort quote",
+      "source": ": checked abort\" Bad value\" 9 ; 0 checked 1 ' checked catch swap drop",
+      "note": "CATCH restores stack depth; overwritten cells are unspecified, so discard the flag cell before comparison.",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          9,
+          -2
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          9,
+          -2
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "postponed quote",
+      "source": ": message postpone .\" ; immediate : x message Hello CASE\" ; x",
+      "reference": {
+        "code": 0,
+        "output": "Hello CASE",
+        "outputHex": "48656c6c6f2043415345",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "Hello CASE",
+        "bytes": [
+          72,
+          101,
+          108,
+          108,
+          111,
+          32,
+          67,
+          65,
+          83,
+          69
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "parenthesis output",
+      "source": ".( Case Here) 7",
+      "reference": {
+        "code": 0,
+        "output": "Case Here",
+        "outputHex": "436173652048657265",
+        "stack": [
+          7
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          7
+        ],
+        "output": "Case Here",
+        "bytes": [
+          67,
+          97,
+          115,
+          101,
+          32,
+          72,
+          101,
+          114,
+          101
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "blank buffer",
+      "source": "create b 8 allot b 8 65 fill b 4 blank b 8 type",
+      "reference": {
+        "code": 0,
+        "output": "    AAAA",
+        "outputHex": "2020202041414141",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "    AAAA",
+        "bytes": [
+          32,
+          32,
+          32,
+          32,
+          65,
+          65,
+          65,
+          65
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "byte copy",
+      "source": "create b 8 allot s\" AbCdEfGh\" b swap move b 8 type",
+      "reference": {
+        "code": 0,
+        "output": "AbCdEfGh",
+        "outputHex": "4162436445664768",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "AbCdEfGh",
+        "bytes": [
+          65,
+          98,
+          67,
+          100,
+          69,
+          102,
+          71,
+          104
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "number output letters",
+      "source": "hex abcd . ff u. decimal",
+      "reference": {
+        "code": 0,
+        "output": "ABCD FF ",
+        "outputHex": "4142434420464620",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "ABCD FF ",
+        "bytes": [
+          65,
+          66,
+          67,
+          68,
+          32,
+          70,
+          70,
+          32
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "search repeated prefix",
+      "source": "s\" aaaaab\" s\" aaab\" search . type",
+      "reference": {
+        "code": 0,
+        "output": "-1 aaab",
+        "outputHex": "2d312061616162",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "-1 aaab",
+        "bytes": [
+          45,
+          49,
+          32,
+          97,
+          97,
+          97,
+          98
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "search empty needle",
+      "source": "s\" abc\" s\" \" search . type",
+      "reference": {
+        "code": 0,
+        "output": "-1 abc",
+        "outputHex": "2d3120616263",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "-1 abc",
+        "bytes": [
+          45,
+          49,
+          32,
+          97,
+          98,
+          99
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "comment in string",
+      "source": "s\" ( This \\ is not a comment )\" type",
+      "reference": {
+        "code": 0,
+        "output": "( This \\ is not a comment )",
+        "outputHex": "282054686973205c206973206e6f74206120636f6d6d656e742029",
+        "stack": []
+      },
+      "actual": {
+        "ok": true,
+        "stack": [],
+        "output": "( This \\ is not a comment )",
+        "bytes": [
+          40,
+          32,
+          84,
+          104,
+          105,
+          115,
+          32,
+          92,
+          32,
+          105,
+          115,
+          32,
+          110,
+          111,
+          116,
+          32,
+          97,
+          32,
+          99,
+          111,
+          109,
+          109,
+          101,
+          110,
+          116,
+          32,
+          41
+        ]
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    },
+    {
+      "name": "empty parse name",
+      "source": ": end parse-name nip ; end",
+      "reference": {
+        "code": 0,
+        "output": "",
+        "outputHex": "",
+        "stack": [
+          0
+        ]
+      },
+      "actual": {
+        "ok": true,
+        "stack": [
+          0
+        ],
+        "output": "",
+        "bytes": []
+      },
+      "passed": true,
+      "referenceStderr": "w\u0000s\u0000l\u0000:\u0000 \u0000�hKm0R \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006tM�n\f�FO*g\\��P0R \u0000W\u0000S\u0000L\u0000\u00020N\u0000A\u0000T\u0000 \u0000!j\u000f_\u000bN�v \u0000W\u0000S\u0000L\u0000 \u0000\rN/e\u0001c \u0000l\u0000o\u0000c\u0000a\u0000l\u0000h\u0000o\u0000s\u0000t\u0000 \u0000�N\u0006t\u00020\r\u0000\n\u0000"
+    }
+  ],
+  "passed": 128,
+  "failed": 0
+}

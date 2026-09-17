@@ -1,13 +1,16 @@
-import config from './config.mjs';
-import {run} from './engine.mjs';
 const $=id=>document.getElementById(id);
-$('title').textContent=config.title+' · '+config.version;
-$('scope').textContent=config.scope;
-$('limits').textContent='当前不包含：'+config.limitations;
-$('input').value=config.example;
-function execute(){
- try{const start=performance.now(),output=run($('input').value);$('output').textContent=output;$('output').className=output.startsWith('ERROR:')?'error':'';$('status').textContent='执行 '+(performance.now()-start).toFixed(2)+' ms';$('tiles').hidden=true;
- if(config.slug==='wfc'&&!output.startsWith('ERROR:')){const rows=output.split('\n').slice(0,12);if(rows.every(x=>/^[~.^]{16}$/.test(x))){$('tiles').replaceChildren();for(const c of rows.join('')){const tile=document.createElement('span');tile.style.background={'~':'#446e83','.':'#99b984','^':'#c3b999'}[c];$('tiles').append(tile)}$('tiles').hidden=false}}
- }catch(e){$('output').textContent=String(e);$('output').className='error'}
-}
-$('run').onclick=execute;$('reset').onclick=()=>{$('input').value=config.example;execute()};execute();
+const examples={hello:'s" Hello, Forth! 世界" type cr\n: square dup * ;\n12 square .',loop:': total 0 10 0 do i + loop ;\ntotal .',error:": risky -77 throw ;\n123 ' risky catch\n. .",compile:': square\n  dup'};
+let worker,pending,counter=0,timer,busy=false,epoch=0,lastBytes=[];
+function status(text,error=false){$('status').textContent=text;$('status').className=error?'error':''}
+function setBusy(value){busy=value;for(const id of ['run','feed','reset','example'])$(id).disabled=value;$('stop').disabled=!value}
+function stop(reason){epoch++;if(worker)worker.terminate();worker=undefined;clearTimeout(timer);pending?.reject(Error(reason));pending=undefined;setBusy(false);lastBytes=[];$('download').disabled=true;$('mode').textContent='会话已结束';$('stack').replaceChildren();$('count').textContent='0'}
+function request(op,source){return new Promise((resolve,reject)=>{const id=++counter;pending={id,resolve,reject};timer=setTimeout(()=>{stop('执行超时');status('执行超时，会话已结束。',true)},10000);worker.postMessage({requestId:id,op,...(source===undefined?{}:{source,budget:10000000})})})}
+async function ensure(){if(worker)return;worker=new Worker(new URL('./repl-worker.mjs',import.meta.url),{type:'module'});worker.onmessage=({data})=>{if(!pending||pending.id!==data.requestId)return;clearTimeout(timer);const waiter=pending;pending=undefined;data.error?waiter.reject(Error(data.error)):waiter.resolve(data.result)};worker.onerror=event=>{stop(event.message);status('会话错误：'+event.message,true)};const opened=await request('open');if(!opened.ok)throw Error(opened.error)}
+function render(result){const values=result.stack??[];$('count').textContent=String(values.length);$('stack').replaceChildren();if(!values.length){const span=document.createElement('span');span.className='empty';span.textContent='空栈';$('stack').append(span)}for(const value of values.slice(-64)){const span=document.createElement('span');span.className='cell';span.textContent=String(value);$('stack').append(span)}$('mode').textContent=result.compiling?'等待定义结束':'解释模式';lastBytes=result.bytes??[];$('download').disabled=lastBytes.length===0}
+async function execute(op){if(busy)return;const generation=epoch,start=performance.now();setBusy(true);lastBytes=[];$('download').disabled=true;status('正在执行…');try{await ensure();const result=await request(op,$('source').value);if(generation!==epoch)return;render(result);$('terminal').textContent=result.output||'（本次没有字符输出）';if(!result.ok)status('执行错误 '+(result.code??'')+'：'+result.error,true);else status((result.compiling?'片段已接收，继续输入定义。 ':'执行完成 · ')+Math.round(performance.now()-start)+' ms')}catch(error){if(generation===epoch)status('会话错误：'+error.message,true)}finally{if(generation===epoch)setBusy(false)}}
+async function reset(){if(busy)return;const generation=epoch;setBusy(true);try{await ensure();const result=await request('reset');if(generation!==epoch)return;render(result);$('terminal').textContent='会话已准备好。';status('就绪 · 可运行程序或发送片段')}catch(error){if(generation===epoch)status(error.message,true)}finally{if(generation===epoch)setBusy(false)}}
+$('example').onchange=()=>{$('source').value=examples[$('example').value]};
+$('run').onclick=()=>execute('eval');$('feed').onclick=()=>execute('feed');$('reset').onclick=reset;
+$('stop').onclick=()=>{stop('已停止');status('已停止；再次运行会创建新会话。')};
+$('download').onclick=()=>{if(!lastBytes.length)return;const url=URL.createObjectURL(new Blob([Uint8Array.from(lastBytes)],{type:'application/octet-stream'})),a=document.createElement('a');a.href=url;a.download='forth-output.bin';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+$('source').value=examples.hello;reset();

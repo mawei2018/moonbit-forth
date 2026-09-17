@@ -10,14 +10,21 @@ import {
 // Errors
 pub suberror ForthError {
   Invalid(String)
+  Thrown(Int)
 } derive(@debug.Debug)
+pub fn ForthError::code(Self) -> Int
 
 // Types and methods
 pub struct Machine {
   // private fields
 } derive(@debug.Debug)
+pub fn Machine::clear_output(Self) -> Unit
 pub fn Machine::eval(Self, String, budget? : Int) -> Unit raise ForthError
+pub fn Machine::feed(Self, String, budget? : Int) -> Bool raise ForthError
+pub fn Machine::is_compiling(Self) -> Bool
 pub fn Machine::new() -> Self
+pub fn Machine::output_bytes(Self) -> Bytes
+pub fn Machine::output_text(Self) -> String
 pub fn Machine::printed(Self) -> String
 pub fn Machine::values(Self) -> Array[Int]
 

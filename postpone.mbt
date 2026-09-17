@@ -45,12 +45,12 @@ fn Machine::emit_postponed(
   if output.length() >= 65536 {
     raise Invalid("compiled definition limit")
   }
-  if name == "[']" {
-    if self.input_pc >= self.input.length() {
-      raise Invalid("missing postponed execution token name")
+  if string_word(name) {
+    for token in self.string_code(name) {
+      output.push(token)
     }
-    let target = self.input[self.input_pc]
-    self.input_pc += 1
+  } else if name == "[']" {
+    let target = self.source_name().to_lower()
     output.push(self.capture_xt(target).to_string())
   } else if name == "literal" {
     output.push(self.pop().to_string())

@@ -1,0 +1,31 @@
+{
+  "generatorFmtInfoPasses": 2,
+  "idempotentSourceFiles": 44,
+  "engineMatchesFinalBuild": true,
+  "engineSHA256": "192ab209383dd32a0cbe3be7f29bda5dc1bb56cbd56994bbaa3f98e77b0e00a5",
+  "cliExamples": [
+    {
+      "arguments": [
+        "--file",
+        "examples/greeting.fs"
+      ],
+      "outputHex": "48656c6c6f2c20466f7274682120e4b896e7958c0a31343420"
+    },
+    {
+      "arguments": [
+        "--file",
+        "examples/definitions.fs",
+        "--eval",
+        "7 triple ."
+      ],
+      "outputHex": "323120"
+    },
+    {
+      "arguments": [
+        "--file",
+        "examples/caught-error.fs"
+      ],
+      "outputHex": "2d373720313233200a"
+    }
+  ]
+}

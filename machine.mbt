@@ -1,6 +1,7 @@
 ///|
 pub suberror ForthError {
   Invalid(String)
+  Thrown(Int)
 } derive(Debug)
 
 ///|
@@ -14,8 +15,14 @@ pub struct Machine {
   priv mut compile_eval : Bool
   priv data_addresses : Map[String, Int]
   priv mut latest_created : Array[String]?
-  priv mut input : Array[String]
-  priv mut input_pc : Int
+  priv sources : Array[SourceFrame]
+  priv strings : Array[Byte]
+  priv string_cache : Map[String, (Int, Int)]
+  priv scratch : Array[Byte]
+  priv terminal : Array[Byte]
+  priv mut base : Int
+  priv mut catch_depth : Int
+  priv mut active_compiler : Compiler?
   priv execution_tokens : Array[Array[String]]
   priv mut binding_id : Int
   priv output : Array[String]
@@ -44,8 +51,14 @@ pub fn Machine::new() -> Machine {
     compile_eval: false,
     data_addresses: {},
     latest_created: None,
-    input: [],
-    input_pc: 0,
+    sources: [],
+    strings: [],
+    string_cache: {},
+    scratch: Array::make(1024, b'\x00'),
+    terminal: [],
+    base: 10,
+    catch_depth: 0,
+    active_compiler: None,
     output: [],
     memory: [],
     returns: [],
@@ -75,52 +88,6 @@ fn Machine::pop(self : Machine) -> Int raise ForthError {
     Some(v) => v
     None => raise Invalid("stack underflow")
   }
-}
-
-///|
-fn tokens(source : String) -> Array[String] raise ForthError {
-  let out = []
-  let mut word = ""
-  let mut comment = false
-  let mut line_comment = false
-  for c in source.iter() {
-    if c == '\u0000' || c == '\u0001' || c == '\u0002' {
-      raise Invalid("reserved source character")
-    }
-    if line_comment {
-      if c == '\n' {
-        line_comment = false
-      }
-      continue
-    }
-    if comment {
-      if c == ')' {
-        comment = false
-      }
-      continue
-    }
-    if c == '(' || c == '\\' || c == ' ' || c == '\n' || c == '\r' || c == '\t' {
-      if word != "" {
-        out.push(word.to_lower())
-        word = ""
-      }
-      if c == '(' {
-        comment = true
-      }
-      if c == '\\' {
-        line_comment = true
-      }
-    } else {
-      word += c.to_string()
-    }
-  }
-  if comment {
-    raise Invalid("unterminated comment")
-  }
-  if word != "" {
-    out.push(word.to_lower())
-  }
-  out
 }
 
 ///|
@@ -162,9 +129,6 @@ fn Machine::execute(
     let builtin = raw.has_prefix("\u0001")
     let word = if builtin { raw[1:].to_owned() } else { raw }
     pc += 1
-    if depth == 0 {
-      self.input_pc = pc
-    }
     if raw.has_prefix("\u0002") {
       self.emit_postponed(raw[1:].to_owned())
     } else if word == "'" {
@@ -215,38 +179,16 @@ fn Machine::execute(
       let name = if anonymous {
         self.binding_key()
       } else {
-        if pc >= code.length() {
-          raise Invalid("missing definition name")
-        }
-        let name = code[pc]
-        pc += 1
-        name
+        self.source_name().to_lower()
       }
-      if number(name) is Some(_) || name == ";" || name == ":" {
+      if self.read_number(name) is Some(_) ||
+        [";", ":", ":noname"].contains(name) {
         raise Invalid("invalid definition name")
       }
-      let body = []
-      while pc < code.length() && code[pc] != ";" {
-        if code[pc] == ":" || code[pc] == ":noname" {
-          raise Invalid("nested definition")
-        }
-        body.push(code[pc])
-        pc += 1
-      }
-      if pc == code.length() {
-        raise Invalid("unterminated definition")
-      }
-      pc += 1
-      self.compile_word(name, body)
-      if anonymous {
-        self.stack.push(self.capture_xt(name))
-      }
+      self.compile_word(name, depth)
     } else if word == "do" || word == "?do" {
       let (body, plus, next) = counted_body(code, pc)
       pc = next
-      if depth == 0 {
-        self.input_pc = pc
-      }
       let start = self.pop()
       let limit = self.pop()
       if word == "do" || start != limit {
@@ -255,9 +197,6 @@ fn Machine::execute(
     } else if word == "begin" {
       let (body, tail, ending, next) = begin_body(code, pc)
       pc = next
-      if depth == 0 {
-        self.input_pc = pc
-      }
       while true {
         self.fuel -= 1
         if self.fuel < 0 {
@@ -312,9 +251,6 @@ fn Machine::execute(
       }
       if nesting != 0 {
         raise Invalid("missing then")
-      }
-      if depth == 0 {
-        self.input_pc = pc
       }
       self.execute(if condition != 0 { yes } else { no }, depth + 1)
     } else if [
@@ -439,7 +375,7 @@ fn Machine::execute(
           let address = self.pop()
           self.memory_range(address, count)
           for i in 0..<count {
-            self.memory[address + i] = value
+            self.save(address + i, value.to_int(), false)
           }
         }
         "move" => {
@@ -448,9 +384,9 @@ fn Machine::execute(
           let source = self.pop()
           self.memory_range(source, count)
           self.memory_range(dest, count)
-          let copy = self.memory[source:source + count].to_owned()
+          let copy = self.read_bytes(source, count)
           for i in 0..<count {
-            self.memory[dest + i] = copy[i]
+            self.save(dest + i, copy[i].to_int(), false)
           }
         }
         "0=" | "0<" | "0>" | "1+" | "1-" => {
@@ -536,7 +472,11 @@ fn Machine::execute(
           self.execute_frame(self.execution_tokens[xt - 1], depth + 1, true)
         }
         "depth" => self.stack.push(self.stack.length())
-        "." => self.output.push(self.pop().to_string())
+        "." => {
+          let text = self.format_integer(self.pop(), false)
+          self.output.push(text)
+          self.write_text(text + " ")
+        }
         "abs"
         | "min"
         | "max"
@@ -580,14 +520,11 @@ fn Machine::execute(
             },
           )
         }
-        _ => raise Invalid("unknown word: " + word)
+        _ => self.text_word(word, depth)
       }
     }
     if self.leaving || self.exiting {
       return
-    }
-    if depth == 0 {
-      pc = if pc > self.input_pc { pc } else { self.input_pc }
     }
     if self.stack.length() > 4096 {
       raise Invalid("stack limit exceeded")
@@ -602,16 +539,50 @@ pub fn Machine::eval(
   source : String,
   budget? : Int = 10000,
 ) -> Unit raise ForthError {
+  ignore(self.eval_chunk(source, budget, false))
+}
+
+///|
+/// Feed a complete input buffer, keeping an unfinished definition for the next call.
+pub fn Machine::feed(
+  self : Machine,
+  source : String,
+  budget? : Int = 10000,
+) -> Bool raise ForthError {
+  self.eval_chunk(source, budget, true)
+}
+
+///|
+pub fn Machine::is_compiling(self : Machine) -> Bool {
+  self.active_compiler is Some(_)
+}
+
+///|
+fn Machine::eval_chunk(
+  self : Machine,
+  source : String,
+  budget : Int,
+  allow_pending : Bool,
+) -> Bool raise ForthError {
   if budget < 1 || source.length() > 1000000 {
     raise Invalid("invalid input limit")
   }
   self.fuel = budget
-  let input = tokens(source)
-  self.input = input
-  self.input_pc = 0
-  defer {
-    self.input = []
-    self.input_pc = 0
+  let return_base = self.returns.length()
+  defer (while self.returns.length() > return_base {
+    ignore(self.returns.pop())
+  })
+  errdefer {
+    self.abort_compilation()
+    self.exiting = false
+    self.leaving = false
   }
-  self.execute_frame(input, 0, false)
+  self.interpret_source(source, 1)
+  if self.returns.length() != return_base {
+    raise Invalid("unbalanced return stack at eval boundary")
+  }
+  if !allow_pending && self.active_compiler is Some(_) {
+    raise Invalid("unterminated definition")
+  }
+  self.is_compiling()
 }

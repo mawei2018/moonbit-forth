@@ -30,6 +30,10 @@ try {
   if ($LASTEXITCODE -ne 0) {throw 'browser engine test failed'}
   node tools/test-cli.mjs
   if ($LASTEXITCODE -ne 0) {throw 'CLI test failed'}
+  node tools/replay-input.mjs
+  if ($LASTEXITCODE -ne 0) {throw 'official input replay failed'}
+  node tools/test-session.mjs
+  if ($LASTEXITCODE -ne 0) {throw 'persistent session checks failed'}
   node tools/robustness.mjs
   if ($LASTEXITCODE -ne 0) {throw 'robustness failed'}
   node tools/benchmark.mjs

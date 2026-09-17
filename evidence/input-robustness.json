@@ -1,0 +1,8 @@
+{
+  "project": "forth",
+  "seed": 20260910,
+  "cases": 307,
+  "expected_error_responses": 303,
+  "uncaught_exceptions": 0,
+  "scope": "bounded malformed-input robustness, not proof of full language/protocol conformance"
+}
