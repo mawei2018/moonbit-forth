@@ -1,4 +1,4 @@
-name = "localreview/forth"
+name = "mawei2018/forth"
 
 version = "0.19.0"
 
