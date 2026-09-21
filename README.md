@@ -1,5 +1,13 @@
 # Forth 工作台 · 0.19.0
 
+## 获取与验证入口
+
+公开源码：[github.com/mawei2018/moonbit-forth](https://github.com/mawei2018/moonbit-forth)；MoonBit 模块名为 `mawei2018/forth`。
+
+从源码运行：`git clone https://github.com/mawei2018/moonbit-forth.git` 后进入该目录，按下文和 [TESTING.md](TESTING.md) 安装所需工具。仓库公开不等于已在 Mooncakes 发布，不承诺 `moon add` 当前可用。
+
+查看 [GitHub Actions](https://github.com/mawei2018/moonbit-forth/actions) 时请核对 run 的 commit SHA；历史 evidence、旧 ZIP 与本地测试不能替代当前提交的 CI 结果。下文保留各版本的验证范围和兼容性限制。
+
 一个原创 MoonBit Forth 子集，提供可嵌入解释器、保留状态的命令行和浏览器工作台。支持 32 位整数、字节数据空间、编译词绑定、循环、返回栈、定义词，以及本版新增的原始输入解析、UTF-8 字符串、进制、异常捕获和跨次编译。
 
 这是独立的本地开发仓库，尚未追平 Gforth 或完整 ANS Forth。没有发布、上传或远程 CI 验收。当前能力见 [WORDS.md](WORDS.md)，仍缺的能力见 [ROADMAP.md](ROADMAP.md)；0.18 及更早记录保存于 [HISTORY.md](HISTORY.md)。
