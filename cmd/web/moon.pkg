@@ -1,5 +1,5 @@
 import {
-  "localreview/forth" @lib,
+  "mawei2018/forth" @lib,
   "moonbitlang/core/json",
 }
 
